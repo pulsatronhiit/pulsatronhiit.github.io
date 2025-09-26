@@ -1,0 +1,129 @@
+.exercise-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 90%;
+  margin: 1.5rem auto;
+  padding: 1rem;
+}
+
+.current-exercise {
+  margin-bottom: 1rem;
+}
+
+.exercise-name {
+  font-size: clamp(2.2rem, 8vw, 4rem);
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
+  line-height: 1.2;
+}
+
+.exercise-description {
+  font-size: clamp(1.3rem, 5vw, 2rem);
+  color: #ccc;
+  line-height: 1.4;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.next-exercise-preview {
+  padding: 1.5rem;
+  background: rgba(0, 255, 65, 0.1);
+  border: 1px solid rgba(0, 255, 65, 0.3);
+  border-radius: 15px;
+  margin-top: 1rem;
+  max-width: 85%;
+}
+
+.next-label {
+  font-size: clamp(0.8rem, 3vw, 1rem);
+  color: #00ff41;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.next-exercise-name {
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  color: #fff;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.completion-preview {
+  padding: 1.5rem;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 15px;
+  margin-top: 1rem;
+  max-width: 85%;
+}
+
+.completion-label {
+  font-size: clamp(1rem, 4vw, 1.3rem);
+  color: #ffd700;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.completion-text {
+  font-size: clamp(0.9rem, 3vw, 1.1rem);
+  color: #fff;
+  opacity: 0.9;
+}
+
+@media screen and (max-width: 393px) {
+  .exercise-container {
+    margin: 1rem auto;
+    padding: 0.8rem;
+    max-width: 95%;
+  }
+  
+  .current-exercise {
+    margin-bottom: 0.8rem;
+  }
+  
+  .exercise-name {
+    font-size: clamp(2rem, 10vw, 3rem);
+    margin-bottom: 0.8rem;
+  }
+  
+  .exercise-description {
+    font-size: clamp(1.2rem, 6vw, 1.8rem);
+    max-width: 90%;
+  }
+  
+  .next-exercise-preview {
+    padding: 1rem;
+    max-width: 90%;
+    margin-top: 0.8rem;
+  }
+  
+  .next-label {
+    font-size: clamp(0.7rem, 3vw, 0.9rem);
+    margin-bottom: 0.3rem;
+  }
+  
+  .next-exercise-name {
+    font-size: clamp(1.4rem, 6vw, 2rem);
+  }
+  
+  .completion-preview {
+    padding: 1rem;
+    max-width: 90%;
+    margin-top: 0.8rem;
+  }
+  
+  .completion-label {
+    font-size: clamp(0.9rem, 4vw, 1.1rem);
+    margin-bottom: 0.3rem;
+  }
+  
+  .completion-text {
+    font-size: clamp(0.8rem, 3vw, 1rem);
+  }
+}

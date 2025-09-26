@@ -1,0 +1,51 @@
+.timer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10vh;
+}
+
+.timer-display {
+  font-size: clamp(3rem, 12vw, 6rem);
+  font-weight: bold;
+  color: #00ff41;
+  text-align: center;
+  font-family: 'Courier New', monospace;
+  text-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+  margin-bottom: 1rem;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+}
+
+.timer-display.warning {
+  color: #ff4444;
+  text-shadow: 0 0 30px rgba(255, 68, 68, 0.8);
+  animation: pulse-warning 1s ease-in-out infinite;
+}
+
+@keyframes pulse-warning {
+  0% {
+    transform: scale(1);
+    text-shadow: 0 0 30px rgba(255, 68, 68, 0.8);
+  }
+  50% {
+    transform: scale(1.05);
+    text-shadow: 0 0 40px rgba(255, 68, 68, 1), 0 0 60px rgba(255, 68, 68, 0.5);
+  }
+  100% {
+    transform: scale(1);
+    text-shadow: 0 0 30px rgba(255, 68, 68, 0.8);
+  }
+}
+
+@media screen and (max-width: 393px) {
+  .timer-container {
+    margin-top: 8vh;
+  }
+  
+  .timer-display {
+    font-size: clamp(2.5rem, 15vw, 4rem);
+    margin-bottom: 1rem;
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "exercises": [
+    {
+      "name": "Jumping Jacks",
+      "description": "Springe mit den Beinen auseinander und bringe die Arme über den Kopf"
+    },
+    {
+      "name": "Burpees",
+      "description": "Gehe in die Hocke, springe in den Liegestütz, zurück zur Hocke und springe hoch"
+    },    
+    {
+      "name": "High Knees",
+      "description": "Laufe auf der Stelle und bringe die Knie hoch zur Brust"
+    },
+    {
+      "name": "Push-ups",
+      "description": "Liegestütze - halte den Körper gerade und drücke dich hoch"
+    },
+    {
+      "name": "Mountain Climbers",
+      "description": "In Liegestütz-Position die Knie abwechselnd zur Brust ziehen"
+    },
+    {
+      "name": "Squats",
+      "description": "Gehe in die Hocke und stehe wieder auf, halte den Rücken gerade"
+    },
+    {
+      "name": "Plank",
+      "description": "Halte die Liegestütz-Position - Körper gerade, Bauch angespannt"
+    },
+    {
+      "name": "Lunges",
+      "description": "Ausfallschritte - ein Bein nach vorn, bis beide Knie 90° bilden"
+    }
+  ]
+}
