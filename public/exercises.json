@@ -1,36 +1,118 @@
 {
   "exercises": [
     {
-      "name": "Jumping Jacks",
-      "description": "Springe mit den Beinen auseinander und bringe die Arme über den Kopf"
+      "name": "Sidestep Squats",
+      "description": "Stehe aufrecht, mache einen Schritt zur Seite und gehe dabei in die Squat-Position runter, dann wieder hoch und das G anze in die andere Richtung"
     },
     {
       "name": "Burpees",
       "description": "Gehe in die Hocke, springe in den Liegestütz, zurück zur Hocke und springe hoch"
+    },
+    {
+      "name": "One-arm KB Swing to Bottom-Up Hold",
+      "description": "Schwinge die Kettlebell einarmig zwischen den Beinen hoch, fange sie am oberen Punkt mit dem Boden nach oben ab und halte sie stabil mit dem Boden nach oben."
+    },
+    {
+      "name": "One-arm KB Swing",
+      "description": "Schwinge die Kettlebell einarmig kraftvoll zwischen den Beinen hoch bis auf Schulterhöhe, nutze die Hüftbewegung für den Schwung"
+    },
+    {
+      "name": "Breakdance Swing Through",
+      "description": "Springe zur Seite auf ein Bein, beuge dich runter und stütze dich mit der gegenüberliegenden Hand ab, schwinge das freie Bein nach vorne durch und zurück, dann Seitenwechsel"
+    },
+    {
+      "name": "Mountain Climbers",
+      "description": "In Liegestütz-Position die Knie abwechselnd zur Brust ziehen"
     },    
     {
       "name": "High Knees",
       "description": "Laufe auf der Stelle und bringe die Knie hoch zur Brust"
     },
     {
-      "name": "Push-ups",
-      "description": "Liegestütze - halte den Körper gerade und drücke dich hoch"
+      "name": "Gorilla Rows",
+      "description": "Stehe in breiter Squat-Position, halte eine Kettlebell mit einer Hand und ziehe sie zum Bauch, am höchsten Punkt wechselst du die KB fliegend in die andere Hand und ziehst weiter."
     },
     {
-      "name": "Mountain Climbers",
-      "description": "In Liegestütz-Position die Knie abwechselnd zur Brust ziehen"
+      "name": "Alternating KB Snatch",
+      "description": "Schwinge die Kettlebell einarmig kraftvoll vom Boden hoch, wechsle sie auf halber Höhe fliegend in die andere Hand und führe sie über den Kopf, dann kontrolliert runter"
     },
     {
-      "name": "Squats",
-      "description": "Gehe in die Hocke und stehe wieder auf, halte den Rücken gerade"
+      "name": "KB lateral Swing to Snatch left",
+      "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann zurück zur Mitte und direkt in einen Snatch über den Kopf, kontrolliert zurück zur Startposition"
     },
     {
-      "name": "Plank",
-      "description": "Halte die Liegestütz-Position - Körper gerade, Bauch angespannt"
+      "name": "KB lateral Swing to Snatch right",
+      "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann zurück zur Mitte und direkt in einen Snatch über den Kopf, kontrolliert zurück zur Startposition"
     },
     {
-      "name": "Lunges",
-      "description": "Ausfallschritte - ein Bein nach vorn, bis beide Knie 90° bilden"
+      "name": "KB Halo to lateral Swing",
+      "description": "Führe die Kettlebell in einem Kreis um den Kopf herum (Halo), dann direkt in einen seitlichen Swing nach außen und zurück zur Startposition"
+    },
+    {
+      "name": "KB Figure 8 into clean",
+      "description": "Führe die Kettlebell in einer 8er-Bewegung zwischen den Beinen durch und wechsle dabei die Hände, dann direkt in einen Clean zur Schulter"
+    },
+    {
+      "name": "Split-Stance KB Core Rotation left",
+      "description": "Stehe in Ausfallschritt-Position, halte die Kettlebell mit gestreckten Armen vor dem Körper und rotiere den Oberkörper nach links, halte die Hüfte stabil"
+    },
+    {
+      "name": "Split-Stance KB Core Rotation right",
+      "description": "Stehe in Ausfallschritt-Position, halte die Kettlebell mit gestreckten Armen vor dem Körper und rotiere den Oberkörper nach rechts, halte die Hüfte stabil"
+    },
+    {
+      "name": "KB Swings -- DANACH PAUSE --",
+      "description": "Schwinge die Kettlebell beidhändig kraftvoll zwischen den Beinen hoch bis auf Brusthöhe, nutze die Hüftbewegung für den Schwung und halte den Rücken gerade"
+    },
+
+
+    {
+      "name": "Sidestep Squats",
+      "description": "Stehe aufrecht, mache einen Schritt zur Seite und gehe dabei in die Squat-Position runter, dann wieder hoch und das G anze in die andere Richtung"
+    },
+    {
+      "name": "Burpee Mountain Climbers",
+      "description": "Führe einen Burpee aus, aber statt zu springen bleibst du in der Liegestütz-Position und machst je Bein einen Mountain Climbers, dann zurück zur Startposition"
+    },
+    {
+      "name": "One-arm KB Swing to Bottom-Up Hold",
+      "description": "Schwinge die Kettlebell einarmig zwischen den Beinen hoch, fange sie am oberen Punkt mit dem Boden nach oben ab und halte sie stabil mit dem Boden nach oben."
+    },
+    {
+      "name": "One-arm KB Swing",
+      "description": "Schwinge die Kettlebell einarmig kraftvoll zwischen den Beinen hoch bis auf Schulterhöhe, nutze die Hüftbewegung für den Schwung"
+    },
+    {
+      "name": "Plank to Breakdance Swing Through",
+      "description": "Starte in Plank-Position, gehe in seitliche Stützposition und schwinge ein Bein nach vorne durch, zurück in die Plank und zur anderen Seite wechseln"
+    },    
+    {
+      "name": "High Knees",
+      "description": "Laufe auf der Stelle und bringe die Knie hoch zur Brust"
+    },
+    {
+      "name": "Gorilla Rows",
+      "description": "Stehe in breiter Squat-Position, halte eine Kettlebell mit einer Hand und ziehe sie zum Bauch, am höchsten Punkt wechselst du die KB fliegend in die andere Hand und ziehst weiter."
+    },
+    {
+      "name": "Alternating KB Snatch",
+      "description": "Schwinge die Kettlebell einarmig kraftvoll vom Boden hoch, wechsle sie auf halber Höhe fliegend in die andere Hand und führe sie über den Kopf, dann kontrolliert runter"
+    },
+    {
+      "name": "Kickstand Squat to Pushpress",
+      "description": "Stehe in Kickstand-Position (ein Fuß leicht nach hinten versetzt), halte die Kettlebell in Rack-Position, gehe in die Hocke und drücke beim Hochkommen die KB über den Kopf"
+    },
+    {
+      "name": "Figure 8 to Lunge",
+      "description": "Führe die Kettlebell in einer 8er-Bewegung zwischen den Beinen durch und wechsle dabei die Hände, dann direkt in einen Ausfallschritt zur Seite"
+    },
+    {
+      "name": "Lateral Swings",
+      "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen bis auf Schulterhöhe, dann zurück zur Mitte und zur anderen Seite"
+    },
+    {
+      "name": "KB Swings",
+      "description": "Schwinge die Kettlebell beidhändig kraftvoll zwischen den Beinen hoch bis auf Brusthöhe, nutze die Hüftbewegung für den Schwung und halte den Rücken gerade"
     }
   ]
 }
