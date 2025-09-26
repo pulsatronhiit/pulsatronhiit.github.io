@@ -22,6 +22,7 @@ const ExerciseDisplay = ({ exercise, nextExercise, isLastExercise }) => {
         <div className="next-exercise-preview">
           <div className="next-label">Als nächstes:</div>
           <div className="next-exercise-name">{nextExercise.name}</div>
+          <div className="next-exercise-description">{nextExercise.description}</div>
         </div>
       )}
       
