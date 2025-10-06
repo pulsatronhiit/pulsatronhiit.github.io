@@ -1,10 +1,9 @@
 // Service Worker registration utility
 export const registerServiceWorker = () => {
-  if ('serviceWorker' in navigator) {
+  // Only register Service Worker in production
+  if (import.meta.env.PROD && 'serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      // Simple path handling - /sw.js in dev, /hiity/sw.js in production
-      const isDev = import.meta.env.DEV;
-      const swPath = isDev ? '/sw.js' : '/hiity/sw.js';
+      const swPath = '/hiity/sw.js';
       
       navigator.serviceWorker.register(swPath)
         .then((registration) => {
@@ -16,6 +15,8 @@ export const registerServiceWorker = () => {
           console.log('Attempted path:', swPath);
         });
     });
+  } else if (import.meta.env.DEV) {
+    console.log('Service Worker disabled in development mode');
   } else {
     console.log('Service Worker not supported');
   }
