@@ -23,7 +23,11 @@
     {
       "name": "Mountain Climbers",
       "description": "In Liegestütz-Position die Knie abwechselnd zur Brust ziehen"
-    },    
+    },
+    {
+      "name": "KB Windmillpress to Figure 8",
+      "description": "Führe eine Windmill Overhead-Press aus, bringe die KB kontrolliert runter und gehe direkt in eine Figure-8-Bewegung zwischen den Beinen durch"
+    },   
     {
       "name": "High Knees",
       "description": "Laufe auf der Stelle und bringe die Knie hoch zur Brust"
@@ -37,11 +41,11 @@
       "description": "Schwinge die Kettlebell einarmig kraftvoll vom Boden hoch, wechsle sie auf halber Höhe fliegend in die andere Hand und führe sie über den Kopf, dann kontrolliert runter"
     },
     {
-      "name": "KB lateral Swing to Snatch left",
+      "name": "KB lateral Swing to Snatch links",
       "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann zurück zur Mitte und direkt in einen Snatch über den Kopf, kontrolliert zurück zur Startposition"
     },
     {
-      "name": "KB lateral Swing to Snatch right",
+      "name": "KB lateral Swing to Snatch rechts",
       "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann zurück zur Mitte und direkt in einen Snatch über den Kopf, kontrolliert zurück zur Startposition"
     },
     {
@@ -53,23 +57,23 @@
       "description": "Führe die Kettlebell in einer 8er-Bewegung zwischen den Beinen durch und wechsle dabei die Hände, dann direkt in einen Clean zur Schulter"
     },
     {
-      "name": "Split-Stance KB Core Rotation left",
+      "name": "Split-Stance KB Core Rotation links",
       "description": "Stehe in Ausfallschritt-Position, halte die Kettlebell mit gestreckten Armen vor dem Körper und rotiere den Oberkörper nach links, halte die Hüfte stabil"
     },
     {
-      "name": "Split-Stance KB Core Rotation right",
+      "name": "Split-Stance KB Core Rotation rechts",
       "description": "Stehe in Ausfallschritt-Position, halte die Kettlebell mit gestreckten Armen vor dem Körper und rotiere den Oberkörper nach rechts, halte die Hüfte stabil"
     },
     {
       "name": "KB Swings",
       "description": "Schwinge die Kettlebell beidhändig kraftvoll zwischen den Beinen hoch bis auf Brusthöhe, nutze die Hüftbewegung für den Schwung und halte den Rücken gerade"
     },
+
     {
       "type": "pause",
       "duration": "02:00",
       "name": "Längere Pause"
     },
-
 
     {
       "name": "Sidestep Squats",
@@ -86,6 +90,14 @@
     {
       "name": "One-arm KB Swing",
       "description": "Schwinge die Kettlebell einarmig kraftvoll zwischen den Beinen hoch bis auf Schulterhöhe, nutze die Hüftbewegung für den Schwung"
+    },
+    {
+      "name": "Kettlebell Cross-Body Clean links",
+      "description": "Halte die Kettlebell einarmig auf der gegenüberliegenden Seite nebem dem Körper auf Hüfthöhe, ziehe sie diagonal vor dem Körper zur gegenüberliegenden Schulter und fange sie in der Rack-Position ab."
+    },
+    {
+      "name": "Kettlebell Cross-Body Clean rechts",
+      "description": "Halte die Kettlebell einarmig auf der gegenüberliegenden Seite nebem dem Körper auf Hüfthöhe, ziehe sie diagonal vor dem Körper zur gegenüberliegenden Schulter und fange sie in der Rack-Position ab."
     },
     {
       "name": "Plank to Breakdance Swing Through",
@@ -120,8 +132,8 @@
       "description": "Schwinge die Kettlebell beidhändig kraftvoll zwischen den Beinen hoch bis auf Brusthöhe, nutze die Hüftbewegung für den Schwung und halte den Rücken gerade"
     },
     {
-      "name": "KB Windmillpress to Figure 8",
-      "description": "Führe eine Windmill Overhead-Press aus, bringe die KB kontrolliert runter und gehe direkt in eine Figure-8-Bewegung zwischen den Beinen durch"
+      "name": "KB Figure 8 into clean",
+      "description": "Führe die Kettlebell in einer 8er-Bewegung zwischen den Beinen durch und wechsle dabei die Hände, dann direkt in einen Clean zur Schulter"
     }
   ]
 }
