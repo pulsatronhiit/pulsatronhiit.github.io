@@ -107,9 +107,6 @@ const Timer = ({ onTimeUp, autoStart, onWarningChange, onPauseToggle, isActive, 
       }`}>
         {formatTime(timeLeft)}
       </div>
-      {isPreWorkout && (
-        <div className="timer-mode-label">BEREIT MACHEN</div>
-      )}
       {isLongPause && (
         <div className="timer-mode-label">LÄNGERE PAUSE</div>
       )}

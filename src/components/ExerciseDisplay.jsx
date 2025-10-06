@@ -81,9 +81,8 @@ const ExerciseDisplay = ({ exercise, nextExercise, isLastExercise, isRestTime, i
       </div>
       
       {nextExercise && !isLastExercise && (
-        <div className="next-exercise-preview">
-          <div className="next-label">Als nächstes:</div>
-          <div className="next-exercise-name">{nextExercise.name}</div>
+        <div className="next-exercise-minimal">
+          <div className="next-label-minimal">Als nächstes: {nextExercise.name}</div>
         </div>
       )}
       
