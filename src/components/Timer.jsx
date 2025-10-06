@@ -19,9 +19,8 @@ const Timer = ({ onTimeUp, autoStart, onWarningChange, onPauseToggle, isActive, 
     }
   }, [autoStart, isRestTime, exerciseTime, restTime]);
 
-  // Check if we're in the warning period (last 10 seconds for exercise, last 3 seconds for rest)
-  const warningThreshold = isRestTime ? 3000 : 10000;
-  const isWarningTime = timeLeft <= warningThreshold && timeLeft > 0;
+  // Check if we're in the warning period (only during exercise, last 10 seconds)
+  const isWarningTime = !isRestTime && timeLeft <= 5000 && timeLeft > 0;
 
   // Notify parent component about warning state changes
   useEffect(() => {
