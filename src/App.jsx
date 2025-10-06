@@ -12,6 +12,8 @@ function App() {
   const [isTimerActive, setIsTimerActive] = useState(false); // Timer control
   const [isRestTime, setIsRestTime] = useState(false); // Track if we're in rest period
   const [isPreWorkout, setIsPreWorkout] = useState(false); // Track pre-workout countdown
+  const [isLongPause, setIsLongPause] = useState(false); // Track if we're in a long pause
+  const [currentPauseDuration, setCurrentPauseDuration] = useState(null); // Store current pause duration
 
   // Load exercises from JSON file
   useEffect(() => {
@@ -36,10 +38,24 @@ function App() {
       setIsTimerActive(true);
       setTimerKey(prev => prev + 1); // Reset timer for first exercise
     } else if (workoutStarted && exercises.length > 0) {
-      if (!isRestTime) {
-        // Exercise finished, start rest period
-        if (currentExerciseIndex < exercises.length - 1) {
-          // Not the last exercise, start rest period
+      if (isLongPause) {
+        // Long pause finished, move to next exercise
+        const nextIndex = currentExerciseIndex + 1;
+        setCurrentExerciseIndex(nextIndex);
+        setIsLongPause(false);
+        setCurrentPauseDuration(null);
+        setTimerKey(prev => prev + 1); // Reset timer for next exercise
+      } else if (!isRestTime) {
+        // Exercise finished, check if next item is a pause or move to rest
+        const nextIndex = currentExerciseIndex + 1;
+        if (nextIndex < exercises.length && exercises[nextIndex].type === 'pause') {
+          // Next item is a pause, start long pause
+          setCurrentExerciseIndex(nextIndex);
+          setIsLongPause(true);
+          setCurrentPauseDuration(exercises[nextIndex].duration);
+          setTimerKey(prev => prev + 1); // Reset timer for pause
+        } else if (nextIndex < exercises.length) {
+          // Next item is an exercise, start rest period
           setIsRestTime(true);
           setTimerKey(prev => prev + 1); // Reset timer for rest period
         } else {
@@ -47,7 +63,9 @@ function App() {
           setWorkoutStarted(false);
           setCurrentExerciseIndex(0);
           setIsRestTime(false);
+          setIsLongPause(false);
           setIsPreWorkout(false);
+          setCurrentPauseDuration(null);
           setTimerKey(prev => prev + 1);
         }
       } else {
@@ -75,6 +93,8 @@ function App() {
     setIsTimerActive(false);
     setIsRestTime(false);
     setIsPreWorkout(false);
+    setIsLongPause(false);
+    setCurrentPauseDuration(null);
     setTimerKey(prev => prev + 1); // Force timer reset when workout ends
   };
 
@@ -90,6 +110,16 @@ function App() {
     ? exercises[currentExerciseIndex + 1] 
     : null;
 
+  // Helper function to get the count of actual exercises (excluding pauses)
+  const getExerciseCount = () => {
+    return exercises.filter(item => item.type !== 'pause').length;
+  };
+
+  // Helper function to get the current exercise number (excluding pauses)
+  const getCurrentExerciseNumber = () => {
+    return exercises.slice(0, currentExerciseIndex + 1).filter(item => item.type !== 'pause').length;
+  };
+
   return (
     <div className={`app ${isWarningTime ? 'warning-active' : ''}`}>
       <header className="app-header">
@@ -97,9 +127,11 @@ function App() {
           <div className="workout-progress">
             {isPreWorkout 
               ? "Mach dich bereit für das Workout!" 
-              : isRestTime 
-                ? `Pause nach Übung ${currentExerciseIndex + 1} von ${exercises.length}`
-                : `Übung ${currentExerciseIndex + 1} von ${exercises.length}`
+              : isLongPause
+                ? `Längere Pause - ${currentExercise?.name || 'Pause'}`
+                : isRestTime 
+                  ? `Pause nach Übung ${getCurrentExerciseNumber()} von ${getExerciseCount()}`
+                  : `Übung ${getCurrentExerciseNumber()} von ${getExerciseCount()}`
             }
           </div>
         )}
@@ -113,6 +145,8 @@ function App() {
           isActive={isTimerActive}
           isRestTime={isRestTime}
           isPreWorkout={isPreWorkout}
+          isLongPause={isLongPause}
+          pauseDuration={currentPauseDuration}
           key={timerKey} // Force timer re-render with auto-start on exercise change
         />
         
@@ -122,6 +156,7 @@ function App() {
           isLastExercise={workoutStarted && exercises.length > 0 && currentExerciseIndex === exercises.length - 1}
           isRestTime={isRestTime}
           isPreWorkout={isPreWorkout}
+          isLongPause={isLongPause}
         />
         
         {!workoutStarted && !isPreWorkout && (

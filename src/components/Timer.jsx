@@ -1,21 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import './Timer.css';
 
-const Timer = ({ onTimeUp, autoStart, onWarningChange, onPauseToggle, isActive, isRestTime = false, isPreWorkout = false }) => {
+const Timer = ({ onTimeUp, autoStart, onWarningChange, onPauseToggle, isActive, isRestTime = false, isPreWorkout = false, isLongPause = false, pauseDuration = null }) => {
   // 50 seconds for exercise, 10 seconds for rest, 5 seconds for pre-workout
   const exerciseTime = 50000; // 50 seconds in milliseconds
   const restTime = 10000; // 10 seconds in milliseconds
   const preWorkoutTime = 5000; // 5 seconds in milliseconds
+  
+  // Helper function to parse pause duration from mm:ss format
+  const parsePauseDuration = (duration) => {
+    if (!duration) return 0;
+    const parts = duration.split(':');
+    const minutes = parseInt(parts[0], 10) || 0;
+    const seconds = parseInt(parts[1], 10) || 0;
+    return (minutes * 60 + seconds) * 1000; // Convert to milliseconds
+  };
   
   const [timeLeft, setTimeLeft] = useState(exerciseTime);
 
   // Auto-start timer when autoStart prop changes, stop when autoStart is false
   useEffect(() => {
     if (autoStart) {
-      // Reset timer based on current mode (pre-workout, exercise, or rest)
+      // Reset timer based on current mode (pre-workout, exercise, rest, or long pause)
       let initialTime;
       if (isPreWorkout) {
         initialTime = preWorkoutTime;
+      } else if (isLongPause) {
+        initialTime = parsePauseDuration(pauseDuration);
       } else if (isRestTime) {
         initialTime = restTime;
       } else {
@@ -25,10 +36,10 @@ const Timer = ({ onTimeUp, autoStart, onWarningChange, onPauseToggle, isActive, 
     } else {
       setTimeLeft(exerciseTime); // Reset to exercise time when workout is stopped
     }
-  }, [autoStart, isRestTime, isPreWorkout, exerciseTime, restTime, preWorkoutTime]);
+  }, [autoStart, isRestTime, isPreWorkout, isLongPause, pauseDuration, exerciseTime, restTime, preWorkoutTime]);
 
   // Check if we're in the warning period (only during exercise, last 5 seconds)
-  const isWarningTime = !isRestTime && !isPreWorkout && timeLeft <= 5000 && timeLeft > 0;
+  const isWarningTime = !isRestTime && !isPreWorkout && !isLongPause && timeLeft <= 5000 && timeLeft > 0;
 
   // Notify parent component about warning state changes
   useEffect(() => {
@@ -48,6 +59,8 @@ const Timer = ({ onTimeUp, autoStart, onWarningChange, onPauseToggle, isActive, 
             // Reset to appropriate time based on next mode
             if (isPreWorkout) {
               return exerciseTime; // Pre-workout -> Exercise
+            } else if (isLongPause) {
+              return exerciseTime; // Long pause -> Exercise
             } else if (isRestTime) {
               return exerciseTime; // Rest -> Exercise
             } else {
@@ -62,6 +75,8 @@ const Timer = ({ onTimeUp, autoStart, onWarningChange, onPauseToggle, isActive, 
       let newTime;
       if (isPreWorkout) {
         newTime = exerciseTime; // Pre-workout -> Exercise
+      } else if (isLongPause) {
+        newTime = exerciseTime; // Long pause -> Exercise
       } else if (isRestTime) {
         newTime = exerciseTime; // Rest -> Exercise
       } else {
@@ -73,9 +88,7 @@ const Timer = ({ onTimeUp, autoStart, onWarningChange, onPauseToggle, isActive, 
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isActive, timeLeft, onTimeUp, isRestTime, isPreWorkout, exerciseTime, restTime]);
-
-  // Format time as MM:SS.MS
+    }, [isActive, timeLeft, onTimeUp, isRestTime, isPreWorkout, isLongPause, exerciseTime, restTime]);  // Format time as MM:SS.MS
   const formatTime = (ms) => {
     const totalSeconds = Math.floor(ms / 1000);
     const minutes = Math.floor(totalSeconds / 60);
@@ -89,12 +102,16 @@ const Timer = ({ onTimeUp, autoStart, onWarningChange, onPauseToggle, isActive, 
     <div className="timer-container">
       <div className={`timer-display ${isWarningTime ? 'warning' : ''} ${
         isPreWorkout ? 'pre-workout-mode' : 
+        isLongPause ? 'long-pause-mode' :
         isRestTime ? 'rest-mode' : 'exercise-mode'
       }`}>
         {formatTime(timeLeft)}
       </div>
       {isPreWorkout && (
         <div className="timer-mode-label">BEREIT MACHEN</div>
+      )}
+      {isLongPause && (
+        <div className="timer-mode-label">LÄNGERE PAUSE</div>
       )}
       {isRestTime && (
         <div className="timer-mode-label">PAUSE</div>

@@ -61,8 +61,13 @@
       "description": "Stehe in Ausfallschritt-Position, halte die Kettlebell mit gestreckten Armen vor dem Körper und rotiere den Oberkörper nach rechts, halte die Hüfte stabil"
     },
     {
-      "name": "KB Swings -- DANACH PAUSE --",
+      "name": "KB Swings",
       "description": "Schwinge die Kettlebell beidhändig kraftvoll zwischen den Beinen hoch bis auf Brusthöhe, nutze die Hüftbewegung für den Schwung und halte den Rücken gerade"
+    },
+    {
+      "type": "pause",
+      "duration": "02:00",
+      "name": "Längere Pause"
     },
 
 

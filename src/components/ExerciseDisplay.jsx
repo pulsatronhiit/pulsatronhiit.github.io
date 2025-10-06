@@ -1,7 +1,7 @@
 import React from 'react';
 import './ExerciseDisplay.css';
 
-const ExerciseDisplay = ({ exercise, nextExercise, isLastExercise, isRestTime, isPreWorkout }) => {
+const ExerciseDisplay = ({ exercise, nextExercise, isLastExercise, isRestTime, isPreWorkout, isLongPause }) => {
   if (isPreWorkout) {
     return (
       <div className="exercise-container pre-workout-display">
@@ -13,6 +13,24 @@ const ExerciseDisplay = ({ exercise, nextExercise, isLastExercise, isRestTime, i
           <div className="first-exercise-preview">
             <div className="next-label">Erste Übung:</div>
             <div className="next-exercise-name">{exercise.name}</div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // During long pause
+  if (isLongPause && exercise) {
+    return (
+      <div className="exercise-container long-pause-display">
+        <div className="long-pause-info">
+          <div className="long-pause-label">⏸️ {exercise.name || 'Längere Pause'}</div>
+          <div className="long-pause-text">Nutze die Zeit für Erholung und Hydration</div>
+        </div>
+        {nextExercise && (
+          <div className="next-exercise-preview">
+            <div className="next-label">Danach geht es weiter mit:</div>
+            <div className="next-exercise-name">{nextExercise.name}</div>
           </div>
         )}
       </div>

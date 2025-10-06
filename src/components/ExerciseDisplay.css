@@ -108,6 +108,31 @@
   padding: 1.5rem;
 }
 
+.long-pause-display {
+  background: rgba(155, 89, 182, 0.05);
+  border: 1px solid rgba(155, 89, 182, 0.2);
+  border-radius: 20px;
+  padding: 1.5rem;
+}
+
+.long-pause-info {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.long-pause-label {
+  font-size: clamp(1.2rem, 5vw, 1.8rem);
+  color: #9b59b6;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.long-pause-text {
+  font-size: clamp(1rem, 4vw, 1.3rem);
+  color: #ccc;
+  opacity: 0.8;
+}
+
 .pre-workout-info {
   text-align: center;
   margin-bottom: 1.5rem;
