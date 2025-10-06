@@ -13,8 +13,8 @@ const Timer = ({ onTimeUp, autoStart, onWarningChange, onPauseToggle, isActive }
     }
   }, [autoStart]);
 
-  // Check if we're in the warning period (last 10 seconds)
-  const isWarningTime = timeLeft <= 10000 && timeLeft > 0;
+  // Check if we're in the warning period (last 3 seconds)
+  const isWarningTime = timeLeft <= 3000 && timeLeft > 0;
 
   // Notify parent component about warning state changes
   useEffect(() => {
