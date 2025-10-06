@@ -138,17 +138,19 @@ function App() {
       </header>
 
       <main className="app-main">
-        <Timer 
-          onTimeUp={handleTimeUp}
-          autoStart={workoutStarted || isPreWorkout}
-          onWarningChange={setIsWarningTime}
-          isActive={isTimerActive}
-          isRestTime={isRestTime}
-          isPreWorkout={isPreWorkout}
-          isLongPause={isLongPause}
-          pauseDuration={currentPauseDuration}
-          key={timerKey} // Force timer re-render with auto-start on exercise change
-        />
+        {(workoutStarted || isPreWorkout) && (
+          <Timer 
+            onTimeUp={handleTimeUp}
+            autoStart={workoutStarted || isPreWorkout}
+            onWarningChange={setIsWarningTime}
+            isActive={isTimerActive}
+            isRestTime={isRestTime}
+            isPreWorkout={isPreWorkout}
+            isLongPause={isLongPause}
+            pauseDuration={currentPauseDuration}
+            key={timerKey} // Force timer re-render with auto-start on exercise change
+          />
+        )}
         
         <ExerciseDisplay 
           exercise={currentExercise} 
