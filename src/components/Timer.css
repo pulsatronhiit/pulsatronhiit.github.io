@@ -18,6 +18,26 @@
   transition: all 0.3s ease;
 }
 
+.timer-display.rest-mode {
+  color: #ffa500;
+  text-shadow: 0 0 20px rgba(255, 165, 0, 0.5);
+}
+
+.timer-display.exercise-mode {
+  color: #00ff41;
+  text-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+}
+
+.timer-mode-label {
+  font-size: clamp(1rem, 4vw, 1.5rem);
+  font-weight: bold;
+  color: #ffa500;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-top: 0.5rem;
+}
+
 .timer-display.warning {
   color: #ff4444;
   text-shadow: 0 0 30px rgba(255, 68, 68, 0.8);

@@ -10,6 +10,7 @@ function App() {
   const [timerKey, setTimerKey] = useState(0); // Force timer re-render
   const [isWarningTime, setIsWarningTime] = useState(false); // Track warning state
   const [isTimerActive, setIsTimerActive] = useState(false); // Timer control
+  const [isRestTime, setIsRestTime] = useState(false); // Track if we're in rest period
 
   // Load exercises from JSON file
   useEffect(() => {
@@ -28,18 +29,25 @@ function App() {
 
   const handleTimeUp = () => {
     if (workoutStarted && exercises.length > 0) {
-      const nextIndex = currentExerciseIndex + 1;
-      
-      // Check if we've completed all exercises
-      if (nextIndex >= exercises.length) {
-        // End workout after last exercise
-        setWorkoutStarted(false);
-        setCurrentExerciseIndex(0);
-        setTimerKey(prev => prev + 1); // Reset timer
+      if (!isRestTime) {
+        // Exercise finished, start rest period
+        if (currentExerciseIndex < exercises.length - 1) {
+          // Not the last exercise, start rest period
+          setIsRestTime(true);
+          setTimerKey(prev => prev + 1); // Reset timer for rest period
+        } else {
+          // Last exercise finished, end workout
+          setWorkoutStarted(false);
+          setCurrentExerciseIndex(0);
+          setIsRestTime(false);
+          setTimerKey(prev => prev + 1);
+        }
       } else {
-        // Move to next exercise and force timer restart
+        // Rest period finished, move to next exercise
+        const nextIndex = currentExerciseIndex + 1;
         setCurrentExerciseIndex(nextIndex);
-        setTimerKey(prev => prev + 1); // Force timer component re-render with auto-start
+        setIsRestTime(false);
+        setTimerKey(prev => prev + 1); // Reset timer for next exercise
       }
     }
   };
@@ -48,12 +56,14 @@ function App() {
     setWorkoutStarted(true);
     setCurrentExerciseIndex(0);
     setIsTimerActive(true);
+    setIsRestTime(false);
   };
 
   const resetWorkout = () => {
     setWorkoutStarted(false);
     setCurrentExerciseIndex(0);
     setIsTimerActive(false);
+    setIsRestTime(false);
     setTimerKey(prev => prev + 1); // Force timer reset when workout ends
   };
 
@@ -74,7 +84,10 @@ function App() {
       <header className="app-header">
         {workoutStarted && (
           <div className="workout-progress">
-            Übung {currentExerciseIndex + 1} von {exercises.length}
+            {isRestTime 
+              ? `Pause nach Übung ${currentExerciseIndex + 1} von ${exercises.length}`
+              : `Übung ${currentExerciseIndex + 1} von ${exercises.length}`
+            }
           </div>
         )}
       </header>
@@ -85,6 +98,7 @@ function App() {
           autoStart={workoutStarted}
           onWarningChange={setIsWarningTime}
           isActive={isTimerActive}
+          isRestTime={isRestTime}
           key={timerKey} // Force timer re-render with auto-start on exercise change
         />
         
@@ -92,6 +106,7 @@ function App() {
           exercise={currentExercise} 
           nextExercise={nextExercise}
           isLastExercise={workoutStarted && exercises.length > 0 && currentExerciseIndex === exercises.length - 1}
+          isRestTime={isRestTime}
         />
         
         {!workoutStarted && (

@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import './Timer.css';
 
-const Timer = ({ onTimeUp, autoStart, onWarningChange, onPauseToggle, isActive }) => {
-  const [timeLeft, setTimeLeft] = useState(60000); // 60 seconds in milliseconds
+const Timer = ({ onTimeUp, autoStart, onWarningChange, onPauseToggle, isActive, isRestTime = false }) => {
+  // 50 seconds for exercise, 10 seconds for rest
+  const exerciseTime = 50000; // 50 seconds in milliseconds
+  const restTime = 10000; // 10 seconds in milliseconds
+  
+  const [timeLeft, setTimeLeft] = useState(exerciseTime);
 
   // Auto-start timer when autoStart prop changes, stop when autoStart is false
   useEffect(() => {
     if (autoStart) {
-      // setIsActive is now controlled by parent
+      // Reset timer based on current mode (exercise or rest)
+      const initialTime = isRestTime ? restTime : exerciseTime;
+      setTimeLeft(initialTime);
     } else {
-      setTimeLeft(60000); // Reset timer when workout is stopped
+      setTimeLeft(exerciseTime); // Reset to exercise time when workout is stopped
     }
-  }, [autoStart]);
+  }, [autoStart, isRestTime, exerciseTime, restTime]);
 
-  // Check if we're in the warning period (last 3 seconds)
-  const isWarningTime = timeLeft <= 3000 && timeLeft > 0;
+  // Check if we're in the warning period (last 10 seconds for exercise, last 3 seconds for rest)
+  const warningThreshold = isRestTime ? 3000 : 10000;
+  const isWarningTime = timeLeft <= warningThreshold && timeLeft > 0;
 
   // Notify parent component about warning state changes
   useEffect(() => {
@@ -31,21 +38,22 @@ const Timer = ({ onTimeUp, autoStart, onWarningChange, onPauseToggle, isActive }
         setTimeLeft(timeLeft => {
           if (timeLeft <= 10) {
             onTimeUp();
-            return 60000; // Reset to 60 seconds
+            // Reset to appropriate time based on next mode
+            return isRestTime ? exerciseTime : restTime;
           }
           return timeLeft - 10; // Decrease by 10ms for smooth countdown
         });
       }, 10);
     } else if (timeLeft === 0) {
-      setIsActive(false);
       onTimeUp();
-      setTimeLeft(60000); // Reset to 60 seconds
+      const newTime = isRestTime ? exerciseTime : restTime;
+      setTimeLeft(newTime);
     }
 
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isActive, timeLeft, onTimeUp]);
+  }, [isActive, timeLeft, onTimeUp, isRestTime, exerciseTime, restTime]);
 
   // Format time as MM:SS.MS
   const formatTime = (ms) => {
@@ -59,9 +67,12 @@ const Timer = ({ onTimeUp, autoStart, onWarningChange, onPauseToggle, isActive }
 
   return (
     <div className="timer-container">
-      <div className={`timer-display ${isWarningTime ? 'warning' : ''}`}>
+      <div className={`timer-display ${isWarningTime ? 'warning' : ''} ${isRestTime ? 'rest-mode' : 'exercise-mode'}`}>
         {formatTime(timeLeft)}
       </div>
+      {isRestTime && (
+        <div className="timer-mode-label">PAUSE</div>
+      )}
     </div>
   );
 };
