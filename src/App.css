@@ -13,6 +13,22 @@
   background: linear-gradient(135deg, #1a0000 0%, #330000 50%, #1a0000 100%);
 }
 
+.app.transition-flash {
+  animation: flash-transition 0.25s ease-in-out;
+}
+
+@keyframes flash-transition {
+  0% {
+    background: #ffffff;
+  }
+  1% {
+    background: #ffffff;
+  }
+  100% {
+    background: #ffffff00;
+  }
+}
+
 .app::before {
   content: '';
   position: absolute;

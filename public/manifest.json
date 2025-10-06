@@ -1,12 +1,16 @@
 {
   "name": "HIIT Workout App",
   "short_name": "HIIT Workout",
-  "description": "Eine HIIT Workout App optimiert für iPhone 15 Plus",
+  "description": "Eine HIIT Workout App optimiert für iPhone 15 Plus - funktioniert offline",
   "start_url": "./",
   "display": "fullscreen",
   "orientation": "portrait",
   "theme_color": "#000000",
   "background_color": "#000000",
+  "prefer_related_applications": false,
+  "scope": "./",
+  "categories": ["fitness", "health"],
+  "lang": "de",
   "icons": [
     {
       "src": "icon-192x192.svg",

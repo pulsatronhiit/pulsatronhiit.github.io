@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 10vh;
+  transition: all 0.3s ease;
 }
 
 .timer-display {
@@ -15,7 +16,7 @@
   text-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
   margin-bottom: 1rem;
   letter-spacing: 0.1em;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
 }
 
 .timer-display.rest-mode {
@@ -72,6 +73,7 @@
   text-transform: uppercase;
   letter-spacing: 0.2em;
   margin-top: 0.5rem;
+  transition: color 0.3s ease, opacity 0.3s ease;
 }
 
 .timer-display.warning {

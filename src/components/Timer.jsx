@@ -89,13 +89,17 @@ const Timer = ({ onTimeUp, autoStart, onWarningChange, onPauseToggle, isActive, 
       if (interval) clearInterval(interval);
     };
     }, [isActive, timeLeft, onTimeUp, isRestTime, isPreWorkout, isLongPause, exerciseTime, restTime]);  // Format time as MM:SS.MS
-  const formatTime = (ms) => {
-    const totalSeconds = Math.floor(ms / 1000);
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
-    const milliseconds = Math.floor((ms % 1000) / 10);
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60000);
+    const seconds = Math.floor((time % 60000) / 1000);
+    const milliseconds = Math.floor((time % 1000) / 10);
     
-    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(2, '0')}`;
+    // Show milliseconds only in the last 3 seconds
+    if (time <= 5000) {
+      return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(2, '0')}`;
+    } else {
+      return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
   };
 
   return (

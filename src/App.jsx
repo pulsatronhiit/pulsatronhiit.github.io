@@ -14,6 +14,7 @@ function App() {
   const [isPreWorkout, setIsPreWorkout] = useState(false); // Track pre-workout countdown
   const [isLongPause, setIsLongPause] = useState(false); // Track if we're in a long pause
   const [currentPauseDuration, setCurrentPauseDuration] = useState(null); // Store current pause duration
+  const [isTransitionFlash, setIsTransitionFlash] = useState(false); // Track flash transition
 
   // Load exercises from JSON file
   useEffect(() => {
@@ -30,9 +31,18 @@ function App() {
     loadExercises();
   }, []);
 
+  // Function to trigger flash transition
+  const triggerFlashTransition = () => {
+    setIsTransitionFlash(true);
+    setTimeout(() => {
+      setIsTransitionFlash(false);
+    }, 250); // Match the animation duration
+  };
+
   const handleTimeUp = () => {
     if (isPreWorkout) {
       // Pre-workout countdown finished, start actual workout
+      triggerFlashTransition();
       setIsPreWorkout(false);
       setWorkoutStarted(true);
       setIsTimerActive(true);
@@ -40,6 +50,7 @@ function App() {
     } else if (workoutStarted && exercises.length > 0) {
       if (isLongPause) {
         // Long pause finished, move to next exercise
+        triggerFlashTransition();
         const nextIndex = currentExerciseIndex + 1;
         setCurrentExerciseIndex(nextIndex);
         setIsLongPause(false);
@@ -50,12 +61,14 @@ function App() {
         const nextIndex = currentExerciseIndex + 1;
         if (nextIndex < exercises.length && exercises[nextIndex].type === 'pause') {
           // Next item is a pause, start long pause
+          triggerFlashTransition();
           setCurrentExerciseIndex(nextIndex);
           setIsLongPause(true);
           setCurrentPauseDuration(exercises[nextIndex].duration);
           setTimerKey(prev => prev + 1); // Reset timer for pause
         } else if (nextIndex < exercises.length) {
           // Next item is an exercise, start rest period
+          triggerFlashTransition();
           setIsRestTime(true);
           setTimerKey(prev => prev + 1); // Reset timer for rest period
         } else {
@@ -70,6 +83,7 @@ function App() {
         }
       } else {
         // Rest period finished, move to next exercise
+        triggerFlashTransition();
         const nextIndex = currentExerciseIndex + 1;
         setCurrentExerciseIndex(nextIndex);
         setIsRestTime(false);
@@ -88,6 +102,7 @@ function App() {
   };
 
   const resetWorkout = () => {
+    triggerFlashTransition();
     setWorkoutStarted(false);
     setCurrentExerciseIndex(0);
     setIsTimerActive(false);
@@ -121,17 +136,15 @@ function App() {
   };
 
   return (
-    <div className={`app ${isWarningTime ? 'warning-active' : ''}`}>
+    <div className={`app ${isWarningTime ? 'warning-active' : ''} ${isTransitionFlash ? 'transition-flash' : ''}`}>
       <header className="app-header">
-        {(workoutStarted || isPreWorkout) && (
+        {workoutStarted && (
           <div className="workout-progress">
-            {isPreWorkout 
-              ? "Mach dich bereit für das Workout!" 
-              : isLongPause
-                ? `Längere Pause - ${currentExercise?.name || 'Pause'}`
-                : isRestTime 
-                  ? `Pause nach Übung ${getCurrentExerciseNumber()} von ${getExerciseCount()}`
-                  : `Übung ${getCurrentExerciseNumber()} von ${getExerciseCount()}`
+            {isLongPause
+              ? `Längere Pause - ${currentExercise?.name || 'Pause'}`
+              : isRestTime 
+                ? `Pause nach Übung ${getCurrentExerciseNumber()} von ${getExerciseCount()}`
+                : `Übung ${getCurrentExerciseNumber()} von ${getExerciseCount()}`
             }
           </div>
         )}
