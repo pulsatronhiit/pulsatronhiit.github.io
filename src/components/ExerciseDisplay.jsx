@@ -1,7 +1,24 @@
 import React from 'react';
 import './ExerciseDisplay.css';
 
-const ExerciseDisplay = ({ exercise, nextExercise, isLastExercise, isRestTime }) => {
+const ExerciseDisplay = ({ exercise, nextExercise, isLastExercise, isRestTime, isPreWorkout }) => {
+  if (isPreWorkout) {
+    return (
+      <div className="exercise-container pre-workout-display">
+        <div className="pre-workout-info">
+          <div className="pre-workout-label">🏃‍♂️ Bereit machen!</div>
+          <div className="pre-workout-text">Das Workout startet gleich...</div>
+        </div>
+        {exercise && (
+          <div className="first-exercise-preview">
+            <div className="next-label">Erste Übung:</div>
+            <div className="next-exercise-name">{exercise.name}</div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
   if (!exercise) {
     return (
       <div className="exercise-container">
@@ -49,7 +66,6 @@ const ExerciseDisplay = ({ exercise, nextExercise, isLastExercise, isRestTime })
         <div className="next-exercise-preview">
           <div className="next-label">Als nächstes:</div>
           <div className="next-exercise-name">{nextExercise.name}</div>
-          <div className="next-exercise-description">{nextExercise.description}</div>
         </div>
       )}
       

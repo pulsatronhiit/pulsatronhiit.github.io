@@ -11,6 +11,7 @@ function App() {
   const [isWarningTime, setIsWarningTime] = useState(false); // Track warning state
   const [isTimerActive, setIsTimerActive] = useState(false); // Timer control
   const [isRestTime, setIsRestTime] = useState(false); // Track if we're in rest period
+  const [isPreWorkout, setIsPreWorkout] = useState(false); // Track pre-workout countdown
 
   // Load exercises from JSON file
   useEffect(() => {
@@ -28,7 +29,13 @@ function App() {
   }, []);
 
   const handleTimeUp = () => {
-    if (workoutStarted && exercises.length > 0) {
+    if (isPreWorkout) {
+      // Pre-workout countdown finished, start actual workout
+      setIsPreWorkout(false);
+      setWorkoutStarted(true);
+      setIsTimerActive(true);
+      setTimerKey(prev => prev + 1); // Reset timer for first exercise
+    } else if (workoutStarted && exercises.length > 0) {
       if (!isRestTime) {
         // Exercise finished, start rest period
         if (currentExerciseIndex < exercises.length - 1) {
@@ -40,6 +47,7 @@ function App() {
           setWorkoutStarted(false);
           setCurrentExerciseIndex(0);
           setIsRestTime(false);
+          setIsPreWorkout(false);
           setTimerKey(prev => prev + 1);
         }
       } else {
@@ -53,10 +61,12 @@ function App() {
   };
 
   const startWorkout = () => {
-    setWorkoutStarted(true);
+    setIsPreWorkout(true);
+    setWorkoutStarted(false); // Don't start workout yet
     setCurrentExerciseIndex(0);
     setIsTimerActive(true);
     setIsRestTime(false);
+    setTimerKey(prev => prev + 1); // Start pre-workout countdown
   };
 
   const resetWorkout = () => {
@@ -64,6 +74,7 @@ function App() {
     setCurrentExerciseIndex(0);
     setIsTimerActive(false);
     setIsRestTime(false);
+    setIsPreWorkout(false);
     setTimerKey(prev => prev + 1); // Force timer reset when workout ends
   };
 
@@ -71,22 +82,24 @@ function App() {
     setIsTimerActive(!isTimerActive);
   };
 
-  const currentExercise = workoutStarted && exercises.length > 0 
+  const currentExercise = (workoutStarted || isPreWorkout) && exercises.length > 0 
     ? exercises[currentExerciseIndex] 
     : null;
 
-  const nextExercise = workoutStarted && exercises.length > 0 && currentExerciseIndex < exercises.length - 1
+  const nextExercise = (workoutStarted || isPreWorkout) && exercises.length > 0 && currentExerciseIndex < exercises.length - 1
     ? exercises[currentExerciseIndex + 1] 
     : null;
 
   return (
     <div className={`app ${isWarningTime ? 'warning-active' : ''}`}>
       <header className="app-header">
-        {workoutStarted && (
+        {(workoutStarted || isPreWorkout) && (
           <div className="workout-progress">
-            {isRestTime 
-              ? `Pause nach Übung ${currentExerciseIndex + 1} von ${exercises.length}`
-              : `Übung ${currentExerciseIndex + 1} von ${exercises.length}`
+            {isPreWorkout 
+              ? "Mach dich bereit für das Workout!" 
+              : isRestTime 
+                ? `Pause nach Übung ${currentExerciseIndex + 1} von ${exercises.length}`
+                : `Übung ${currentExerciseIndex + 1} von ${exercises.length}`
             }
           </div>
         )}
@@ -95,10 +108,11 @@ function App() {
       <main className="app-main">
         <Timer 
           onTimeUp={handleTimeUp}
-          autoStart={workoutStarted}
+          autoStart={workoutStarted || isPreWorkout}
           onWarningChange={setIsWarningTime}
           isActive={isTimerActive}
           isRestTime={isRestTime}
+          isPreWorkout={isPreWorkout}
           key={timerKey} // Force timer re-render with auto-start on exercise change
         />
         
@@ -107,9 +121,10 @@ function App() {
           nextExercise={nextExercise}
           isLastExercise={workoutStarted && exercises.length > 0 && currentExerciseIndex === exercises.length - 1}
           isRestTime={isRestTime}
+          isPreWorkout={isPreWorkout}
         />
         
-        {!workoutStarted && (
+        {!workoutStarted && !isPreWorkout && (
           <button 
             onClick={startWorkout} 
             className="workout-btn start-workout-btn"
@@ -119,7 +134,7 @@ function App() {
           </button>
         )}
         
-        {workoutStarted && (
+        {(workoutStarted || isPreWorkout) && (
           <div className="workout-controls">
             <button 
               onClick={toggleTimer} 

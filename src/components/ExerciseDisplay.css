@@ -101,6 +101,53 @@
   opacity: 0.9;
 }
 
+.pre-workout-display {
+  background: rgba(0, 191, 255, 0.05);
+  border: 1px solid rgba(0, 191, 255, 0.2);
+  border-radius: 20px;
+  padding: 1.5rem;
+}
+
+.pre-workout-info {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.pre-workout-label {
+  font-size: clamp(1.2rem, 5vw, 1.8rem);
+  color: #00bfff;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.pre-workout-text {
+  font-size: clamp(1rem, 4vw, 1.3rem);
+  color: #ccc;
+  opacity: 0.8;
+}
+
+.first-exercise-preview {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(0, 191, 255, 0.1);
+  border-radius: 10px;
+}
+
+.first-exercise-preview .next-label {
+  font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+  color: #00bfff;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.first-exercise-preview .next-exercise-name {
+  font-size: clamp(1.4rem, 5vw, 2rem);
+  color: #fff;
+  font-weight: 600;
+}
+
 .completion-label {
   font-size: clamp(1rem, 4vw, 1.3rem);
   color: #ffd700;
