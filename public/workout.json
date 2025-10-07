@@ -1,0 +1,141 @@
+{
+  "workout": {
+    "name": "HIIT Kettlebell Workout",
+    "description": "Intensives Kettlebell-Training mit verschiedenen funktionellen Bewegungen",
+    "sequence": [
+      {
+        "type": "exercise",
+        "exerciseId": "sidestep-squats"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "burpees"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "one-arm-kb-swing-bottom-up"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "one-arm-kb-swing"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "breakdance-swing-through"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "mountain-climbers"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "kb-windmillpress-figure8"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "high-knees"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "gorilla-rows"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "alternating-kb-snatch"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "kb-lateral-swing-snatch-left"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "kb-lateral-swing-snatch-right"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "kb-halo-lateral-swing"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "kb-figure8-clean"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "split-stance-rotation-left"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "split-stance-rotation-right"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "kb-swings"
+      },
+      {
+        "type": "pause",
+        "duration": "02:00",
+        "name": "Längere Pause"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "sidestep-squats"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "burpee-mountain-climbers"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "one-arm-kb-swing-bottom-up"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "one-arm-kb-swing"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "kb-cross-body-clean-left"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "kb-cross-body-clean-right"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "plank-breakdance-swing"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "high-knees"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "gorilla-rows"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "alternating-kb-snatch"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "kickstand-squat-pushpress"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "figure8-lunge"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "lateral-swings"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "kb-swings"
+      },
+      {
+        "type": "exercise",
+        "exerciseId": "kb-figure8-clean"
+      }
+    ]
+  }
+}

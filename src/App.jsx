@@ -4,7 +4,8 @@ import ExerciseDisplay from './components/ExerciseDisplay';
 import './App.css';
 
 function App() {
-  const [exercises, setExercises] = useState([]);
+  const [exercises, setExercises] = useState({});
+  const [workoutSequence, setWorkoutSequence] = useState([]);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
   const [workoutStarted, setWorkoutStarted] = useState(false);
   const [timerKey, setTimerKey] = useState(0); // Force timer re-render
@@ -16,19 +17,25 @@ function App() {
   const [currentPauseDuration, setCurrentPauseDuration] = useState(null); // Store current pause duration
   const [isTransitionFlash, setIsTransitionFlash] = useState(false); // Track flash transition
 
-  // Load exercises from JSON file
+  // Load exercises and workout from JSON files
   useEffect(() => {
-    const loadExercises = async () => {
+    const loadWorkoutData = async () => {
       try {
-        const response = await fetch('./exercises.json');
-        const data = await response.json();
-        setExercises(data.exercises);
+        // Load exercises library
+        const exercisesResponse = await fetch('./exercises_new.json');
+        const exercisesData = await exercisesResponse.json();
+        setExercises(exercisesData.exercises);
+
+        // Load workout sequence
+        const workoutResponse = await fetch('./workout.json');
+        const workoutData = await workoutResponse.json();
+        setWorkoutSequence(workoutData.workout.sequence);
       } catch (error) {
-        console.error('Error loading exercises:', error);
+        console.error('Error loading workout data:', error);
       }
     };
     
-    loadExercises();
+    loadWorkoutData();
   }, []);
 
   // Function to trigger flash transition
@@ -47,7 +54,7 @@ function App() {
       setWorkoutStarted(true);
       setIsTimerActive(true);
       setTimerKey(prev => prev + 1); // Reset timer for first exercise
-    } else if (workoutStarted && exercises.length > 0) {
+    } else if (workoutStarted && workoutSequence.length > 0) {
       if (isLongPause) {
         // Long pause finished, move to next exercise
         triggerFlashTransition();
@@ -59,14 +66,14 @@ function App() {
       } else if (!isRestTime) {
         // Exercise finished, check if next item is a pause or move to rest
         const nextIndex = currentExerciseIndex + 1;
-        if (nextIndex < exercises.length && exercises[nextIndex].type === 'pause') {
+        if (nextIndex < workoutSequence.length && workoutSequence[nextIndex].type === 'pause') {
           // Next item is a pause, start long pause
           triggerFlashTransition();
           setCurrentExerciseIndex(nextIndex);
           setIsLongPause(true);
-          setCurrentPauseDuration(exercises[nextIndex].duration);
+          setCurrentPauseDuration(workoutSequence[nextIndex].duration);
           setTimerKey(prev => prev + 1); // Reset timer for pause
-        } else if (nextIndex < exercises.length) {
+        } else if (nextIndex < workoutSequence.length) {
           // Next item is an exercise, start rest period
           triggerFlashTransition();
           setIsRestTime(true);
@@ -117,22 +124,35 @@ function App() {
     setIsTimerActive(!isTimerActive);
   };
 
-  const currentExercise = (workoutStarted || isPreWorkout) && exercises.length > 0 
-    ? exercises[currentExerciseIndex] 
+  // Helper function to get exercise data by sequence item
+  const getExerciseFromSequence = (sequenceItem) => {
+    if (!sequenceItem) return null;
+    if (sequenceItem.type === 'pause') {
+      return {
+        type: 'pause',
+        name: sequenceItem.name,
+        duration: sequenceItem.duration
+      };
+    }
+    return exercises[sequenceItem.exerciseId] || null;
+  };
+
+  const currentExercise = (workoutStarted || isPreWorkout) && workoutSequence.length > 0 
+    ? getExerciseFromSequence(workoutSequence[currentExerciseIndex])
     : null;
 
-  const nextExercise = (workoutStarted || isPreWorkout) && exercises.length > 0 && currentExerciseIndex < exercises.length - 1
-    ? exercises[currentExerciseIndex + 1] 
+  const nextExercise = (workoutStarted || isPreWorkout) && workoutSequence.length > 0 && currentExerciseIndex < workoutSequence.length - 1
+    ? getExerciseFromSequence(workoutSequence[currentExerciseIndex + 1])
     : null;
 
   // Helper function to get the count of actual exercises (excluding pauses)
   const getExerciseCount = () => {
-    return exercises.filter(item => item.type !== 'pause').length;
+    return workoutSequence.filter(item => item.type !== 'pause').length;
   };
 
   // Helper function to get the current exercise number (excluding pauses)
   const getCurrentExerciseNumber = () => {
-    return exercises.slice(0, currentExerciseIndex + 1).filter(item => item.type !== 'pause').length;
+    return workoutSequence.slice(0, currentExerciseIndex + 1).filter(item => item.type !== 'pause').length;
   };
 
   return (
@@ -168,7 +188,7 @@ function App() {
         <ExerciseDisplay 
           exercise={currentExercise} 
           nextExercise={nextExercise}
-          isLastExercise={workoutStarted && exercises.length > 0 && currentExerciseIndex === exercises.length - 1}
+          isLastExercise={workoutStarted && workoutSequence.length > 0 && currentExerciseIndex === workoutSequence.length - 1}
           isRestTime={isRestTime}
           isPreWorkout={isPreWorkout}
           isLongPause={isLongPause}
@@ -178,7 +198,7 @@ function App() {
           <button 
             onClick={startWorkout} 
             className="workout-btn start-workout-btn"
-            disabled={exercises.length === 0}
+            disabled={workoutSequence.length === 0}
           >
             Workout starten
           </button>
