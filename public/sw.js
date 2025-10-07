@@ -10,7 +10,6 @@ const urlsToCache = [
   basePath,
   `${basePath}index.html`,
   `${basePath}exercises.json`,
-  `${basePath}workout.json`,
   `${basePath}manifest.json`,
   `${basePath}icon-192x192.svg`,
   `${basePath}icon-512x512.svg`,
@@ -23,7 +22,7 @@ const urlsToCache = [
   `${basePath}src/utils/serviceWorker.js`
 ];
 
-// Install event - cache resources but don't activate immediately during usage
+// Install event - cache resources and activate on next start
 self.addEventListener('install', (event) => {
   console.log('Service Worker: Installing version', CACHE_VERSION);
   event.waitUntil(
@@ -33,8 +32,8 @@ self.addEventListener('install', (event) => {
         return cache.addAll(urlsToCache);
       })
       .then(() => {
-        console.log('Service Worker: Files cached, waiting for activation on next app start');
-        // Don't skip waiting - let it activate naturally on next page load
+        console.log('Service Worker: Files cached, will activate on next app start');
+        // Don't skip waiting - activate naturally on next page load for stability
       })
   );
 });
@@ -126,4 +125,12 @@ self.addEventListener('activate', (event) => {
       });
     })
   );
+});
+
+// Handle messages from clients
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    console.log('Service Worker: Received SKIP_WAITING message, activating immediately');
+    self.skipWaiting();
+  }
 });

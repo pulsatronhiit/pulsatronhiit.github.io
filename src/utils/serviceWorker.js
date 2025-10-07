@@ -1,4 +1,4 @@
-// Service Worker registration utility with startup updates only
+// Service Worker registration utility with aggressive updates
 export const registerServiceWorker = () => {
   // Only register Service Worker in production
   if (import.meta.env.PROD && 'serviceWorker' in navigator) {
@@ -6,22 +6,24 @@ export const registerServiceWorker = () => {
       // Add build timestamp to force SW update check
       const swPath = `/hiity/sw.js?v=${Date.now()}`;
       
-      navigator.serviceWorker.register(swPath)
+      navigator.serviceWorker.register(swPath, {
+        updateViaCache: 'none' // Never cache the service worker itself
+      })
         .then((registration) => {
           console.log('Service Worker registered successfully:', registration.scope);
           
-          // Check for updates on startup only
+          // Force immediate update check
           registration.update();
           
-          // Listen for updates but don't interrupt user
+          // Listen for updates and activate immediately
           registration.addEventListener('updatefound', () => {
             const newWorker = registration.installing;
-            console.log('Service Worker: New version found, installing in background...');
+            console.log('Service Worker: New version found, installing...');
             
             newWorker.addEventListener('statechange', () => {
               if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                 console.log('Service Worker: New version ready, will activate on next app start');
-                // Don't activate immediately - wait for next page load
+                // Don't force immediate reload - let it activate naturally
               }
             });
           });
