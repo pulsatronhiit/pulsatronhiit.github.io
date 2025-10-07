@@ -338,7 +338,7 @@ function App() {
   return (
     <div className={`app ${isWarningTime ? 'warning-active' : ''} ${isTransitionFlash ? 'transition-flash' : ''}`}>
       <header className="app-header">
-        {!workoutStarted && !isPreWorkout && (
+        {!workoutStarted && !isPreWorkout && !difficultySelected && !showCustomConfig && (
           <div className="brand-header">
             <h1 className="brand-title">IronHIIT</h1>
             <p className="brand-slogan">Baremetal Training. Minimal Data. Maximum Results.</p>
