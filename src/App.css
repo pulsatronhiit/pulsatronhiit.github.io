@@ -516,6 +516,18 @@
   box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
 }
 
+/* Workout Control Buttons */
+.workout-control-buttons {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.workout-control-btn {
+  width: 100%;
+  max-width: 250px;
+  margin: 0 auto;
+}
+
 /* Prevent scrolling and bouncing on iOS */
 @media screen and (max-width: 393px) {
   body {

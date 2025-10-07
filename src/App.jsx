@@ -523,16 +523,16 @@ function App() {
         )}
         
         {(workoutStarted || isPreWorkout) && (
-          <div className="workout-controls">
+          <div className="confirmation-buttons workout-control-buttons">
             <button 
               onClick={toggleTimer} 
-              className="workout-btn pause-btn"
+              className="workout-btn start-workout-btn workout-control-btn"
             >
               {isTimerActive ? 'Pausieren' : 'Fortsetzen'}
             </button>
             <button 
               onClick={resetWorkout} 
-              className="workout-btn reset-workout-btn"
+              className="workout-btn back-btn workout-control-btn"
             >
               Workout beenden
             </button>
