@@ -48,22 +48,26 @@ function App() {
     leicht: {
       name: 'Leicht',
       totalExercises: 15,
-      pauses: [{ after: 5, duration: '01:00' },{ after: 10, duration: '01:00' }]
+      pauseCount: 2,
+      pauseDuration: '01:00'
     },
     moderat: {
       name: 'Moderat',
       totalExercises: 20,
-      pauses: [{ after: 10, duration: '02:00' }]
+      pauseCount: 1,
+      pauseDuration: '02:00'
     },
     anstrengend: {
       name: 'Anstrengend',
-      totalExercises: 30,
-      pauses: [{ after: 10, duration: '01:00' }, { after: 20, duration: '01:00' }]
+      totalExercises: 30, 
+      pauseCount: 2,
+      pauseDuration: '01:00'
     },
     brutal: {
       name: 'Brutal',
       totalExercises: 40,
-      pauses: [{ after: 20, duration: '02:00' }]
+      pauseCount: 1,
+      pauseDuration: '02:00'
     }
   };
 
@@ -72,6 +76,18 @@ function App() {
     const config = workoutConfigs[difficulty];
     const exerciseIds = Object.keys(exercises);
     const sequence = [];
+
+    // Calculate pause positions - distribute evenly
+    const pausePositions = [];
+    if (config.pauseCount > 0) {
+      const interval = Math.floor(config.totalExercises / (config.pauseCount + 1));
+      for (let i = 1; i <= config.pauseCount; i++) {
+        const position = interval * i;
+        if (position < config.totalExercises) {
+          pausePositions.push(position);
+        }
+      }
+    }
 
     // Generate random exercise sequence
     for (let i = 0; i < config.totalExercises; i++) {
@@ -82,15 +98,13 @@ function App() {
         exerciseId: randomExerciseId
       });
 
-      // Add pauses at specified intervals
-      config.pauses.forEach(pause => {
-        if (i + 1 === pause.after && i + 1 < config.totalExercises) {
-          sequence.push({
-            type: 'pause',
-            duration: pause.duration
-          });
-        }
-      });
+      // Add pause if this is a pause position
+      if (pausePositions.includes(i + 1) && i + 1 < config.totalExercises) {
+        sequence.push({
+          type: 'pause',
+          duration: config.pauseDuration
+        });
+      }
     }
 
     return sequence;
@@ -116,14 +130,14 @@ function App() {
     if (!difficulty || !workoutConfigs[difficulty]) return null;
     const config = workoutConfigs[difficulty];
     
-    const pauseDetails = config.pauses.map((pause, index) => {
-      return `${pause.duration} Min nach ${pause.after} Übungen`;
-    }).join(' '); 
+    const pauseText = config.pauseCount > 0 
+      ? `${config.pauseCount} Pause${config.pauseCount > 1 ? 'n' : ''} (${config.pauseDuration} Min)`
+      : 'Keine Pausen';
 
     return {
       name: config.name,
       exercises: config.totalExercises,
-      pauseText: pauseDetails
+      pauseText: pauseText
     };
   };
 
@@ -290,7 +304,7 @@ function App() {
               >
                 <strong>Leicht</strong>
                 <span>15 Übungen</span>
-                <span>1 Pause (1 Min)</span>
+                <span>2 Pausen (1 Min)</span>
               </button>
               <button 
                 onClick={() => selectDifficulty('moderat')} 
