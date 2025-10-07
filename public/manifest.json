@@ -1,7 +1,7 @@
 {
-  "name": "HIIT Workout App",
-  "short_name": "HIIT Workout",
-  "description": "Eine HIIT Workout App optimiert für iPhone 15 Plus",
+  "name": "IronHIIT - Baremetal Training",
+  "short_name": "IronHIIT",
+  "description": "HIIT Kettlebell Training. Baremetal Training. Minimal Data. Maximum Results.",
   "start_url": "./",
   "display": "fullscreen",
   "orientation": "portrait",

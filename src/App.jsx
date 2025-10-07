@@ -338,6 +338,12 @@ function App() {
   return (
     <div className={`app ${isWarningTime ? 'warning-active' : ''} ${isTransitionFlash ? 'transition-flash' : ''}`}>
       <header className="app-header">
+        {!workoutStarted && !isPreWorkout && (
+          <div className="brand-header">
+            <h1 className="brand-title">IronHIIT</h1>
+            <p className="brand-slogan">Baremetal Training. Minimal Data. Maximum Results.</p>
+          </div>
+        )}
         {workoutStarted && (
           <div className="workout-progress">
             {isLongPause
@@ -349,6 +355,7 @@ function App() {
           </div>
         )}
       </header>
+
 
       <main className="app-main">
         {(workoutStarted || isPreWorkout) && (

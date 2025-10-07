@@ -1,7 +1,8 @@
 {
-  "name": "hiit-workout-app",
+  "name": "ironhiit-app",
   "private": true,
   "version": "1.0.0",
+  "description": "IronHIIT - HIIT Kettlebell Training ohne Tracking",
   "type": "module",
   "scripts": {
     "dev": "vite",
