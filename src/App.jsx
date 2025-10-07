@@ -157,6 +157,34 @@ function App() {
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
 
+  // Calculate total workout duration
+  const calculateWorkoutDuration = (config) => {
+    
+    // Exercise time: 50 seconds per exercise
+    const exerciseTime = config.totalExercises * 60;    
+    
+    // Pause time: convert pause duration to seconds and multiply by pause count
+    const pauseTime = config.pauseCount * timeToSeconds(config.pauseDuration);
+    
+    // Total time in seconds
+    const totalSeconds = exerciseTime + pauseTime;
+    
+    // Round to nearest minute
+    const totalMinutes = Math.round(totalSeconds / 60);
+    
+    if (totalMinutes >= 60) {
+      const hours = Math.floor(totalMinutes / 60);
+      const minutes = totalMinutes % 60;
+      if (minutes === 0) {
+        return `ca. ${hours} Std.`;
+      } else {
+        return `ca. ${hours} Std. ${minutes} min`;
+      }
+    } else {
+      return `ca. ${totalMinutes} min`;
+    }
+  };
+
   // Update custom config values
   const updateCustomConfig = (field, value) => {
     setCustomConfig(prev => ({
@@ -184,10 +212,13 @@ function App() {
       ? `${config.pauseCount} Pause${config.pauseCount > 1 ? 'n' : ''} (${config.pauseDuration} Min)`
       : 'Keine Pausen';
 
+    const totalDuration = calculateWorkoutDuration(config);
+
     return {
       name: difficulty === 'individuell' ? 'Individuell' : config.name,
       exercises: config.totalExercises,
-      pauseText: pauseText
+      pauseText: pauseText,
+      duration: totalDuration
     };
   };
 
@@ -459,6 +490,10 @@ function App() {
                   }
                 </span>
               </div>
+              <div className="summary-item">
+                <span>Gesamtdauer:</span>
+                <span>{calculateWorkoutDuration(customConfig)}</span>
+              </div>
             </div>
 
             <div className="config-buttons">
@@ -496,6 +531,10 @@ function App() {
                     <div className="detail-item">
                       <span className="detail-label">Pausen:</span>
                       <span className="detail-value">{details.pauseText}</span>
+                    </div>
+                    <div className="detail-item">
+                      <span className="detail-label">Gesamtdauer:</span>
+                      <span className="detail-value">{details.duration}</span>
                     </div>
                   </div>
                   <div className="random-workout-hint">
