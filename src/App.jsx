@@ -22,7 +22,7 @@ function App() {
     const loadWorkoutData = async () => {
       try {
         // Load exercises library
-        const exercisesResponse = await fetch('./exercises_new.json');
+        const exercisesResponse = await fetch('./exercises.json');
         const exercisesData = await exercisesResponse.json();
         setExercises(exercisesData.exercises);
 

@@ -9,7 +9,7 @@ const basePath = isProduction ? '/hiity/' : '/';
 const urlsToCache = [
   basePath,
   `${basePath}index.html`,
-  `${basePath}exercises_new.json`,
+  `${basePath}exercises.json`,
   `${basePath}workout.json`,
   `${basePath}manifest.json`,
   `${basePath}icon-192x192.svg`,
