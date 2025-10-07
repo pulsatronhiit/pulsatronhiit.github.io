@@ -18,6 +18,12 @@ function App() {
   const [isLongPause, setIsLongPause] = useState(false); // Track if we're in a long pause
   const [currentPauseDuration, setCurrentPauseDuration] = useState(null); // Store current pause duration
   const [isTransitionFlash, setIsTransitionFlash] = useState(false); // Track flash transition
+  const [showCustomConfig, setShowCustomConfig] = useState(false); // Track custom config screen
+  const [customConfig, setCustomConfig] = useState({
+    totalExercises: 20,
+    pauseCount: 2,
+    pauseDuration: '02:00'
+  }); // Custom workout configuration
 
   // Load exercises from JSON file
   useEffect(() => {
@@ -68,12 +74,18 @@ function App() {
       totalExercises: 40,
       pauseCount: 1,
       pauseDuration: '02:00'
+    },
+    individuell: {
+      name: 'Individuell',
+      totalExercises: 20,
+      pauseCount: 2,
+      pauseDuration: '02:00'
     }
   };
 
-  // Generate random workout based on difficulty
+  // Generate random workout based on difficulty or custom config
   const generateWorkout = (difficulty) => {
-    const config = workoutConfigs[difficulty];
+    const config = difficulty === 'individuell' ? customConfig : workoutConfigs[difficulty];
     const exerciseIds = Object.keys(exercises);
     const sequence = [];
 
@@ -112,30 +124,68 @@ function App() {
 
   // Handle difficulty selection
   const selectDifficulty = (difficulty) => {
+    if (difficulty === 'individuell') {
+      setShowCustomConfig(true);
+      setSelectedDifficulty(difficulty);
+      return;
+    }
+    
     const sequence = generateWorkout(difficulty);
     setWorkoutSequence(sequence);
     setSelectedDifficulty(difficulty);
     setDifficultySelected(true);
   };
 
+  // Handle custom configuration submission
+  const submitCustomConfig = () => {
+    const sequence = generateWorkout('individuell');
+    setWorkoutSequence(sequence);
+    setShowCustomConfig(false);
+    setDifficultySelected(true);
+  };
+
+  // Convert minutes:seconds format to total seconds for calculations
+  const timeToSeconds = (timeStr) => {
+    const [minutes, seconds] = timeStr.split(':').map(Number);
+    return minutes * 60 + seconds;
+  };
+
+  // Convert seconds back to MM:SS format
+  const secondsToTime = (totalSeconds) => {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  };
+
+  // Update custom config values
+  const updateCustomConfig = (field, value) => {
+    setCustomConfig(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
   // Go back to difficulty selection
   const goBackToDifficultySelection = () => {
     setDifficultySelected(false);
+    setShowCustomConfig(false);
     setSelectedDifficulty(null);
     setWorkoutSequence([]);
   };
 
   // Get difficulty details for display
   const getDifficultyDetails = (difficulty) => {
-    if (!difficulty || !workoutConfigs[difficulty]) return null;
-    const config = workoutConfigs[difficulty];
+    if (!difficulty) return null;
+    
+    const config = difficulty === 'individuell' ? customConfig : workoutConfigs[difficulty];
+    if (!config) return null;
     
     const pauseText = config.pauseCount > 0 
       ? `${config.pauseCount} Pause${config.pauseCount > 1 ? 'n' : ''} (${config.pauseDuration} Min)`
       : 'Keine Pausen';
 
     return {
-      name: config.name,
+      name: difficulty === 'individuell' ? 'Individuell' : config.name,
       exercises: config.totalExercises,
       pauseText: pauseText
     };
@@ -207,6 +257,7 @@ function App() {
     triggerFlashTransition();
     setWorkoutStarted(false);
     setDifficultySelected(false);
+    setShowCustomConfig(false);
     setSelectedDifficulty(null);
     setWorkoutSequence([]);
     setCurrentExerciseIndex(0);
@@ -294,7 +345,7 @@ function App() {
           />
         )}
         
-        {!difficultySelected && (
+        {!difficultySelected && !showCustomConfig && (
           <div className="difficulty-selection">
             <h2>Wähle deine Herausforderung</h2>
             <div className="difficulty-buttons">
@@ -326,11 +377,108 @@ function App() {
                 <strong>Brutal</strong>
                 <span>40 Übungen, 1 Pause (2 Min)</span>
               </button>
+              <button 
+                onClick={() => selectDifficulty('individuell')} 
+                className="difficulty-btn custom"
+              >
+                <strong>Individuell</strong>
+                <span>Erstelle dein eigenes Workout</span>
+              </button>
             </div>
           </div>
         )}
 
-        {difficultySelected && !workoutStarted && !isPreWorkout && (
+        {showCustomConfig && (
+          <div className="custom-config">
+            <div className="config-header">
+              <h2>Individuelles Workout</h2>
+              <p>Stelle dein eigenes Workout zusammen</p>
+            </div>
+
+            <div className="config-section">
+              <label>Anzahl Übungen: {customConfig.totalExercises}</label>
+              <input
+                type="range"
+                min="5"
+                max="60"
+                value={customConfig.totalExercises}
+                onChange={(e) => updateCustomConfig('totalExercises', parseInt(e.target.value))}
+                className="config-slider"
+              />
+              <div className="range-labels">
+                <span>5</span>
+                <span>60</span>
+              </div>
+            </div>
+
+            <div className="config-section">
+              <label>Anzahl Pausen: {customConfig.pauseCount}</label>
+              <input
+                type="range"
+                min="0"
+                max="10"
+                value={customConfig.pauseCount}
+                onChange={(e) => updateCustomConfig('pauseCount', parseInt(e.target.value))}
+                className="config-slider"
+              />
+              <div className="range-labels">
+                <span>0</span>
+                <span>10</span>
+              </div>
+            </div>
+
+            <div className="config-section">
+              <label>Pausendauer: {customConfig.pauseDuration} Min</label>
+              <input
+                type="range"
+                min="30"
+                max="300"
+                step="30"
+                value={timeToSeconds(customConfig.pauseDuration)}
+                onChange={(e) => updateCustomConfig('pauseDuration', secondsToTime(parseInt(e.target.value)))}
+                className="config-slider"
+              />
+              <div className="range-labels">
+                <span>0:30</span>
+                <span>5:00</span>
+              </div>
+            </div>
+
+            <div className="config-summary">
+              <h3>Workout Zusammenfassung</h3>
+              <div className="summary-item">
+                <span>Übungen:</span>
+                <span>{customConfig.totalExercises} zufällige Übungen</span>
+              </div>
+              <div className="summary-item">
+                <span>Pausen:</span>
+                <span>
+                  {customConfig.pauseCount === 0 
+                    ? 'Keine Pausen' 
+                    : `${customConfig.pauseCount} Pause${customConfig.pauseCount > 1 ? 'n' : ''} (${customConfig.pauseDuration} Min)`
+                  }
+                </span>
+              </div>
+            </div>
+
+            <div className="config-buttons">
+              <button 
+                onClick={submitCustomConfig} 
+                className="workout-btn start-custom-btn"
+              >
+                Workout erstellen
+              </button>
+              <button 
+                onClick={goBackToDifficultySelection} 
+                className="workout-btn back-btn"
+              >
+                Zurück zur Auswahl
+              </button>
+            </div>
+          </div>
+        )}
+
+        {difficultySelected && !showCustomConfig && !workoutStarted && !isPreWorkout && (
           <div className="difficulty-confirmation">
             {(() => {
               const details = getDifficultyDetails(selectedDifficulty);
