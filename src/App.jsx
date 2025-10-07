@@ -48,7 +48,7 @@ function App() {
     leicht: {
       name: 'Leicht',
       totalExercises: 15,
-      pauses: [{ after: 5, duration: '01:00' }]
+      pauses: [{ after: 5, duration: '01:00' },{ after: 10, duration: '01:00' }]
     },
     moderat: {
       name: 'Moderat',
