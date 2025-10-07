@@ -303,32 +303,28 @@ function App() {
                 className="difficulty-btn easy"
               >
                 <strong>Leicht</strong>
-                <span>15 Übungen</span>
-                <span>2 Pausen (1 Min)</span>
+                <span>15 Übungen, 2 Pausen (1 Min)</span>
               </button>
               <button 
                 onClick={() => selectDifficulty('moderat')} 
                 className="difficulty-btn moderate"
               >
                 <strong>Moderat</strong>
-                <span>20 Übungen</span>
-                <span>1 Pause (2 Min)</span>
+                <span>20 Übungen, 1 Pause (2 Min)</span>
               </button>
               <button 
                 onClick={() => selectDifficulty('anstrengend')} 
                 className="difficulty-btn hard"
               >
                 <strong>Anstrengend</strong>
-                <span>30 Übungen</span>
-                <span>2 Pausen (1 Min)</span>
+                <span>30 Übungen, 2 Pausen (1 Min)</span>
               </button>
               <button 
                 onClick={() => selectDifficulty('brutal')} 
                 className="difficulty-btn brutal"
               >
                 <strong>Brutal</strong>
-                <span>40 Übungen</span>
-                <span>1 Pause (2 Min)</span>
+                <span>40 Übungen, 1 Pause (2 Min)</span>
               </button>
             </div>
           </div>
