@@ -1,4 +1,6 @@
-const CACHE_NAME = 'hiit-workout-v1';
+// Build-time cache version - gets replaced during build process
+const CACHE_VERSION = typeof __CACHE_VERSION__ !== 'undefined' ? __CACHE_VERSION__ : Date.now().toString();
+const CACHE_NAME = `hiit-workout-v${CACHE_VERSION}`;
 
 // Determine base path based on environment
 const isProduction = self.location.pathname.includes('/hiity/');
@@ -20,17 +22,18 @@ const urlsToCache = [
   `${basePath}src/utils/serviceWorker.js`
 ];
 
-// Install event - cache resources
+// Install event - cache resources but don't activate immediately during usage
 self.addEventListener('install', (event) => {
+  console.log('Service Worker: Installing version', CACHE_VERSION);
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        console.log('Service Worker: Caching files');
+        console.log('Service Worker: Caching files for version:', CACHE_VERSION);
         return cache.addAll(urlsToCache);
       })
       .then(() => {
-        console.log('Service Worker: All files cached');
-        return self.skipWaiting();
+        console.log('Service Worker: Files cached, waiting for activation on next app start');
+        // Don't skip waiting - let it activate naturally on next page load
       })
   );
 });
@@ -91,21 +94,35 @@ self.addEventListener('fetch', (event) => {
   );
 });
 
-// Activate event - clean up old caches
+// Activate event - clean up old caches and notify clients
 self.addEventListener('activate', (event) => {
+  console.log('Service Worker: Activating new version:', CACHE_VERSION);
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
-            console.log('Service Worker: Deleting old cache:', cacheName);
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    }).then(() => {
-      console.log('Service Worker: Activated');
-      return self.clients.claim();
+    Promise.all([
+      // Clean up old caches
+      caches.keys().then((cacheNames) => {
+        return Promise.all(
+          cacheNames.map((cacheName) => {
+            if (cacheName !== CACHE_NAME) {
+              console.log('Service Worker: Deleting old cache:', cacheName);
+              return caches.delete(cacheName);
+            }
+          })
+        );
+      }),
+      // Take control of all clients immediately
+      self.clients.claim()
+    ]).then(() => {
+      console.log('Service Worker: New version activated');
+      // Notify all clients about the update
+      return self.clients.matchAll().then(clients => {
+        clients.forEach(client => {
+          client.postMessage({ 
+            type: 'CACHE_UPDATED', 
+            version: CACHE_VERSION 
+          });
+        });
+      });
     })
   );
 });
