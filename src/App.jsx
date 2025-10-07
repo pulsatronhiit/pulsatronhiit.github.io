@@ -33,7 +33,7 @@ function App() {
     };
     
     loadWorkoutData();
-  }, []);
+  }, []); 
 
   // Function to trigger flash transition
   const triggerFlashTransition = () => {
@@ -116,12 +116,9 @@ function App() {
     if (!difficulty || !workoutConfigs[difficulty]) return null;
     const config = workoutConfigs[difficulty];
     
-    const pauseDetails = config.pauses.map(pause => {
-      const afterText = pause.after === 10 && config.pauses.length > 1 ? 
-        `nach ${pause.after} & ${config.pauses[1]?.after || pause.after + 10} Übungen` :
-        `nach ${pause.after} Übungen`;
-      return `${pause.duration} Min ${afterText}`;
-    }).join(', ');
+    const pauseDetails = config.pauses.map((pause, index) => {
+      return `${pause.duration} Min nach ${pause.after} Übungen`;
+    }).join(' '); 
 
     return {
       name: config.name,
@@ -330,7 +327,7 @@ function App() {
               return details ? (
                 <>
                   <div className="confirmation-header">
-                    <h3>Herausforderung:</h3>
+                    <h3>Herausforderung</h3>
                     <h2>{details.name}</h2>
                   </div>
                   <div className="confirmation-details">
