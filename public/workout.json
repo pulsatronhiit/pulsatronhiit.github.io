@@ -73,8 +73,7 @@
       },
       {
         "type": "pause",
-        "duration": "02:00",
-        "name": "Längere Pause"
+        "duration": "02:00"
       },
       {
         "type": "exercise",

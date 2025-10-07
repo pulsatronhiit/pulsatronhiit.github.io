@@ -8,6 +8,7 @@ function App() {
   const [workoutSequence, setWorkoutSequence] = useState([]);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
   const [workoutStarted, setWorkoutStarted] = useState(false);
+  const [difficultySelected, setDifficultySelected] = useState(false);
   const [timerKey, setTimerKey] = useState(0); // Force timer re-render
   const [isWarningTime, setIsWarningTime] = useState(false); // Track warning state
   const [isTimerActive, setIsTimerActive] = useState(false); // Timer control
@@ -17,7 +18,7 @@ function App() {
   const [currentPauseDuration, setCurrentPauseDuration] = useState(null); // Store current pause duration
   const [isTransitionFlash, setIsTransitionFlash] = useState(false); // Track flash transition
 
-  // Load exercises and workout from JSON files
+  // Load exercises from JSON file
   useEffect(() => {
     const loadWorkoutData = async () => {
       try {
@@ -25,11 +26,6 @@ function App() {
         const exercisesResponse = await fetch('./exercises.json');
         const exercisesData = await exercisesResponse.json();
         setExercises(exercisesData.exercises);
-
-        // Load workout sequence
-        const workoutResponse = await fetch('./workout.json');
-        const workoutData = await workoutResponse.json();
-        setWorkoutSequence(workoutData.workout.sequence);
       } catch (error) {
         console.error('Error loading workout data:', error);
       }
@@ -44,6 +40,66 @@ function App() {
     setTimeout(() => {
       setIsTransitionFlash(false);
     }, 250); // Match the animation duration
+  };
+
+  // Workout difficulty configurations
+  const workoutConfigs = {
+    leicht: {
+      name: 'Leicht',
+      totalExercises: 15,
+      pauses: [{ after: 5, duration: '01:00' }]
+    },
+    moderat: {
+      name: 'Moderat',
+      totalExercises: 20,
+      pauses: [{ after: 10, duration: '02:00' }]
+    },
+    anstrengend: {
+      name: 'Anstrengend',
+      totalExercises: 30,
+      pauses: [{ after: 10, duration: '01:00' }, { after: 20, duration: '01:00' }]
+    },
+    brutal: {
+      name: 'Brutal',
+      totalExercises: 40,
+      pauses: [{ after: 20, duration: '02:00' }]
+    }
+  };
+
+  // Generate random workout based on difficulty
+  const generateWorkout = (difficulty) => {
+    const config = workoutConfigs[difficulty];
+    const exerciseIds = Object.keys(exercises);
+    const sequence = [];
+
+    // Generate random exercise sequence
+    for (let i = 0; i < config.totalExercises; i++) {
+      // Add random exercise
+      const randomExerciseId = exerciseIds[Math.floor(Math.random() * exerciseIds.length)];
+      sequence.push({
+        type: 'exercise',
+        exerciseId: randomExerciseId
+      });
+
+      // Add pauses at specified intervals
+      config.pauses.forEach(pause => {
+        if (i + 1 === pause.after && i + 1 < config.totalExercises) {
+          sequence.push({
+            type: 'pause',
+            duration: pause.duration
+          });
+        }
+      });
+    }
+
+    return sequence;
+  };
+
+  // Handle difficulty selection
+  const selectDifficulty = (difficulty) => {
+    const sequence = generateWorkout(difficulty);
+    setWorkoutSequence(sequence);
+    setDifficultySelected(true);
   };
 
   const handleTimeUp = () => {
@@ -111,6 +167,8 @@ function App() {
   const resetWorkout = () => {
     triggerFlashTransition();
     setWorkoutStarted(false);
+    setDifficultySelected(false);
+    setWorkoutSequence([]);
     setCurrentExerciseIndex(0);
     setIsTimerActive(false);
     setIsRestTime(false);
@@ -130,7 +188,7 @@ function App() {
     if (sequenceItem.type === 'pause') {
       return {
         type: 'pause',
-        name: sequenceItem.name,
+        name: 'Längere Pause', // Always use "Längere Pause" for any pause
         duration: sequenceItem.duration
       };
     }
@@ -185,16 +243,58 @@ function App() {
           />
         )}
         
-        <ExerciseDisplay 
-          exercise={currentExercise} 
-          nextExercise={nextExercise}
-          isLastExercise={workoutStarted && workoutSequence.length > 0 && currentExerciseIndex === workoutSequence.length - 1}
-          isRestTime={isRestTime}
-          isPreWorkout={isPreWorkout}
-          isLongPause={isLongPause}
-        />
+        {difficultySelected && (
+          <ExerciseDisplay 
+            exercise={currentExercise} 
+            nextExercise={nextExercise}
+            isLastExercise={workoutStarted && workoutSequence.length > 0 && currentExerciseIndex === workoutSequence.length - 1}
+            isRestTime={isRestTime}
+            isPreWorkout={isPreWorkout}
+            isLongPause={isLongPause}
+          />
+        )}
         
-        {!workoutStarted && !isPreWorkout && (
+        {!difficultySelected && (
+          <div className="difficulty-selection">
+            <h2>Wähle deine Herausforderung</h2>
+            <div className="difficulty-buttons">
+              <button 
+                onClick={() => selectDifficulty('leicht')} 
+                className="difficulty-btn easy"
+              >
+                <strong>Leicht</strong>
+                <span>15 Übungen</span>
+                <span>1 Pause (1 Min)</span>
+              </button>
+              <button 
+                onClick={() => selectDifficulty('moderat')} 
+                className="difficulty-btn moderate"
+              >
+                <strong>Moderat</strong>
+                <span>20 Übungen</span>
+                <span>1 Pause (2 Min)</span>
+              </button>
+              <button 
+                onClick={() => selectDifficulty('anstrengend')} 
+                className="difficulty-btn hard"
+              >
+                <strong>Anstrengend</strong>
+                <span>30 Übungen</span>
+                <span>2 Pausen (1 Min)</span>
+              </button>
+              <button 
+                onClick={() => selectDifficulty('brutal')} 
+                className="difficulty-btn brutal"
+              >
+                <strong>Brutal</strong>
+                <span>40 Übungen</span>
+                <span>1 Pause (2 Min)</span>
+              </button>
+            </div>
+          </div>
+        )}
+
+        {difficultySelected && !workoutStarted && !isPreWorkout && (
           <button 
             onClick={startWorkout} 
             className="workout-btn start-workout-btn"
