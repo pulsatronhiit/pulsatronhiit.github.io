@@ -9,6 +9,7 @@ function App() {
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
   const [workoutStarted, setWorkoutStarted] = useState(false);
   const [difficultySelected, setDifficultySelected] = useState(false);
+  const [selectedDifficulty, setSelectedDifficulty] = useState(null);
   const [timerKey, setTimerKey] = useState(0); // Force timer re-render
   const [isWarningTime, setIsWarningTime] = useState(false); // Track warning state
   const [isTimerActive, setIsTimerActive] = useState(false); // Timer control
@@ -99,7 +100,34 @@ function App() {
   const selectDifficulty = (difficulty) => {
     const sequence = generateWorkout(difficulty);
     setWorkoutSequence(sequence);
+    setSelectedDifficulty(difficulty);
     setDifficultySelected(true);
+  };
+
+  // Go back to difficulty selection
+  const goBackToDifficultySelection = () => {
+    setDifficultySelected(false);
+    setSelectedDifficulty(null);
+    setWorkoutSequence([]);
+  };
+
+  // Get difficulty details for display
+  const getDifficultyDetails = (difficulty) => {
+    if (!difficulty || !workoutConfigs[difficulty]) return null;
+    const config = workoutConfigs[difficulty];
+    
+    const pauseDetails = config.pauses.map(pause => {
+      const afterText = pause.after === 10 && config.pauses.length > 1 ? 
+        `nach ${pause.after} & ${config.pauses[1]?.after || pause.after + 10} Übungen` :
+        `nach ${pause.after} Übungen`;
+      return `${pause.duration} Min ${afterText}`;
+    }).join(', ');
+
+    return {
+      name: config.name,
+      exercises: config.totalExercises,
+      pauseText: pauseDetails
+    };
   };
 
   const handleTimeUp = () => {
@@ -168,6 +196,7 @@ function App() {
     triggerFlashTransition();
     setWorkoutStarted(false);
     setDifficultySelected(false);
+    setSelectedDifficulty(null);
     setWorkoutSequence([]);
     setCurrentExerciseIndex(0);
     setIsTimerActive(false);
@@ -295,13 +324,47 @@ function App() {
         )}
 
         {difficultySelected && !workoutStarted && !isPreWorkout && (
-          <button 
-            onClick={startWorkout} 
-            className="workout-btn start-workout-btn"
-            disabled={workoutSequence.length === 0}
-          >
-            Workout starten
-          </button>
+          <div className="difficulty-confirmation">
+            {(() => {
+              const details = getDifficultyDetails(selectedDifficulty);
+              return details ? (
+                <>
+                  <div className="confirmation-header">
+                    <h3>Herausforderung:</h3>
+                    <h2>{details.name}</h2>
+                  </div>
+                  <div className="confirmation-details">
+                    <div className="detail-item">
+                      <span className="detail-label">Übungen:</span>
+                      <span className="detail-value">{details.exercises} zufällige Übungen</span>
+                    </div>
+                    <div className="detail-item">
+                      <span className="detail-label">Pausen:</span>
+                      <span className="detail-value">{details.pauseText}</span>
+                    </div>
+                  </div>
+                  <div className="random-workout-hint">
+                    Ein Workout mit zufälligen Übungen wird für dich zusammengestellt.
+                  </div>
+                  <div className="confirmation-buttons">
+                    <button 
+                      onClick={startWorkout} 
+                      className="workout-btn start-workout-btn"
+                      disabled={workoutSequence.length === 0}
+                    >
+                      Workout starten
+                    </button>
+                    <button 
+                      onClick={goBackToDifficultySelection} 
+                      className="workout-btn back-btn"
+                    >
+                      Andere Herausforderung wählen
+                    </button>
+                  </div>
+                </>
+              ) : null;
+            })()}
+          </div>
         )}
         
         {(workoutStarted || isPreWorkout) && (

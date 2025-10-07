@@ -237,6 +237,92 @@
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
 }
 
+/* Difficulty confirmation styles */
+.difficulty-confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.confirmation-header h2 {
+  color: #00ff41;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+.confirmation-details {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 65, 0.3);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  backdrop-filter: blur(10px);
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  color: white;
+}
+
+.detail-item:last-child {
+  margin-bottom: 0;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #00ff41;
+  font-size: 1rem;
+}
+
+.detail-value {
+  font-size: 0.95rem;
+  text-align: right;
+  opacity: 0.9;
+}
+
+.random-workout-hint {
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 25px;
+  color: #fbbf24;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.confirmation-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.back-btn {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1) !important;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  color: white !important;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-2px);
+}
+
 .workout-controls {
   display: flex;
   gap: 1rem;
