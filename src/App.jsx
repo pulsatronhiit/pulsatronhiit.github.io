@@ -19,6 +19,15 @@ function App() {
   const [currentPauseDuration, setCurrentPauseDuration] = useState(null); // Store current pause duration
   const [isTransitionFlash, setIsTransitionFlash] = useState(false); // Track flash transition
   const [showCustomConfig, setShowCustomConfig] = useState(false); // Track custom config screen
+  const [showWorkoutComplete, setShowWorkoutComplete] = useState(false); // Track workout completion screen
+  const [workoutStats, setWorkoutStats] = useState({
+    startTime: null,
+    endTime: null,
+    completedExercises: 0,
+    totalExercises: 0,
+    difficulty: null,
+    actualDuration: null
+  }); // Track workout statistics
   const [customConfig, setCustomConfig] = useState({
     totalExercises: 20,
     pauseCount: 2,
@@ -157,6 +166,24 @@ function App() {
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
 
+  // Format duration for display (e.g., "15:42" or "1h 05min")
+  const formatActualDuration = (seconds) => {
+    if (seconds < 60) {
+      return `${seconds}s`;
+    }
+    
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    
+    if (minutes >= 60) {
+      const hours = Math.floor(minutes / 60);
+      const remainingMinutes = minutes % 60;
+      return `${hours}h ${remainingMinutes.toString().padStart(2, '0')}min`;
+    } else {
+      return `${minutes}min ${remainingSeconds.toString().padStart(2, '0')}s`;
+    }
+  };
+
   // Calculate total workout duration
   const calculateWorkoutDuration = (config) => {
     
@@ -197,6 +224,7 @@ function App() {
   const goBackToDifficultySelection = () => {
     setDifficultySelected(false);
     setShowCustomConfig(false);
+    setShowWorkoutComplete(false);
     setSelectedDifficulty(null);
     setWorkoutSequence([]);
   };
@@ -256,7 +284,19 @@ function App() {
           setTimerKey(prev => prev + 1); // Reset timer for rest period
         } else {
           // Last exercise finished, end workout
+          const endTime = new Date();
+          const duration = Math.floor((endTime - workoutStats.startTime) / 1000); // Duration in seconds
+          const completedExercises = workoutSequence.filter(item => item.type !== 'pause').length;
+          
+          setWorkoutStats(prev => ({
+            ...prev,
+            endTime: endTime,
+            completedExercises: completedExercises,
+            actualDuration: duration
+          }));
+          
           setWorkoutStarted(false);
+          setShowWorkoutComplete(true);
           setCurrentExerciseIndex(0);
           setIsRestTime(false);
           setIsLongPause(false);
@@ -276,6 +316,17 @@ function App() {
   };
 
   const startWorkout = () => {
+    // Initialize workout statistics
+    const exerciseCount = workoutSequence.filter(item => item.type !== 'pause').length;
+    setWorkoutStats({
+      startTime: new Date(),
+      endTime: null,
+      completedExercises: 0,
+      totalExercises: exerciseCount,
+      difficulty: selectedDifficulty,
+      actualDuration: null
+    });
+    
     setIsPreWorkout(true);
     setWorkoutStarted(false); // Don't start workout yet
     setCurrentExerciseIndex(0);
@@ -286,18 +337,65 @@ function App() {
 
   const resetWorkout = () => {
     triggerFlashTransition();
-    setWorkoutStarted(false);
-    setDifficultySelected(false);
-    setShowCustomConfig(false);
-    setSelectedDifficulty(null);
-    setWorkoutSequence([]);
-    setCurrentExerciseIndex(0);
-    setIsTimerActive(false);
-    setIsRestTime(false);
-    setIsPreWorkout(false);
-    setIsLongPause(false);
-    setCurrentPauseDuration(null);
-    setTimerKey(prev => prev + 1); // Force timer reset when workout ends
+    
+    // If workout was active, show completion screen with current stats
+    if (workoutStarted || isPreWorkout) {
+      const endTime = new Date();
+      const duration = workoutStats.startTime ? Math.floor((endTime - workoutStats.startTime) / 1000) : 0;
+      
+      // Calculate completed exercises (current index if it's an exercise)
+      let completedExercises = 0;
+      for (let i = 0; i <= currentExerciseIndex && i < workoutSequence.length; i++) {
+        if (workoutSequence[i]?.type === 'exercise') {
+          completedExercises++;
+        }
+      }
+      
+      // If we're in the middle of an exercise (not rest/pause), don't count it as completed
+      if ((workoutStarted && !isRestTime && !isLongPause) && workoutSequence[currentExerciseIndex]?.type === 'exercise') {
+        completedExercises = Math.max(0, completedExercises - 1);
+      }
+      
+      setWorkoutStats(prev => ({
+        ...prev,
+        endTime: endTime,
+        completedExercises: completedExercises,
+        actualDuration: duration
+      }));
+      
+      setWorkoutStarted(false);
+      setShowWorkoutComplete(true);
+      setCurrentExerciseIndex(0);
+      setIsTimerActive(false);
+      setIsRestTime(false);
+      setIsPreWorkout(false);
+      setIsLongPause(false);
+      setCurrentPauseDuration(null);
+      setTimerKey(prev => prev + 1);
+    } else {
+      // Complete reset when not in an active workout
+      setWorkoutStarted(false);
+      setDifficultySelected(false);
+      setShowCustomConfig(false);
+      setShowWorkoutComplete(false);
+      setSelectedDifficulty(null);
+      setWorkoutSequence([]);
+      setCurrentExerciseIndex(0);
+      setIsTimerActive(false);
+      setIsRestTime(false);
+      setIsPreWorkout(false);
+      setIsLongPause(false);
+      setCurrentPauseDuration(null);
+      setWorkoutStats({
+        startTime: null,
+        endTime: null,
+        completedExercises: 0,
+        totalExercises: 0,
+        difficulty: null,
+        actualDuration: null
+      });
+      setTimerKey(prev => prev + 1);
+    }
   };
 
   const toggleTimer = () => {
@@ -338,7 +436,7 @@ function App() {
   return (
     <div className={`app ${isWarningTime ? 'warning-active' : ''} ${isTransitionFlash ? 'transition-flash' : ''}`}>
       <header className="app-header">
-        {!workoutStarted && !isPreWorkout && !difficultySelected && !showCustomConfig && (
+        {!workoutStarted && !isPreWorkout && !difficultySelected && !showCustomConfig && !showWorkoutComplete && (
           <div className="brand-header">
             <h1 className="brand-title">IronHIIT</h1>
             <p className="brand-slogan">Baremetal Training.</p>
@@ -383,7 +481,7 @@ function App() {
           />
         )}
         
-        {!difficultySelected && !showCustomConfig && (
+        {!difficultySelected && !showCustomConfig && !showWorkoutComplete && (
           <div className="difficulty-selection">
             <h2>Wähle deine Herausforderung</h2>
             <div className="difficulty-buttons">
@@ -426,7 +524,7 @@ function App() {
           </div>
         )}
 
-        {showCustomConfig && (
+        {showCustomConfig && !showWorkoutComplete && (
           <div className="custom-config">
             <div className="config-header">
               <h2>Individuelles Workout</h2>
@@ -520,7 +618,7 @@ function App() {
           </div>
         )}
 
-        {difficultySelected && !showCustomConfig && !workoutStarted && !isPreWorkout && (
+        {difficultySelected && !showCustomConfig && !workoutStarted && !isPreWorkout && !showWorkoutComplete && (
           <div className="difficulty-confirmation">
             {(() => {
               const details = getDifficultyDetails(selectedDifficulty);
@@ -568,6 +666,82 @@ function App() {
           </div>
         )}
         
+        {showWorkoutComplete && (
+          <div className="workout-complete">
+            <div className="completion-header">
+              <h2>
+                {workoutStats.completedExercises === workoutStats.totalExercises 
+                  ? 'Workout abgeschlossen' 
+                  : 'Training beendet'}
+              </h2>
+              <p>
+                {workoutStats.completedExercises === workoutStats.totalExercises
+                  ? 'Herzlichen Glückwunsch zu deinem vollständigen Training.'
+                  : 'Gut gemacht! Jeder Schritt zählt.'}
+              </p>
+            </div>
+            
+            <div className="workout-summary">
+              <h3>Training Zusammenfassung</h3>
+              
+              <div className="summary-stats">
+                <div className="stat-item">
+                  <span className="stat-label">Herausforderung:</span>
+                  <span className="stat-value">
+                    {workoutStats.difficulty === 'individuell' ? 'Individuell' : 
+                     workoutConfigs[workoutStats.difficulty]?.name || workoutStats.difficulty}
+                  </span>
+                </div>
+                
+                <div className="stat-item">
+                  <span className="stat-label">Übungen absolviert:</span>
+                  <span className="stat-value">{workoutStats.completedExercises} von {workoutStats.totalExercises}</span>
+                </div>
+                
+                <div className="stat-item">
+                  <span className="stat-label">Tatsächliche Dauer:</span>
+                  <span className="stat-value">{formatActualDuration(workoutStats.actualDuration)}</span>
+                </div>
+                
+                <div className="stat-item">
+                  <span className="stat-label">Trainingszeit:</span>
+                  <span className="stat-value">
+                    {workoutStats.startTime?.toLocaleTimeString('de-DE', { 
+                      hour: '2-digit', 
+                      minute: '2-digit' 
+                    })} - {workoutStats.endTime?.toLocaleTimeString('de-DE', { 
+                      hour: '2-digit', 
+                      minute: '2-digit' 
+                    })}
+                  </span>
+                </div>
+              </div>
+            </div>
+            
+            <div className="completion-message">
+              <p>
+                {workoutStats.completedExercises === workoutStats.totalExercises
+                  ? 'Du hast alle Übungen erfolgreich abgeschlossen.'
+                  : `Du hast ${workoutStats.completedExercises} von ${workoutStats.totalExercises} Übungen geschafft.`}
+              </p>
+              <p>
+                {workoutStats.completedExercises === workoutStats.totalExercises
+                  ? 'Keep up the great work!'
+                  : 'Jeder Fortschritt zählt! Keep going!'}
+              </p>
+            </div>
+            
+            <div className="completion-buttons">
+              <button 
+                onClick={goBackToDifficultySelection} 
+                className="workout-btn start-workout-btn"
+              >
+                Neues Training starten
+              </button>
+            </div>
+          </div>
+        )}
+
         {(workoutStarted || isPreWorkout) && (
           <div className="confirmation-buttons workout-control-buttons">
             <button 

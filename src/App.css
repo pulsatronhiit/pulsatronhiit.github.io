@@ -554,6 +554,106 @@
   margin: 0 auto;
 }
 
+/* Workout Completion Styles */
+.workout-complete {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 65, 0.3);
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 500px;
+  margin: 0 auto;
+  backdrop-filter: blur(10px);
+  text-align: center;
+}
+
+.completion-header {
+  margin-bottom: 30px;
+}
+
+.completion-header h2 {
+  color: #00ff41;
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.completion-header p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.workout-summary {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 25px;
+  margin: 25px 0;
+}
+
+.workout-summary h3 {
+  color: #ffffff;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.summary-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-item:last-child {
+  border-bottom: none;
+}
+
+.stat-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.stat-value {
+  color: #00ff41;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.completion-message {
+  background: rgba(0, 255, 65, 0.1);
+  border: 1px solid rgba(0, 255, 65, 0.2);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 25px 0;
+}
+
+.completion-message p {
+  color: #ffffff;
+  margin: 8px 0;
+  font-size: 1rem;
+}
+
+.completion-message p:first-child {
+  font-weight: 600;
+}
+
+.completion-buttons {
+  margin-top: 30px;
+}
+
+.completion-buttons .workout-btn {
+  min-width: 250px;
+}
+
 /* Prevent scrolling and bouncing on iOS */
 @media screen and (max-width: 393px) {
   body {

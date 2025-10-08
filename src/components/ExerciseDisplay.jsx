@@ -6,8 +6,8 @@ const ExerciseDisplay = ({ exercise, nextExercise, isLastExercise, isRestTime, i
     return (
       <div className="exercise-container pre-workout-display">
         <div className="pre-workout-info">
-          <div className="pre-workout-label">🏃‍♂️ Bereit machen!</div>
-          <div className="pre-workout-text">Das Workout startet gleich...</div>
+          <div className="pre-workout-label">Mach dich bereit</div>
+          <div className="pre-workout-text">Das Workout startet gleich</div>
         </div>
         {exercise && (
           <div className="first-exercise-preview">
@@ -65,8 +65,8 @@ const ExerciseDisplay = ({ exercise, nextExercise, isLastExercise, isRestTime, i
     return (
       <div className="exercise-container rest-display">
         <div className="completion-preview">
-          <div className="completion-label">🎉 Workout beendet!</div>
-          <div className="completion-text">Gut gemacht!</div>
+          <div className="completion-label">Workout beendet</div>
+          <div className="completion-text">Gut gemacht</div>
         </div>
       </div>
     );
@@ -87,7 +87,7 @@ const ExerciseDisplay = ({ exercise, nextExercise, isLastExercise, isRestTime, i
       
       {isLastExercise && (
         <div className="completion-preview">
-          <div className="completion-label">🎉 Letzte Übung!</div>
+          <div className="completion-label">Letzte Übung</div>
           <div className="completion-text">Das Workout wird automatisch beendet</div>
         </div>
       )}
