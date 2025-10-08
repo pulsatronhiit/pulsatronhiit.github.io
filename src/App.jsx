@@ -341,7 +341,7 @@ function App() {
         {!workoutStarted && !isPreWorkout && !difficultySelected && !showCustomConfig && (
           <div className="brand-header">
             <h1 className="brand-title">IronHIIT</h1>
-            <p className="brand-slogan">Baremetal Training. Minimal Data. Maximum Results.</p>
+            <p className="brand-slogan">Baremetal Training.</p>
           </div>
         )}
         {workoutStarted && (
