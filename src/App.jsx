@@ -227,14 +227,14 @@ function App() {
       : workoutConfigs[workoutStats.difficulty]?.name || workoutStats.difficulty;
     
     const isComplete = workoutStats.completedExercises === workoutStats.totalExercises;
-    const statusText = isComplete ? 'abgeschlossen' : 'trainiert';
+    const statusText = isComplete ? 'abgeschlossen' : 'durchgeführt';
     const duration = formatActualDuration(workoutStats.actualDuration);
     
-    return `💪 IronHIIT Training ${statusText}!\n\n` +
+    return `Ein Training mit IronHIIT ${statusText}!\n\n` +
            `🎯 Herausforderung: ${difficultyName}\n` +
            `✅ Übungen: ${workoutStats.completedExercises}/${workoutStats.totalExercises}\n` +
            `⏱️ Dauer: ${duration}\n\n` +
-           `Baremetal Training. Minimal Data. Maximum Results.\n` +
+           `Baremetal Training. Maximum Results.\n` +
            `#IronHIIT #HIIT #KettlebellTraining #Fitness`;
   };
 
@@ -252,12 +252,16 @@ function App() {
         });
         return;
       } catch (error) {
-        // User cancelled or error occurred, fall back to other methods
-        console.log('Native share cancelled or failed');
+        // User cancelled - don't use fallbacks, just return
+        if (error.name === 'AbortError') {
+          return;
+        }
+        // Only use fallbacks for actual errors (not user cancellation)
+        console.log('Native share failed with error:', error);
       }
     }
     
-    // Fallback: Copy to clipboard
+    // Fallback: Copy to clipboard (only if native share is not available or failed)
     if (navigator.clipboard) {
       try {
         await navigator.clipboard.writeText(shareText);
@@ -270,33 +274,6 @@ function App() {
     
     // Last fallback: Show text in alert for manual copy
     alert(`Training-Ergebnisse:\n\n${shareText}\n\nText markieren und kopieren für das Teilen.`);
-  };
-
-  // Open specific social media share
-  const handleSocialShare = (platform) => {
-    const shareText = encodeURIComponent(generateShareText());
-    const url = encodeURIComponent(window.location.origin + window.location.pathname);
-    
-    let shareUrl = '';
-    
-    switch (platform) {
-      case 'twitter':
-        shareUrl = `https://twitter.com/intent/tweet?text=${shareText}`;
-        break;
-      case 'facebook':
-        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${shareText}`;
-        break;
-      case 'whatsapp':
-        shareUrl = `https://wa.me/?text=${shareText}`;
-        break;
-      case 'telegram':
-        shareUrl = `https://telegram.me/share/url?url=${url}&text=${shareText}`;
-        break;
-      default:
-        return;
-    }
-    
-    window.open(shareUrl, '_blank', 'width=600,height=400');
   };
 
   // Go back to difficulty selection
@@ -823,36 +800,7 @@ function App() {
                   📱 Teilen
                 </button>
                 
-                <div className="social-share-buttons">
-                  <button 
-                    onClick={() => handleSocialShare('whatsapp')}
-                    className="share-btn whatsapp"
-                    title="Via WhatsApp teilen"
-                  >
-                    💬
-                  </button>
-                  <button 
-                    onClick={() => handleSocialShare('twitter')}
-                    className="share-btn twitter"
-                    title="Auf Twitter teilen"
-                  >
-                    🐦
-                  </button>
-                  <button 
-                    onClick={() => handleSocialShare('facebook')}
-                    className="share-btn facebook"
-                    title="Auf Facebook teilen"
-                  >
-                    📘
-                  </button>
-                  <button 
-                    onClick={() => handleSocialShare('telegram')}
-                    className="share-btn telegram"
-                    title="Via Telegram teilen"
-                  >
-                    ✈️
-                  </button>
-                </div>
+
               </div>
             </div>
             
