@@ -8,6 +8,10 @@
 /dist
 /build
 
+# Vite
+.vite
+.vite/
+
 # Runtime data
 pids
 *.pid
