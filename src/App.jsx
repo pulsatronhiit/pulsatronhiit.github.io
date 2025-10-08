@@ -111,16 +111,69 @@ function App() {
     }
 
     // Generate random exercise sequence
-    for (let i = 0; i < config.totalExercises; i++) {
-      // Add random exercise
+    let exerciseCount = 0;
+    while (exerciseCount < config.totalExercises) {
+      // Pick a random exercise or group
       const randomExerciseId = exerciseIds[Math.floor(Math.random() * exerciseIds.length)];
-      sequence.push({
-        type: 'exercise',
-        exerciseId: randomExerciseId
-      });
+      const exerciseData = exercises[randomExerciseId];
+      
+      if (exerciseData.type === 'group') {
+        // This is a group - check if we have room for both exercises
+        if (exerciseCount + 1 < config.totalExercises) {
+          // Add left exercise
+          sequence.push({
+            type: 'exercise',
+            exerciseId: exerciseData.left.id,
+            exercise: exerciseData.left
+          });
+          exerciseCount++;
+          
+          // Add pause if this is a pause position
+          if (pausePositions.includes(exerciseCount) && exerciseCount < config.totalExercises) {
+            sequence.push({
+              type: 'pause',
+              duration: config.pauseDuration
+            });
+          }
+          
+          // Add right exercise
+          sequence.push({
+            type: 'exercise',
+            exerciseId: exerciseData.right.id,
+            exercise: exerciseData.right
+          });
+          exerciseCount++;
+        } else {
+          // Only room for one more exercise - pick a different individual exercise instead
+          const individualExercises = exerciseIds.filter(id => exercises[id].type !== 'group');
+          if (individualExercises.length > 0) {
+            const randomIndividualId = individualExercises[Math.floor(Math.random() * individualExercises.length)];
+            sequence.push({
+              type: 'exercise',
+              exerciseId: randomIndividualId
+            });
+            exerciseCount++;
+          } else {
+            // Fallback: if no individual exercises exist, add the left exercise
+            sequence.push({
+              type: 'exercise',
+              exerciseId: exerciseData.left.id,
+              exercise: exerciseData.left
+            });
+            exerciseCount++;
+          }
+        }
+      } else {
+        // This is a regular individual exercise
+        sequence.push({
+          type: 'exercise',
+          exerciseId: randomExerciseId
+        });
+        exerciseCount++;
+      }
 
-      // Add pause if this is a pause position
-      if (pausePositions.includes(i + 1) && i + 1 < config.totalExercises) {
+      // Add pause if this is a pause position (for individual exercises)
+      if (exerciseData.type !== 'group' && pausePositions.includes(exerciseCount) && exerciseCount < config.totalExercises) {
         sequence.push({
           type: 'pause',
           duration: config.pauseDuration
@@ -468,6 +521,11 @@ function App() {
         duration: sequenceItem.duration
       };
     }
+    // For grouped exercises, the exercise object is already included
+    if (sequenceItem.exercise) {
+      return sequenceItem.exercise;
+    }
+    // For individual exercises, look up in exercises object
     return exercises[sequenceItem.exerciseId] || null;
   };
 

@@ -50,15 +50,18 @@
       "name": "Alternating KB Snatch",
       "description": "Schwinge die Kettlebell einarmig kraftvoll vom Boden hoch, wechsle sie auf halber Höhe fliegend in die andere Hand und führe sie über den Kopf, dann kontrolliert runter"
     },
-    "kb-lateral-swing-snatch-left": {
-      "id": "kb-lateral-swing-snatch-left",
-      "name": "KB lateral Swing to Snatch links",
-      "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann zurück zur Mitte und direkt in einen Snatch über den Kopf, kontrolliert zurück zur Startposition"
-    },
-    "kb-lateral-swing-snatch-right": {
-      "id": "kb-lateral-swing-snatch-right",
-      "name": "KB lateral Swing to Snatch rechts",
-      "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann zurück zur Mitte und direkt in einen Snatch über den Kopf, kontrolliert zurück zur Startposition"
+    "kb-lateral-swing-snatch" : {
+        "type": "group",
+        "left": {
+          "id": "kb-lateral-swing-snatch-left",
+          "name": "KB lateral Swing to Snatch links",
+          "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann zurück zur Mitte und direkt in einen Snatch über den Kopf, kontrolliert zurück zur Startposition"
+        },
+        "right": {
+          "id": "kb-lateral-swing-snatch-right",
+          "name": "KB lateral Swing to Snatch rechts",
+          "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann zurück zur Mitte und direkt in einen Snatch über den Kopf, kontrolliert zurück zur Startposition"
+        }
     },
     "kb-halo-lateral-swing": {
       "id": "kb-halo-lateral-swing",
@@ -70,15 +73,18 @@
       "name": "KB Figure 8 into clean",
       "description": "Führe die Kettlebell in einer 8er-Bewegung zwischen den Beinen durch und wechsle dabei die Hände, dann direkt in einen Clean zur Schulter"
     },
-    "split-stance-rotation-left": {
-      "id": "split-stance-rotation-left",
-      "name": "Split-Stance KB Core Rotation links",
-      "description": "Stehe in Ausfallschritt-Position, halte die Kettlebell mit gestreckten Armen vor dem Körper und rotiere den Oberkörper nach links, halte die Hüfte stabil"
-    },
-    "split-stance-rotation-right": {
-      "id": "split-stance-rotation-right",
-      "name": "Split-Stance KB Core Rotation rechts",
-      "description": "Stehe in Ausfallschritt-Position, halte die Kettlebell mit gestreckten Armen vor dem Körper und rotiere den Oberkörper nach rechts, halte die Hüfte stabil"
+    "split-stance-rotation" : {
+      "type": "group",
+      "left": {
+        "id": "split-stance-rotation-left",
+        "name": "Split-Stance KB Core Rotation links",
+        "description": "Stehe in Ausfallschritt-Position, halte die Kettlebell mit gestreckten Armen vor dem Körper und rotiere den Oberkörper nach links, halte die Hüfte stabil"
+      },
+      "right": {
+        "id": "split-stance-rotation-right",
+        "name": "Split-Stance KB Core Rotation rechts",
+        "description": "Stehe in Ausfallschritt-Position, halte die Kettlebell mit gestreckten Armen vor dem Körper und rotiere den Oberkörper nach rechts, halte die Hüfte stabil"
+      }
     },
     "kb-swings": {
       "id": "kb-swings",
@@ -90,15 +96,18 @@
       "name": "Burpee Mountain Climbers",
       "description": "Führe einen Burpee aus, aber statt zu springen bleibst du in der Liegestütz-Position und machst je Bein einen Mountain Climbers, dann zurück zur Startposition"
     },
-    "kb-cross-body-clean-left": {
-      "id": "kb-cross-body-clean-left",
-      "name": "Kettlebell Cross-Body Clean links",
-      "description": "Halte die Kettlebell einarmig auf der gegenüberliegenden Seite nebem dem Körper auf Hüfthöhe, ziehe sie diagonal vor dem Körper zur gegenüberliegenden Schulter und fange sie in der Rack-Position ab."
-    },
-    "kb-cross-body-clean-right": {
-      "id": "kb-cross-body-clean-right",
-      "name": "Kettlebell Cross-Body Clean rechts",
-      "description": "Halte die Kettlebell einarmig auf der gegenüberliegenden Seite nebem dem Körper auf Hüfthöhe, ziehe sie diagonal vor dem Körper zur gegenüberliegenden Schulter und fange sie in der Rack-Position ab."
+    "kb-cross-body-clean" : {
+      "type": "group",
+      "left": {
+        "id": "kb-cross-body-clean-left",
+        "name": "Kettlebell Cross-Body Clean links",
+        "description": "Halte die Kettlebell einarmig auf der gegenüberliegenden Seite nebem dem Körper auf Hüfthöhe, ziehe sie diagonal vor dem Körper zur gegenüberliegenden Schulter und fange sie in der Rack-Position ab."      
+      },
+      "right": {
+        "id": "kb-cross-body-clean-right",
+        "name": "Kettlebell Cross-Body Clean rechts",
+        "description": "Halte die Kettlebell einarmig auf der gegenüberliegenden Seite nebem dem Körper auf Hüfthöhe, ziehe sie diagonal vor dem Körper zur gegenüberliegenden Schulter und fange sie in der Rack-Position ab."
+      }
     },
     "plank-breakdance-swing": {
       "id": "plank-breakdance-swing",
