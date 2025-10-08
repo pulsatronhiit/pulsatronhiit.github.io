@@ -227,10 +227,10 @@ function App() {
       : workoutConfigs[workoutStats.difficulty]?.name || workoutStats.difficulty;
     
     const isComplete = workoutStats.completedExercises === workoutStats.totalExercises;
-    const statusText = isComplete ? 'abgeschlossen' : 'durchgeführt';
+    const statusText = isComplete ? 'abgeschlossen' : 'absolviert';
     const duration = formatActualDuration(workoutStats.actualDuration);
     
-    return `Ein Training mit IronHIIT ${statusText}!\n\n` +
+    return `Hat ein Training mit IronHIIT ${statusText}!\n\n` +
            `🎯 Herausforderung: ${difficultyName}\n` +
            `✅ Übungen: ${workoutStats.completedExercises}/${workoutStats.totalExercises}\n` +
            `⏱️ Dauer: ${duration}\n\n` +
