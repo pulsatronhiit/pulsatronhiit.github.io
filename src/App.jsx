@@ -220,6 +220,85 @@ function App() {
     }));
   };
 
+  // Generate share text for workout results
+  const generateShareText = () => {
+    const difficultyName = workoutStats.difficulty === 'individuell' 
+      ? 'Individuell' 
+      : workoutConfigs[workoutStats.difficulty]?.name || workoutStats.difficulty;
+    
+    const isComplete = workoutStats.completedExercises === workoutStats.totalExercises;
+    const statusText = isComplete ? 'abgeschlossen' : 'trainiert';
+    const duration = formatActualDuration(workoutStats.actualDuration);
+    
+    return `💪 IronHIIT Training ${statusText}!\n\n` +
+           `🎯 Herausforderung: ${difficultyName}\n` +
+           `✅ Übungen: ${workoutStats.completedExercises}/${workoutStats.totalExercises}\n` +
+           `⏱️ Dauer: ${duration}\n\n` +
+           `Baremetal Training. Minimal Data. Maximum Results.\n` +
+           `#IronHIIT #HIIT #KettlebellTraining #Fitness`;
+  };
+
+  // Handle sharing workout results
+  const handleShare = async () => {
+    const shareText = generateShareText();
+    
+    // Try native Web Share API first (mobile devices)
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'IronHIIT Workout',
+          text: shareText,
+          url: window.location.origin + window.location.pathname
+        });
+        return;
+      } catch (error) {
+        // User cancelled or error occurred, fall back to other methods
+        console.log('Native share cancelled or failed');
+      }
+    }
+    
+    // Fallback: Copy to clipboard
+    if (navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(shareText);
+        alert('Training-Ergebnisse in Zwischenablage kopiert! 📋');
+        return;
+      } catch (error) {
+        console.log('Clipboard copy failed');
+      }
+    }
+    
+    // Last fallback: Show text in alert for manual copy
+    alert(`Training-Ergebnisse:\n\n${shareText}\n\nText markieren und kopieren für das Teilen.`);
+  };
+
+  // Open specific social media share
+  const handleSocialShare = (platform) => {
+    const shareText = encodeURIComponent(generateShareText());
+    const url = encodeURIComponent(window.location.origin + window.location.pathname);
+    
+    let shareUrl = '';
+    
+    switch (platform) {
+      case 'twitter':
+        shareUrl = `https://twitter.com/intent/tweet?text=${shareText}`;
+        break;
+      case 'facebook':
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${shareText}`;
+        break;
+      case 'whatsapp':
+        shareUrl = `https://wa.me/?text=${shareText}`;
+        break;
+      case 'telegram':
+        shareUrl = `https://telegram.me/share/url?url=${url}&text=${shareText}`;
+        break;
+      default:
+        return;
+    }
+    
+    window.open(shareUrl, '_blank', 'width=600,height=400');
+  };
+
   // Go back to difficulty selection
   const goBackToDifficultySelection = () => {
     setDifficultySelected(false);
@@ -729,6 +808,52 @@ function App() {
                   ? 'Keep up the great work!'
                   : 'Jeder Fortschritt zählt! Keep going!'}
               </p>
+            </div>
+            
+            <div className="share-section">
+              <h3>Training teilen</h3>
+              <p>Teile deine Erfolge mit Freunden!</p>
+              
+              <div className="share-buttons">
+                <button 
+                  onClick={handleShare}
+                  className="share-btn primary-share"
+                  title="Mit nativer Share-Funktion oder Zwischenablage teilen"
+                >
+                  📱 Teilen
+                </button>
+                
+                <div className="social-share-buttons">
+                  <button 
+                    onClick={() => handleSocialShare('whatsapp')}
+                    className="share-btn whatsapp"
+                    title="Via WhatsApp teilen"
+                  >
+                    💬
+                  </button>
+                  <button 
+                    onClick={() => handleSocialShare('twitter')}
+                    className="share-btn twitter"
+                    title="Auf Twitter teilen"
+                  >
+                    🐦
+                  </button>
+                  <button 
+                    onClick={() => handleSocialShare('facebook')}
+                    className="share-btn facebook"
+                    title="Auf Facebook teilen"
+                  >
+                    📘
+                  </button>
+                  <button 
+                    onClick={() => handleSocialShare('telegram')}
+                    className="share-btn telegram"
+                    title="Via Telegram teilen"
+                  >
+                    ✈️
+                  </button>
+                </div>
+              </div>
             </div>
             
             <div className="completion-buttons">

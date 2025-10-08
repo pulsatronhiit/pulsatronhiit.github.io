@@ -646,6 +646,108 @@
   font-weight: 600;
 }
 
+/* Share Section Styles */
+.share-section {
+  background: rgba(0, 255, 65, 0.05);
+  border: 1px solid rgba(0, 255, 65, 0.2);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 25px 0;
+  text-align: center;
+}
+
+.share-section h3 {
+  color: #00ff41;
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.share-section p {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+.share-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.share-btn {
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+}
+
+.primary-share {
+  background: linear-gradient(135deg, #00ff41 0%, #00cc33 100%);
+  color: #000000;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  min-width: 160px;
+}
+
+.primary-share:hover {
+  background: linear-gradient(135deg, #00cc33 0%, #00aa2a 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 255, 65, 0.4);
+}
+
+.social-share-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.social-share-buttons .share-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 1.5rem;
+  padding: 0;
+}
+
+.social-share-buttons .share-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+.whatsapp:hover {
+  background: rgba(37, 211, 102, 0.2);
+  border-color: rgba(37, 211, 102, 0.4);
+}
+
+.twitter:hover {
+  background: rgba(29, 161, 242, 0.2);
+  border-color: rgba(29, 161, 242, 0.4);
+}
+
+.facebook:hover {
+  background: rgba(24, 119, 242, 0.2);
+  border-color: rgba(24, 119, 242, 0.4);
+}
+
+.telegram:hover {
+  background: rgba(0, 136, 204, 0.2);
+  border-color: rgba(0, 136, 204, 0.4);
+}
+
 .completion-buttons {
   margin-top: 30px;
 }
