@@ -1,24 +1,37 @@
-# HIIT Workout App
+# IronHIIT - Baremetal Training
 
-Eine Progressive Web App (PWA) für HIIT-Workouts, optimiert für iPhone 15 Plus als Vollbild-App.
+Eine Progressive Web App (PWA) für HIIT-Kettlebell-Workouts, optimiert für iPhone 15 Plus als Vollbild-App.
+
+**Baremetal Training. Minimal Data. Maximum Results.**
 
 ## Features
 
 - **Progressive Web App**: Kann am Homescreen angepinnt werden wie eine native App
-- **60-Sekunden Timer**: Präziser Countdown im Format MM:SS.MS mit 10ms Genauigkeit
-- **Übungssequenz**: Übungen werden aus einer JSON-Datei geladen und in Reihenfolge abgespielt
+- **Intelligente Workout-Generierung**: Zufällige Workouts basierend auf Schwierigkeitsgrad
+- **Gruppierte Übungen**: Links/Rechts-Variationen werden automatisch aufeinanderfolgend eingeplant
+- **Timer-System**: 5s Vorbereitung, 50s Übung, 10s Pause + konfigurierbare längere Pausen
+- **Workout-Statistiken**: Vollständige Erfassung und Analyse des Trainings
+- **Social Sharing**: Native Share-API mit intelligenten Fallbacks
 - **iPhone 15 Plus optimiert**: Speziell für 393x852px Vollbilddarstellung entwickelt
-- **Automatischer Übungswechsel**: Timer startet automatisch neu bei jeder neuen Übung
-- **Touch-optimiert**: Große Buttons und benutzerfreundliche Oberfläche
+
+## Deployment
+
+**Live-Zugang:**
+- **HIIT App**: `https://ironhiit.github.io/app/`
+
+**Automatisches GitHub Pages Deployment** bei jedem Push auf main/master Branch.
 
 ## Technologie-Stack
 
-- **Frontend**: React 18 mit Hooks
-- **Build-Tool**: Vite
-- **Styling**: Vanilla CSS mit responsivem Design
+- **Frontend**: React 18 mit funktionalen Komponenten und Hooks
+- **Build-Tool**: Vite 5.4.20 mit GitHub Pages Konfiguration
+- **Styling**: Vanilla CSS mit IronHIIT-Branding (Metallgradiente, Neon-Akzente)
 - **PWA**: Web App Manifest für Homescreen-Installation
+- **CI/CD**: GitHub Actions für automatisches Deployment
 
-## Installation und Start
+## Installation und Entwicklung
+
+### Lokale Entwicklung
 
 1. Abhängigkeiten installieren:
    ```bash
@@ -32,26 +45,41 @@ Eine Progressive Web App (PWA) für HIIT-Workouts, optimiert für iPhone 15 Plus
 
 3. App im Browser öffnen: `http://localhost:5173`
 
-## Produktions-Build
+### Produktions-Build
 
 ```bash
 npm run build
 ```
 
-Die fertige App wird im `dist/` Ordner erstellt.
+Die fertige App wird in `dist/app/` erstellt, mit Landing Page in `dist/index.html`.
+
 
 ## Übungen anpassen
 
-Die Übungen können in der Datei `public/exercises.json` angepasst werden:
+Die Übungen sind in `public/exercises.json` definiert:
 
 ```json
 {
-  "exercises": [
-    {
-      "name": "Übungsname",
-      "description": "Beschreibung der Übung"
+  "exercises": {
+    "exercise-id": {
+      "id": "exercise-id",
+      "name": "Übungsname", 
+      "description": "Detaillierte Beschreibung"
+    },
+    "grouped-exercise": {
+      "type": "group",
+      "left": {
+        "id": "exercise-left",
+        "name": "Übung links",
+        "description": "..."
+      },
+      "right": {
+        "id": "exercise-right", 
+        "name": "Übung rechts",
+        "description": "..."
+      }
     }
-  ]
+  }
 }
 ```
 
@@ -69,48 +97,77 @@ Die App startet dann im Vollbildmodus ohne Browser-UI.
 ```
 src/
 ├── components/
-│   ├── Timer.jsx          # Timer-Komponente mit MM:SS.MS Format
-│   ├── Timer.css          # Timer Styling
-│   ├── ExerciseDisplay.jsx # Übungsanzeige-Komponente
+│   ├── Timer.jsx          # Multi-Phase Timer (Vorbereitung, Übung, Pause)
+│   ├── Timer.css          # Timer Styling mit Flash-Transitions
+│   ├── ExerciseDisplay.jsx # Intelligente Übungsanzeige
 │   └── ExerciseDisplay.css # Übungsanzeige Styling
-├── App.jsx               # Haupt-App-Komponente
-├── App.css              # App-weites Styling
+├── App.jsx               # Haupt-App mit Workout-Orchestrierung
+├── App.css              # IronHIIT Branding und Vollbild-Layout
 ├── main.jsx             # React Entry Point
 └── index.css            # Basis-Styling
 
 public/
-├── exercises.json       # Übungsdefinitionen
-├── manifest.json       # PWA Manifest
+├── exercises.json       # Übungsdefinitionen (24+ Kettlebell-Übungen)
+├── manifest.json       # PWA Manifest für /app/ Pfad
 ├── icon-192x192.svg    # App Icon (klein)
 └── icon-512x512.svg    # App Icon (groß)
+
+.github/workflows/
+└── deploy.yml          # GitHub Actions Deployment
+
+dist/
+├── index.html          # Landing Page (ironhiit.github.io)
+└── app/               # React App (ironhiit.github.io/app)
 ```
 
-## Timer-Funktionalität
+## Workout-Features
 
-- **Format**: MM:SS.MS (Minuten:Sekunden.Millisekunden)
-- **Dauer**: 60 Sekunden pro Übung
-- **Genauigkeit**: 10ms Updates für flüssige Anzeige
-- **Auto-Reset**: Automatischer Neustart bei Übungswechsel
-- **Steuerung**: Start, Pause, Reset Buttons
+### Zufällige Generierung
+- **Intelligente Auswahl** aus 24+ Kettlebell-Übungen
+- **Gruppen-Logik** für aufeinanderfolgende Links/Rechts-Variationen
+- **Pause-Verteilung** automatisch über das Workout verteilt
 
-## Responsive Design
+### Statistiken & Tracking
+- **Vollständigkeitsrate** (absolvierte vs. geplante Übungen)
+- **Tatsächliche Trainingsdauer** mit Startzeit/Endzeit
+- **Schwierigkeitsgrad-Tracking** für Fortschrittsanalyse
+- **Session-Persistenz** während des aktiven Workouts
 
-- **iPhone 15 Plus**: 393x852px optimiert
-- **Vollbild**: Nutzt 100vh/100dvh für echtes Vollbild
-- **Touch-freundlich**: Große Buttons und optimierte Abstände
-- **Kein Scrollen**: Feste Layouthöhe verhindert ungewolltes Scrollen
+### Social Sharing
+- **Native Web Share API** (Mobile Geräte)
+- **Clipboard-Fallback** für Desktop
+- **Alert-Fallback** als letzte Option
+- **Intelligente Abbruch-Erkennung** (keine Fallbacks bei User-Abbruch)
 
-## Browser-Kompatibilität
+## Timer-System
 
-- **Safari (iOS)**: Vollständig unterstützt
-- **Chrome (Desktop/Mobile)**: Vollständig unterstützt  
-- **Firefox**: Vollständig unterstützt
-- **Edge**: Vollständig unterstützt
+### Multi-Phase Logic
+- **Vorbereitung**: 5s Countdown vor dem ersten Training
+- **Übungszeit**: 50s intensive Trainingsphase
+- **Kurze Pausen**: 10s Erholung zwischen Übungen
+- **Lange Pausen**: 2+ Minuten für Hydration/Erholung
+- **Flexible Steuerung**: Pause, Fortsetzen, Workout beenden
 
-## Entwicklung
 
-Die App verwendet moderne React Patterns:
-- Funktionale Komponenten mit Hooks
-- useState für lokales State-Management
-- useEffect für Timer-Logic und API-Calls
-- Responsive CSS mit clamp() für skalierbare Schriften
+## iPhone Installation
+
+1. Öffne die App im Safari-Browser: `https://ironhiit.github.io/app/`
+2. Tippe auf das "Teilen"-Symbol (Quadrat mit Pfeil nach oben)
+3. Scrolle runter und tippe auf "Zum Home-Bildschirm"
+4. Bestätige mit "Hinzufügen"
+
+Die App startet dann im Vollbildmodus ohne Browser-UI wie eine native App.
+
+
+## Beitragen
+
+1. Repository forken
+2. Feature Branch erstellen (`git checkout -b feature/awesome-feature`)
+3. Änderungen committen (`git commit -m 'Add awesome feature'`)
+4. Branch pushen (`git push origin feature/awesome-feature`)
+5. Pull Request erstellen
+
+## Lizenz
+
+MIT License - siehe [LICENSE](LICENSE) für Details.
+
