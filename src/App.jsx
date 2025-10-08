@@ -526,7 +526,7 @@ function App() {
           />
         )}
         
-        {difficultySelected && (
+        {difficultySelected && !showWorkoutComplete && (
           <ExerciseDisplay 
             exercise={currentExercise} 
             nextExercise={nextExercise}
