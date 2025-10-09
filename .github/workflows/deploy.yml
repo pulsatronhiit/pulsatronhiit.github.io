@@ -34,6 +34,7 @@ jobs:
       run: |
         mkdir -p dist
         cp -r landing/* dist/
+        cp robots.txt dist/
 
     - name: Setup Pages
       uses: actions/configure-pages@v4

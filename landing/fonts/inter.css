@@ -1,0 +1,80 @@
+/* Inter Font Family - Optimized for PulsatronHIIT Landing Page */
+/* Only includes used weights: 300, 400, 500, 600, 700, 800, 900 */
+
+/* Variable font (modern browsers) - recommended approach */
+@font-face {
+  font-family: InterVariable;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("InterVariable.woff2") format("woff2");
+}
+
+/* Static fonts (fallback for older browsers) */
+@font-face { 
+  font-family: "Inter"; 
+  font-style: normal; 
+  font-weight: 300; 
+  font-display: swap; 
+  src: url("Inter-Light.woff2") format("woff2"); 
+}
+
+@font-face { 
+  font-family: "Inter"; 
+  font-style: normal; 
+  font-weight: 400; 
+  font-display: swap; 
+  src: url("Inter-Regular.woff2") format("woff2"); 
+}
+
+@font-face { 
+  font-family: "Inter"; 
+  font-style: normal; 
+  font-weight: 500; 
+  font-display: swap; 
+  src: url("Inter-Medium.woff2") format("woff2"); 
+}
+
+@font-face { 
+  font-family: "Inter"; 
+  font-style: normal; 
+  font-weight: 600; 
+  font-display: swap; 
+  src: url("Inter-SemiBold.woff2") format("woff2"); 
+}
+
+@font-face { 
+  font-family: "Inter"; 
+  font-style: normal; 
+  font-weight: 700; 
+  font-display: swap; 
+  src: url("Inter-Bold.woff2") format("woff2"); 
+}
+
+@font-face { 
+  font-family: "Inter"; 
+  font-style: normal; 
+  font-weight: 800; 
+  font-display: swap; 
+  src: url("Inter-ExtraBold.woff2") format("woff2"); 
+}
+
+@font-face { 
+  font-family: "Inter"; 
+  font-style: normal; 
+  font-weight: 900; 
+  font-display: swap; 
+  src: url("Inter-Black.woff2") format("woff2"); 
+}
+
+/* Use variable font when supported, with static fonts as fallback */
+:root {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: "InterVariable", "Inter", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    font-optical-sizing: auto;
+  }
+}

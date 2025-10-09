@@ -1,0 +1,51 @@
+# Robots.txt für PulsatronHIIT
+# Verhindert Crawling von persönlichen Daten im Impressum
+
+User-agent: *
+
+# Impressum komplett von Indexierung ausschließen
+Disallow: /impressum.html
+Disallow: /impressum/
+Disallow: /legal/
+
+# Zusätzliche sensible Bereiche (falls später hinzugefügt)
+Disallow: /datenschutz.html
+Disallow: /privacy.html
+
+# Erlaubte Bereiche
+Allow: /
+Allow: /app/
+Allow: /css/
+Allow: /js/
+Allow: /images/
+
+# Crawl-Delay für respektvolles Crawling
+Crawl-delay: 1
+
+# Spezielle Regeln für aggressive Bots und AI-Crawler
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /impressum.html
+
+User-agent: YandexBot
+Disallow: /impressum.html
+
+User-agent: facebookexternalhit
+Disallow: /impressum.html
+
+# Sitemap (optional, falls später erstellt)
+# Sitemap: https://pulsatronhiit.github.io/sitemap.xml
