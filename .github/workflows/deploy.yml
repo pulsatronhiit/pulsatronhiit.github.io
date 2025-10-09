@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [  master ]
   workflow_dispatch:
 
 jobs:
@@ -30,83 +30,10 @@ jobs:
     - name: Build app
       run: npm run build
       
-    - name: Create landing page
+    - name: Copy landing page
       run: |
         mkdir -p dist
-        cat > dist/index.html << 'EOF'
-        <!DOCTYPE html>
-        <html lang="de">
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>PulsatronHIIT - Baremetal Training</title>
-          <style>
-            * { margin: 0; padding: 0; box-sizing: border-box; }
-            body {
-              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-              background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-              color: #ffffff;
-              min-height: 100vh;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-            }
-            .container {
-              text-align: center;
-              padding: 2rem;
-              max-width: 600px;
-            }
-            .logo {
-              font-size: 3.5rem;
-              font-weight: 900;
-              background: linear-gradient(45deg, #ff6b35, #f7931e, #ffd700);
-              -webkit-background-clip: text;
-              -webkit-text-fill-color: transparent;
-              background-clip: text;
-              margin-bottom: 1rem;
-              text-shadow: 0 0 30px rgba(255, 107, 53, 0.3);
-            }
-            .tagline {
-              font-size: 1.2rem;
-              color: #cccccc;
-              margin-bottom: 2rem;
-              font-weight: 300;
-            }
-            .cta-button {
-              display: inline-block;
-              padding: 1rem 2rem;
-              background: linear-gradient(45deg, #ff6b35, #f7931e);
-              color: white;
-              text-decoration: none;
-              border-radius: 8px;
-              font-weight: 600;
-              font-size: 1.1rem;
-              transition: all 0.3s ease;
-              box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
-            }
-            .cta-button:hover {
-              transform: translateY(-2px);
-              box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
-            }
-            .coming-soon {
-              margin-top: 3rem;
-              font-size: 0.9rem;
-              color: #888888;
-            }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <h1 class="logo">PulsatronHIIT</h1>
-            <p class="tagline">Baremetal Training. Minimal Data. Maximum Results.</p>
-            <a href="/app/" class="cta-button">Zur HIIT App 🏃‍♂️</a>
-            <div class="coming-soon">
-              <p>Vollständige Landing Page kommt bald...</p>
-            </div>
-          </div>
-        </body>
-        </html>
-        EOF
+        cp -r landing/* dist/
 
     - name: Setup Pages
       uses: actions/configure-pages@v4
