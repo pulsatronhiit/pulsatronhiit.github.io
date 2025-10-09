@@ -24,7 +24,7 @@ const ExerciseDisplay = ({ exercise, nextExercise, isLastExercise, isRestTime, i
     return (
       <div className="exercise-container long-pause-display">
         <div className="long-pause-info">
-          <div className="long-pause-label">⏸️ {exercise.name || 'Längere Pause'}</div>
+          <div className="long-pause-label"></div>
           <div className="long-pause-text">Nutze die Zeit für Erholung und Hydration</div>
         </div>
         {nextExercise && (

@@ -10,18 +10,18 @@
 .timer-display {
   font-size: clamp(3rem, 12vw, 6rem);
   font-weight: bold;
-  color: #00ff41;
+  color: #667eea;
   text-align: center;
   font-family: 'Courier New', monospace;
-  text-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+  text-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
   margin-bottom: 1rem;
   letter-spacing: 0.1em;
   transition: all 0.4s ease;
 }
 
 .timer-display.rest-mode {
-  color: #ffa500;
-  text-shadow: 0 0 20px rgba(255, 165, 0, 0.5);
+  color: #00bfff;
+  text-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
 }
 
 .timer-display.pre-workout-mode {
@@ -43,8 +43,8 @@
 }
 
 .timer-display.exercise-mode {
-  color: #00ff41;
-  text-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+  color: #667eea;
+  text-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
 }
 
 .timer-display.long-pause-mode {
@@ -68,7 +68,7 @@
 .timer-mode-label {
   font-size: clamp(1rem, 4vw, 1.5rem);
   font-weight: bold;
-  color: #ffa500;
+  color: #00bfff;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.2em;

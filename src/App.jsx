@@ -559,7 +559,7 @@ function App() {
         {workoutStarted && (
           <div className="workout-progress">
             {isLongPause
-              ? `Längere Pause - ${currentExercise?.name || 'Pause'}`
+              ? `Längere Pause nach Übung ${getCurrentExerciseNumber()} von ${getExerciseCount()}`
               : isRestTime 
                 ? `Pause nach Übung ${getCurrentExerciseNumber()} von ${getExerciseCount()}`
                 : `Übung ${getCurrentExerciseNumber()} von ${getExerciseCount()}`

@@ -1,3 +1,15 @@
+/* CSS Variables for consistent branding */
+:root {
+  --primary-color: #667eea;
+  --secondary-color: #764ba2;
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --primary-rgba: rgba(102, 126, 234, 0.1);
+  --primary-rgba-strong: rgba(102, 126, 234, 0.3);
+  --secondary-rgba: rgba(118, 75, 162, 0.1);
+  --warning-color: #ff4444;
+  --warning-rgba: rgba(255, 68, 68, 0.2);
+}
+
 .app {
   min-height: 100vh;
   width: 100vw;
@@ -37,16 +49,16 @@
   right: 0;
   bottom: 0;
   background: 
-    radial-gradient(circle at 20% 80%, rgba(0, 255, 65, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(0, 255, 65, 0.1) 0%, transparent 50%);
+    radial-gradient(circle at 20% 80%, var(--primary-rgba) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, var(--secondary-rgba) 0%, transparent 50%);
   pointer-events: none;
   transition: all 0.3s ease;
 }
 
 .app.warning-active::before {
   background: 
-    radial-gradient(circle at 20% 80%, rgba(255, 68, 68, 0.2) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 68, 68, 0.2) 0%, transparent 50%);
+    radial-gradient(circle at 20% 80%, var(--warning-rgba) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, var(--warning-rgba) 0%, transparent 50%);
   animation: pulse-bg 1s ease-in-out infinite;
 }
 
@@ -84,7 +96,7 @@
 
 .brand-slogan {
   font-size: clamp(0.9rem, 3vw, 1.1rem);
-  color: #00ff41;
+  color: var(--primary-color);
   font-weight: 600;
   margin: 0;
   text-transform: uppercase;
@@ -94,7 +106,7 @@
 
 .workout-progress {
   font-size: clamp(1rem, 4vw, 1.3rem);
-  color: #00ff41;
+  color: var(--primary-color);
   font-weight: 500;
 }
 
@@ -124,13 +136,13 @@
 }
 
 .start-workout-btn {
-  background: linear-gradient(45deg, #00ff41, #00cc33);
-  color: #000;
+  background: var(--primary-gradient);
+  color: #fff;
 }
 
 .start-workout-btn:hover:not(:disabled) {
   transform: scale(1.05);
-  box-shadow: 0 0 40px rgba(0, 255, 65, 0.6);
+  box-shadow: 0 0 40px var(--primary-rgba-strong);
 }
 
 .start-workout-btn:disabled {
@@ -150,13 +162,13 @@
 }
 
 .pause-btn {
-  background: linear-gradient(45deg, #ffa500, #ff8c00);
+  background: linear-gradient(45deg, #764ba2, #5a4d7a);
   color: #fff;
 }
 
 .pause-btn:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 40px rgba(255, 165, 0, 0.6);
+  box-shadow: 0 0 40px rgba(118, 75, 162, 0.6);
 }
 
 /* Difficulty selection styles */
@@ -169,10 +181,10 @@
 }
 
 .difficulty-selection h2 {
-  color: #00ff41;
+  color: var(--primary-color);
   font-size: 2rem;
   margin-bottom: 30px;
-  text-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+  text-shadow: 0 0 10px var(--primary-rgba-strong);
 }
 
 .difficulty-buttons {
@@ -275,15 +287,15 @@
 }
 
 .confirmation-header h2 {
-  color: #00ff41;
+  color: var(--primary-color);
   font-size: 1.8rem;
   margin-bottom: 20px;
-  text-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+  text-shadow: 0 0 10px var(--primary-rgba-strong);
 }
 
 .confirmation-details {
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(0, 255, 65, 0.3);
+  border: 1px solid var(--primary-rgba-strong);
   border-radius: 15px;
   padding: 20px;
   margin-bottom: 20px;
@@ -306,7 +318,7 @@
 
 .detail-label {
   font-weight: 600;
-  color: #00ff41;
+  color: var(--primary-color);
   font-size: 1rem;
   flex-shrink: 0;
   min-width: 70px;
@@ -413,7 +425,7 @@
 }
 
 .config-header h2 {
-  color: #00ff41;
+  color: var(--primary-color);
   font-size: 2.2rem;
   margin-bottom: 8px;
   font-weight: 700;
@@ -455,19 +467,19 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #00ff41;
+  background: var(--primary-color);
   cursor: pointer;
-  box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+  box-shadow: 0 0 10px var(--primary-rgba-strong);
 }
 
 .config-slider::-moz-range-thumb {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #00ff41;
+  background: var(--primary-color);
   cursor: pointer;
   border: none;
-  box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+  box-shadow: 0 0 10px var(--primary-rgba-strong);
 }
 
 .range-labels {
@@ -478,15 +490,15 @@
 }
 
 .config-summary {
-  background: rgba(0, 255, 65, 0.1);
-  border: 1px solid rgba(0, 255, 65, 0.3);
+  background: var(--primary-rgba);
+  border: 1px solid var(--primary-rgba-strong);
   border-radius: 15px;
   padding: 20px;
   margin: 25px 0;
 }
 
 .config-summary h3 {
-  color: #00ff41;
+  color: var(--primary-color);
   font-size: 1.3rem;
   margin-bottom: 15px;
   text-align: center;
@@ -516,14 +528,14 @@
 }
 
 .start-custom-btn {
-  background: linear-gradient(135deg, #00ff41 0%, #00cc33 100%);
-  color: #000000;
+  background: var(--primary-gradient);
+  color: #ffffff;
 }
 
 .start-custom-btn:hover {
-  background: linear-gradient(135deg, #00cc33 0%, #00aa2a 100%);
+  background: linear-gradient(135deg, var(--secondary-color) 0%, #5a4d7a 100%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 255, 65, 0.4);
+  box-shadow: 0 6px 20px var(--primary-rgba-strong);
 }
 
 .difficulty-btn.custom {
@@ -557,7 +569,7 @@
 /* Workout Completion Styles */
 .workout-complete {
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(0, 255, 65, 0.3);
+  border: 1px solid var(--primary-rgba-strong);
   border-radius: 20px;
   padding: 30px;
   max-width: 500px;
@@ -571,7 +583,7 @@
 }
 
 .completion-header h2 {
-  color: #00ff41;
+  color: var(--primary-color);
   font-size: 2.2rem;
   margin-bottom: 10px;
   font-weight: 700;
@@ -623,14 +635,14 @@
 }
 
 .stat-value {
-  color: #00ff41;
+  color: var(--primary-color);
   font-weight: 600;
   font-size: 1.1rem;
 }
 
 .completion-message {
-  background: rgba(0, 255, 65, 0.1);
-  border: 1px solid rgba(0, 255, 65, 0.2);
+  background: var(--primary-rgba);
+  border: 1px solid var(--primary-rgba-strong);
   border-radius: 15px;
   padding: 20px;
   margin: 25px 0;
@@ -648,8 +660,8 @@
 
 /* Share Section Styles */
 .share-section {
-  background: rgba(0, 255, 65, 0.05);
-  border: 1px solid rgba(0, 255, 65, 0.2);
+  background: rgba(102, 126, 234, 0.05);
+  border: 1px solid var(--primary-rgba-strong);
   border-radius: 15px;
   padding: 20px;
   margin: 25px 0;
@@ -657,7 +669,7 @@
 }
 
 .share-section h3 {
-  color: #00ff41;
+  color: var(--primary-color);
   font-size: 1.3rem;
   margin-bottom: 8px;
   font-weight: 600;
@@ -690,17 +702,17 @@
 }
 
 .primary-share {
-  background: linear-gradient(135deg, #00ff41 0%, #00cc33 100%);
-  color: #000000;
+  background: var(--primary-gradient);
+  color: #ffffff;
   padding: 12px 30px;
   font-size: 1.1rem;
   min-width: 160px;
 }
 
 .primary-share:hover {
-  background: linear-gradient(135deg, #00cc33 0%, #00aa2a 100%);
+  background: linear-gradient(135deg, var(--secondary-color) 0%, #5a4d7a 100%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 255, 65, 0.4);
+  box-shadow: 0 6px 20px var(--primary-rgba-strong);
 }
 
 .completion-buttons {
