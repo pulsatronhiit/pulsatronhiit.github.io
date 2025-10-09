@@ -1,8 +1,8 @@
 {
-  "name": "ironhiit-app",
+  "name": "PulsatronHIIT-app",
   "private": true,
   "version": "1.0.0",
-  "description": "IronHIIT - HIIT Kettlebell Training ohne Tracking",
+  "description": "PulsatronHIIT - HIIT Kettlebell Training with full data protection. No tracking, no cookies, no personal data collection. GDPR compliant by design.",
   "type": "module",
   "scripts": {
     "dev": "vite",

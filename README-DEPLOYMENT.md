@@ -1,11 +1,11 @@
-# IronHIIT - GitHub Pages Deployment
+# PulsatronHIIT - GitHub Pages Deployment
 
 ## Deployment Setup
 
 Diese App ist für GitHub Pages konfiguriert und wird automatisch deployed:
 
-- **Landing Page**: `https://ironhiit.github.io/`
-- **HIIT App**: `https://ironhiit.github.io/app/`
+- **Landing Page**: `https://pulsatronhiit.github.io/`
+- **HIIT App**: `https://pulsatronhiit.github.io/app/`
 
 ### Automatisches Deployment
 
@@ -35,8 +35,8 @@ npx serve dist/app -s
 
 ```
 dist/
-├── index.html          # Landing Page (ironhiit.github.io)
-└── app/               # HIIT App (ironhiit.github.io/app)
+├── index.html          # Landing Page (pulsatronhiit.github.io)
+└── app/               # HIIT App (pulsatronhiit.github.io/app)
     ├── index.html
     ├── assets/
     └── manifest.json
@@ -62,4 +62,4 @@ dist/
 2. GitHub Pages in Repository Settings aktivieren
 3. Automatisches Deployment läuft bei jedem Push
 
-Die App wird dann unter `https://ironhiit.github.io/app/` verfügbar sein!
+Die App wird dann unter `https://pulsatronhiit.github.io/app/` verfügbar sein!

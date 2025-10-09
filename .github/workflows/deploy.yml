@@ -39,7 +39,7 @@ jobs:
         <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>IronHIIT - Baremetal Training</title>
+          <title>PulsatronHIIT - Baremetal Training</title>
           <style>
             * { margin: 0; padding: 0; box-sizing: border-box; }
             body {
@@ -97,7 +97,7 @@ jobs:
         </head>
         <body>
           <div class="container">
-            <h1 class="logo">IronHIIT</h1>
+            <h1 class="logo">PulsatronHIIT</h1>
             <p class="tagline">Baremetal Training. Minimal Data. Maximum Results.</p>
             <a href="/app/" class="cta-button">Zur HIIT App 🏃‍♂️</a>
             <div class="coming-soon">

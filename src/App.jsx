@@ -283,12 +283,12 @@ function App() {
     const statusText = isComplete ? 'abgeschlossen' : 'absolviert';
     const duration = formatActualDuration(workoutStats.actualDuration);
     
-    return `Hat ein Training mit IronHIIT ${statusText}!\n\n` +
+    return `Hat ein Training mit PulsatronHIIT ${statusText}!\n\n` +
            `🎯 Herausforderung: ${difficultyName}\n` +
            `✅ Übungen: ${workoutStats.completedExercises}/${workoutStats.totalExercises}\n` +
            `⏱️ Dauer: ${duration}\n\n` +
            `Baremetal Training. Maximum Results.\n` +
-           `#IronHIIT #HIIT #KettlebellTraining #Fitness`;
+           `#PulsatronHIIT #HIIT #Kettlebell #Fitness`;
   };
 
   // Handle sharing workout results
@@ -299,7 +299,7 @@ function App() {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: 'IronHIIT Workout',
+          title: 'PulsatronHIIT Workout',
           text: shareText,
           url: window.location.origin + window.location.pathname
         });
@@ -552,7 +552,7 @@ function App() {
       <header className="app-header">
         {!workoutStarted && !isPreWorkout && !difficultySelected && !showCustomConfig && !showWorkoutComplete && (
           <div className="brand-header">
-            <h1 className="brand-title">IronHIIT</h1>
+            <h1 className="brand-title">PulsatronHIIT</h1>
             <p className="brand-slogan">Baremetal Training.</p>
           </div>
         )}

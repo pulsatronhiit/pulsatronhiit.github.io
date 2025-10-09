@@ -1,6 +1,6 @@
 {
-  "name": "IronHIIT - Baremetal Training",
-  "short_name": "IronHIIT",
+  "name": "PulsatronHIIT - Baremetal Training",
+  "short_name": "PulsatronHIIT",
   "description": "HIIT Kettlebell Training. Baremetal Training. Minimal Data. Maximum Results.",
   "start_url": "/app/",
   "display": "fullscreen",

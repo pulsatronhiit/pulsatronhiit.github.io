@@ -1,6 +1,6 @@
-# IronHIIT - Baremetal Training
+# PulsatronHIIT - Baremetal Training
 
-Eine Progressive Web App (PWA) für HIIT-Kettlebell-Workouts, optimiert für iPhone 15 Plus als Vollbild-App.
+HIIT Kettlebell Training with full data protection. No tracking, no cookies, no personal data collection. GDPR compliant by design.
 
 **Baremetal Training. Minimal Data. Maximum Results.**
 
@@ -17,7 +17,7 @@ Eine Progressive Web App (PWA) für HIIT-Kettlebell-Workouts, optimiert für iPh
 ## Deployment
 
 **Live-Zugang:**
-- **HIIT App**: `https://ironhiit.github.io/app/`
+- **HIIT App**: `https://pulsatronhiit.github.io/app/`
 
 **Automatisches GitHub Pages Deployment** bei jedem Push auf main/master Branch.
 
@@ -25,7 +25,7 @@ Eine Progressive Web App (PWA) für HIIT-Kettlebell-Workouts, optimiert für iPh
 
 - **Frontend**: React 18 mit funktionalen Komponenten und Hooks
 - **Build-Tool**: Vite 5.4.20 mit GitHub Pages Konfiguration
-- **Styling**: Vanilla CSS mit IronHIIT-Branding (Metallgradiente, Neon-Akzente)
+- **Styling**: Vanilla CSS mit PulsatronHIIT-Branding (Metallgradiente, Neon-Akzente)
 - **PWA**: Web App Manifest für Homescreen-Installation
 - **CI/CD**: GitHub Actions für automatisches Deployment
 
@@ -102,7 +102,7 @@ src/
 │   ├── ExerciseDisplay.jsx # Intelligente Übungsanzeige
 │   └── ExerciseDisplay.css # Übungsanzeige Styling
 ├── App.jsx               # Haupt-App mit Workout-Orchestrierung
-├── App.css              # IronHIIT Branding und Vollbild-Layout
+├── App.css              # PulsatronHIIT Branding und Vollbild-Layout
 ├── main.jsx             # React Entry Point
 └── index.css            # Basis-Styling
 
@@ -116,8 +116,8 @@ public/
 └── deploy.yml          # GitHub Actions Deployment
 
 dist/
-├── index.html          # Landing Page (ironhiit.github.io)
-└── app/               # React App (ironhiit.github.io/app)
+├── index.html          # Landing Page (pulsatronhiit.github.io)
+└── app/               # React App (pulsatronhiit.github.io/app)
 ```
 
 ## Workout-Features
@@ -151,7 +151,7 @@ dist/
 
 ## iPhone Installation
 
-1. Öffne die App im Safari-Browser: `https://ironhiit.github.io/app/`
+1. Öffne die App im Safari-Browser: `https://pulsatronhiit.github.io/app/`
 2. Tippe auf das "Teilen"-Symbol (Quadrat mit Pfeil nach oben)
 3. Scrolle runter und tippe auf "Zum Home-Bildschirm"
 4. Bestätige mit "Hinzufügen"
