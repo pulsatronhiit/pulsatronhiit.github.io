@@ -57,7 +57,7 @@ function animateTimer() {
     const timerTime = document.querySelector('.timer-time');
     const progressBar = document.querySelector('.progress-bar');
     
-    if (!timerTime || !progressBar) return;
+    if (!timerTime && !progressBar) return;
     
     let seconds = 50;
     let progress = 100;
@@ -70,7 +70,7 @@ function animateTimer() {
         
         // Update progress bar
         progress = (seconds / 50) * 100;
-        progressBar.style.width = `${progress}%`;
+        if(progressBar) progressBar.style.width = `${progress}%`;
         
         seconds--;
         
