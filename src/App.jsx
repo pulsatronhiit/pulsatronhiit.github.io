@@ -110,11 +110,46 @@ function App() {
       }
     }
 
+    // Track used exercises to avoid duplicates
+    const usedExercises = new Set();
+    const availableExercises = [...exerciseIds];
+    
+    // Shuffle function to randomize exercises
+    const shuffleArray = (array) => {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    };
+
+    // Get next available exercise (prefer unused ones)
+    const getNextExercise = () => {
+      // First, try to get an unused exercise
+      const unusedExercises = availableExercises.filter(id => !usedExercises.has(id));
+      
+      if (unusedExercises.length > 0) {
+        // Shuffle unused exercises and pick the first one
+        const shuffledUnused = shuffleArray(unusedExercises);
+        const selectedId = shuffledUnused[0];
+        usedExercises.add(selectedId);
+        return selectedId;
+      } else {
+        // All exercises have been used, reset and pick randomly
+        usedExercises.clear();
+        const shuffledAll = shuffleArray(availableExercises);
+        const selectedId = shuffledAll[0];
+        usedExercises.add(selectedId);
+        return selectedId;
+      }
+    };
+
     // Generate random exercise sequence
     let exerciseCount = 0;
     while (exerciseCount < config.totalExercises) {
-      // Pick a random exercise or group
-      const randomExerciseId = exerciseIds[Math.floor(Math.random() * exerciseIds.length)];
+      // Pick next available exercise
+      const randomExerciseId = getNextExercise();
       const exerciseData = exercises[randomExerciseId];
       
       if (exerciseData.type === 'group') {
@@ -146,19 +181,27 @@ function App() {
         } else {
           // Only room for one more exercise - pick a different individual exercise instead
           const individualExercises = exerciseIds.filter(id => exercises[id].type !== 'group');
-          if (individualExercises.length > 0) {
-            const randomIndividualId = individualExercises[Math.floor(Math.random() * individualExercises.length)];
-            sequence.push({
-              type: 'exercise',
-              exerciseId: randomIndividualId
-            });
-            exerciseCount++;
+          const unusedIndividualExercises = individualExercises.filter(id => !usedExercises.has(id));
+          
+          let selectedIndividualId;
+          if (unusedIndividualExercises.length > 0) {
+            // Pick from unused individual exercises
+            const shuffledUnused = shuffleArray(unusedIndividualExercises);
+            selectedIndividualId = shuffledUnused[0];
+          } else if (individualExercises.length > 0) {
+            // All individual exercises used, pick randomly
+            const shuffledAll = shuffleArray(individualExercises);
+            selectedIndividualId = shuffledAll[0];
           } else {
             // Fallback: if no individual exercises exist, add the left exercise
+            selectedIndividualId = exerciseData.left.id;
+          }
+          
+          usedExercises.add(selectedIndividualId);
             sequence.push({
               type: 'exercise',
-              exerciseId: exerciseData.left.id,
-              exercise: exerciseData.left
+            exerciseId: selectedIndividualId,
+            exercise: exercises[selectedIndividualId]?.left || undefined
             });
             exerciseCount++;
           }
