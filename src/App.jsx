@@ -35,7 +35,7 @@ function App() {
     pauseDuration: '02:00'
   }); // Custom workout configuration
   const [isStandalone, setIsStandalone] = useState(false);
-  const [showBrandHeader, setShowBrandHeader] = useState(false); // Control brand header fade-in animation
+  const [isAppStartup, setIsAppStartup] = useState(false); // Control brand header fade-in animation
 
   // Load exercises from JSON file
   useEffect(() => {
@@ -56,7 +56,7 @@ function App() {
   // Brand header fade-in animation on app start
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowBrandHeader(true);
+      setIsAppStartup(true);
     }, 100); // Small delay to ensure DOM is ready
 
     return () => clearTimeout(timer);
@@ -642,7 +642,7 @@ function App() {
     <div className={`app ${isWarningTime ? 'warning-active' : ''} ${isTransitionFlash ? 'transition-flash' : ''}`}>
       <header className="app-header">
         {!workoutStarted && !isPreWorkout && !difficultySelected && !showCustomConfig && !showWorkoutComplete && (
-          <div className={`brand-header ${showBrandHeader ? 'fade-in' : ''}`}>
+          <div className={`brand-header ${isAppStartup ? 'fade-in' : ''}`}>
             <h1 className="brand-title">PulsatronHIIT</h1>
             <p className="brand-slogan">Baremetal Training.</p>
           </div>
@@ -686,8 +686,8 @@ function App() {
           />
         )}
         
-        {!difficultySelected && !showCustomConfig && !showWorkoutComplete && showBrandHeader && (
-          <div className={`difficulty-selection ${showBrandHeader ? 'fade-in' : ''}`}>
+        {!difficultySelected && !showCustomConfig && !showWorkoutComplete && (
+          <div className={`difficulty-selection ${isAppStartup ? 'fade-in' : ''}`}>
             <h2>Wähle deine Herausforderung</h2>
             <div className="difficulty-buttons">
               <button 
