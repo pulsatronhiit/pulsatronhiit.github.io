@@ -198,13 +198,12 @@ function App() {
           }
           
           usedExercises.add(selectedIndividualId);
-            sequence.push({
-              type: 'exercise',
+          sequence.push({
+            type: 'exercise',
             exerciseId: selectedIndividualId,
             exercise: exercises[selectedIndividualId]?.left || undefined
-            });
-            exerciseCount++;
-          }
+          });
+          exerciseCount++;
         }
       } else {
         // This is a regular individual exercise
@@ -875,18 +874,7 @@ function App() {
               </div>
             </div>
             
-            <div className="completion-message">
-              <p>
-                {workoutStats.completedExercises === workoutStats.totalExercises
-                  ? 'Du hast alle Übungen erfolgreich abgeschlossen.'
-                  : `Du hast ${workoutStats.completedExercises} von ${workoutStats.totalExercises} Übungen geschafft.`}
-              </p>
-              <p>
-                {workoutStats.completedExercises === workoutStats.totalExercises
-                  ? 'Keep up the great work!'
-                  : 'Jeder Fortschritt zählt! Keep going!'}
-              </p>
-            </div>
+
             
             <div className="share-section">
               <h3>Training teilen</h3>

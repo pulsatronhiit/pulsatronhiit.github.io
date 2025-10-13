@@ -640,23 +640,6 @@
   font-size: 1.1rem;
 }
 
-.completion-message {
-  background: var(--primary-rgba);
-  border: 1px solid var(--primary-rgba-strong);
-  border-radius: 15px;
-  padding: 20px;
-  margin: 25px 0;
-}
-
-.completion-message p {
-  color: #ffffff;
-  margin: 8px 0;
-  font-size: 1rem;
-}
-
-.completion-message p:first-child {
-  font-weight: 600;
-}
 
 /* Share Section Styles */
 .share-section {
