@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Timer from './components/Timer';
 import ExerciseDisplay from './components/ExerciseDisplay';
+import InstallPrompt from './components/InstallPrompt';
 import './App.css';
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
     pauseCount: 2,
     pauseDuration: '02:00'
   }); // Custom workout configuration
+  const [isStandalone, setIsStandalone] = useState(false);
 
   // Load exercises from JSON file
   useEffect(() => {
@@ -49,6 +51,28 @@ function App() {
     
     loadWorkoutData();
   }, []); 
+
+  // PWA Detection
+  useEffect(() => {
+    const checkIfStandalone = () => {
+      // Verschiedene Methoden zur Erkennung einer installierten PWA
+      const standalone = window.matchMedia('(display-mode: standalone)').matches ||
+                        window.navigator.standalone === true ||
+                        document.referrer.includes('android-app://');
+      
+      setIsStandalone(standalone);
+    };
+
+    checkIfStandalone();
+    
+    // Listen für Änderungen im Display Mode
+    const mediaQuery = window.matchMedia('(display-mode: standalone)');
+    mediaQuery.addListener(checkIfStandalone);
+    
+    return () => {
+      mediaQuery.removeListener(checkIfStandalone);
+    };
+  }, []);
 
   // Function to trigger flash transition
   const triggerFlashTransition = () => {
@@ -590,6 +614,12 @@ function App() {
     return workoutSequence.slice(0, currentExerciseIndex + 1).filter(item => item.type !== 'pause').length;
   };
 
+  // Zeige Installation-Prompt wenn nicht als PWA geöffnet
+  if (!isStandalone) {
+    return <InstallPrompt />;
+  }
+
+  // Normale App-Logik für PWA-Modus
   return (
     <div className={`app ${isWarningTime ? 'warning-active' : ''} ${isTransitionFlash ? 'transition-flash' : ''}`}>
       <header className="app-header">
