@@ -35,7 +35,7 @@ function App() {
     pauseDuration: '02:00'
   }); // Custom workout configuration
   const [isStandalone, setIsStandalone] = useState(false);
-  const [isAppStartup, setIsAppStartup] = useState(false); // Control brand header fade-in animation
+  const [isAppStartup, setIsAppStartup] = useState(true); // Control brand header fade-in animation
 
   // Load exercises from JSON file
   useEffect(() => {
@@ -56,8 +56,8 @@ function App() {
   // Brand header fade-in animation on app start
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsAppStartup(true);
-    }, 100); // Small delay to ensure DOM is ready
+      setIsAppStartup(false);
+    }, 3000); // Small delay to ensure DOM is ready
 
     return () => clearTimeout(timer);
   }, []);

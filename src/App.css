@@ -80,16 +80,15 @@
 
 .brand-header {
   margin-bottom: 1.5rem;
-  opacity: 0;
 }
 
 .brand-header.fade-in {
-  opacity: 1;
   transform: translateY(0);
   animation: brandFadeIn 2.4s ease-in-out forwards;
 }
 
 .difficulty-selection.fade-in {
+  opacity: 0;
   animation: difficultySelectionFadeIn 0.5s ease-out forwards;
   animation-delay: 2.4s;
 }
@@ -211,7 +210,6 @@
 
 /* Difficulty selection styles */
 .difficulty-selection {
-  opacity: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
