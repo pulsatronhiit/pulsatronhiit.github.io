@@ -330,7 +330,8 @@ function App() {
            `✅ Übungen: ${workoutStats.completedExercises}/${workoutStats.totalExercises}\n` +
            `⏱️ Dauer: ${duration}\n\n` +
            `Baremetal Training. Maximum Results.\n` +
-           `#PulsatronHIIT #HIIT #Kettlebell #Fitness`;
+           `#PulsatronHIIT #HIIT #Kettlebell #Fitness` +
+           `https://pulsatronhiit.github.io/`;
   };
 
   // Handle sharing workout results
