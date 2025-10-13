@@ -80,6 +80,42 @@
 
 .brand-header {
   margin-bottom: 1.5rem;
+  opacity: 0;
+}
+
+.brand-header.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  animation: brandFadeIn 2.4s ease-in-out forwards;
+}
+
+.difficulty-selection.fade-in {
+  animation: difficultySelectionFadeIn 0.5s ease-out forwards;
+  animation-delay: 2.4s;
+}
+
+@keyframes difficultySelectionFadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+}
+
+@keyframes brandFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(40vh);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(40vh);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .brand-title {
@@ -103,6 +139,8 @@
   letter-spacing: 0.05em;
   opacity: 0.9;
 }
+
+
 
 .workout-progress {
   font-size: clamp(1rem, 4vw, 1.3rem);
@@ -173,6 +211,7 @@
 
 /* Difficulty selection styles */
 .difficulty-selection {
+  opacity: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
