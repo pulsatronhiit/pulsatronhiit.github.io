@@ -55,8 +55,16 @@ function App() {
   // PWA Detection
   useEffect(() => {
     const checkIfStandalone = () => {
+      // Im Entwicklungsmodus (npm run dev) behandeln wir die App als installiert
+      const isDevelopment = import.meta.env.DEV || 
+                           window.location.hostname === 'localhost' || 
+                           window.location.hostname === '127.0.0.1' ||
+                           window.location.port === '5173' ||
+                           window.location.port === '3000';
+      
       // Verschiedene Methoden zur Erkennung einer installierten PWA
-      const standalone = window.matchMedia('(display-mode: standalone)').matches ||
+      const standalone = isDevelopment ||
+                        window.matchMedia('(display-mode: standalone)').matches ||
                         window.navigator.standalone === true ||
                         document.referrer.includes('android-app://');
       
