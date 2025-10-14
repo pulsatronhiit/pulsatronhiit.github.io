@@ -74,7 +74,7 @@ function App() {
                            window.location.port === '3000';
       
       // Verschiedene Methoden zur Erkennung einer installierten PWA
-      const standalone = isDevelopment ||
+      const standalone = //isDevelopment ||
                         window.matchMedia('(display-mode: standalone)').matches ||
                         window.navigator.standalone === true ||
                         document.referrer.includes('android-app://');

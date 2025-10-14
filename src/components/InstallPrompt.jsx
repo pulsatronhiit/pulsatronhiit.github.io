@@ -6,21 +6,24 @@ import appIcon from '/icon-192x192.svg';
 const InstallPrompt = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [showManualInstructions, setShowManualInstructions] = useState(false);
+  const [isCheckingInstallPrompt, setIsCheckingInstallPrompt] = useState(true); // Track install prompt detection status
 
   useEffect(() => {
     const handler = (e) => {
       e.preventDefault();
       setDeferredPrompt(e);
+      setIsCheckingInstallPrompt(false); // Install prompt detection completed
     };
 
     window.addEventListener('beforeinstallprompt', handler);
     
-    // Zeige manuelle Anweisungen nach 3 Sekunden falls kein Install-Prompt verfügbar
+    // Kurze Wartezeit für Install-Prompt Erkennung
     const timer = setTimeout(() => {
-      // if (!deferredPrompt) {
+      setIsCheckingInstallPrompt(false); // Detection completed
+      if (!deferredPrompt) {
         setShowManualInstructions(true);
-      // }
-    }, 3000);
+      }
+    }, 200);
 
     return () => {
       window.removeEventListener('beforeinstallprompt', handler);
@@ -35,10 +38,25 @@ const InstallPrompt = () => {
       if (outcome === 'accepted') {
         setDeferredPrompt(null);
       }
-    } else {
-      setShowManualInstructions(true);
     }
   };
+
+  // Während Install-Prompt-Erkennung läuft, zeige Loading
+  if (isCheckingInstallPrompt) {
+    return (
+      <div className="app">
+        <div style={{ 
+          minHeight: '100vh', 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center',
+          background: 'linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%)'
+        }}>
+          {/* Leerer Bildschirm während PWA-Erkennung */}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="install-prompt">
@@ -53,20 +71,17 @@ const InstallPrompt = () => {
         <div className="install-content">
           <p>Für die beste Erfahrung installiere PulsatronHIIT auf deinem Homebildschirm.</p>
           
-          {deferredPrompt ? (
+          {deferredPrompt && (
             <button className="install-button" onClick={handleInstallClick}>
               <span className="install-icon">📱</span>
               App installieren
             </button>
-          ) : (
-            <button className="install-button" onClick={handleInstallClick}>
-              <span className="install-icon">📖</span>
-              Anleitung anzeigen
-            </button>
           )}
         </div>
 
-        {showManualInstructions && (
+        {/* Zeige manual instructions standardmäßig an
+            Verstecke sie nur, wenn deferredPrompt verfügbar ist */}
+        {!deferredPrompt && (
           <div className="manual-instructions">
             <h3>Manuelle Installation:</h3>
             <div className="instruction-steps">
