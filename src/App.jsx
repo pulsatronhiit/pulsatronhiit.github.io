@@ -35,6 +35,7 @@ function App() {
     pauseDuration: '02:00'
   }); // Custom workout configuration
   const [isStandalone, setIsStandalone] = useState(false);
+  const [isCheckingPWA, setIsCheckingPWA] = useState(true); // Track PWA detection status
   const [isAppStartup, setIsAppStartup] = useState(true); // Control brand header fade-in animation
 
   // Load exercises from JSON file
@@ -79,6 +80,7 @@ function App() {
                         document.referrer.includes('android-app://');
       
       setIsStandalone(standalone);
+      setIsCheckingPWA(false); // PWA detection completed
     };
 
     checkIfStandalone();
@@ -631,6 +633,23 @@ function App() {
   const getCurrentExerciseNumber = () => {
     return workoutSequence.slice(0, currentExerciseIndex + 1).filter(item => item.type !== 'pause').length;
   };
+
+  // Während PWA-Erkennung läuft, zeige leeren Bildschirm
+  if (isCheckingPWA) {
+    return (
+      <div className="app">
+        <div style={{ 
+          minHeight: '100vh', 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center',
+          background: 'linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%)'
+        }}>
+          {/* Leerer Bildschirm während PWA-Erkennung */}
+        </div>
+      </div>
+    );
+  }
 
   // Zeige Installation-Prompt wenn nicht als PWA geöffnet
   if (!isStandalone) {
