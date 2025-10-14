@@ -576,19 +576,19 @@
 }
 
 .difficulty-btn.custom {
-  background: linear-gradient(135deg, #6a0dad 0%, #4b0082 100%);
-  border: 2px solid #8a2be2;
+  background: var(--primary-gradient);
+  border: 2px solid var(--primary-color);
 }
 
 .difficulty-btn.custom:hover {
-  background: linear-gradient(135deg, #8a2be2 0%, #6a0dad 100%);
+  background: linear-gradient(135deg, var(--secondary-color) 0%, #5a4d7a 100%);
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(138, 43, 226, 0.4);
+  box-shadow: 0 8px 25px var(--primary-rgba-strong);
 }
 
 .difficulty-btn.custom:active {
   transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+  box-shadow: 0 4px 15px var(--primary-rgba-strong);
 }
 
 /* Workout Control Buttons */
