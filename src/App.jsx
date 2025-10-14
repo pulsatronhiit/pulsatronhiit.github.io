@@ -37,6 +37,14 @@ function App() {
   const [isStandalone, setIsStandalone] = useState(false);
   const [isCheckingPWA, setIsCheckingPWA] = useState(true); // Track PWA detection status
   const [isAppStartup, setIsAppStartup] = useState(true); // Control brand header fade-in animation
+  
+  // Screen transition animation states
+  const [difficultySelectionClass, setDifficultySelectionClass] = useState('');
+  const [difficultyConfirmationClass, setDifficultyConfirmationClass] = useState('');
+  const [customConfigClass, setCustomConfigClass] = useState('');
+  const [headerClass, setHeaderClass] = useState('');
+  const [contentHeaderClass, setContentHeaderClass] = useState('');
+  const [difficultyButtonsClass, setDifficultyButtonsClass] = useState('');
 
   // Load exercises from JSON file
   useEffect(() => {
@@ -273,23 +281,62 @@ function App() {
   // Handle difficulty selection
   const selectDifficulty = (difficulty) => {
     if (difficulty === 'individuell') {
-      setShowCustomConfig(true);
-      setSelectedDifficulty(difficulty);
+      // Animate transition to custom config
+      setDifficultySelectionClass('slide-out-right');
+      setHeaderClass('slide-out-right');
+      setContentHeaderClass('slide-out-right');
+      setDifficultyButtonsClass('slide-out-right');
+      
+      setTimeout(() => {
+        // Trigger flash animation during transition
+        triggerFlashTransition();
+        setShowCustomConfig(true);
+        setSelectedDifficulty(difficulty);
+        setCustomConfigClass('slide-in-right');
+        setDifficultySelectionClass(''); // Reset
+        setHeaderClass(''); // Reset
+        setContentHeaderClass(''); // Reset
+        setDifficultyButtonsClass(''); // Reset
+      }, 1); // Match slide-out duration
       return;
     }
     
-    const sequence = generateWorkout(difficulty);
-    setWorkoutSequence(sequence);
-    setSelectedDifficulty(difficulty);
-    setDifficultySelected(true);
+    // Animate transition to difficulty confirmation
+    setDifficultySelectionClass('slide-out-left');
+    setHeaderClass('slide-out-left');
+    setContentHeaderClass('slide-out-left');
+    setDifficultyButtonsClass('slide-out-left');
+    
+    setTimeout(() => {
+      // Trigger flash animation during transition
+      triggerFlashTransition();
+      const sequence = generateWorkout(difficulty);
+      setWorkoutSequence(sequence);
+      setSelectedDifficulty(difficulty);
+      setDifficultySelected(true);
+      setDifficultyConfirmationClass('slide-in-right');
+      setDifficultySelectionClass(''); // Reset
+      setHeaderClass(''); // Reset
+      setContentHeaderClass(''); // Reset
+      setDifficultyButtonsClass(''); // Reset
+    }, 1); // Match slide-out duration
   };
 
   // Handle custom configuration submission
   const submitCustomConfig = () => {
-    const sequence = generateWorkout('individuell');
-    setWorkoutSequence(sequence);
-    setShowCustomConfig(false);
-    setDifficultySelected(true);
+    // Animate transition from custom config to difficulty confirmation
+    setCustomConfigClass('slide-out-left');
+    
+    setTimeout(() => {
+      // Trigger flash animation during transition
+      triggerFlashTransition();
+      const sequence = generateWorkout('individuell');
+      setWorkoutSequence(sequence);
+      setShowCustomConfig(false);
+      setDifficultySelected(true);
+      setDifficultyConfirmationClass('slide-in-left');
+      setCustomConfigClass(''); // Reset
+    }, 400); // Match slide-out duration
   };
 
   // Convert minutes:seconds format to total seconds for calculations
@@ -418,11 +465,87 @@ function App() {
 
   // Go back to difficulty selection
   const goBackToDifficultySelection = () => {
-    setDifficultySelected(false);
-    setShowCustomConfig(false);
-    setShowWorkoutComplete(false);
-    setSelectedDifficulty(null);
-    setWorkoutSequence([]);
+    // Determine which screen we're coming from and animate accordingly
+    if (showCustomConfig) {
+      // Coming from custom config
+      setCustomConfigClass('slide-out-right');
+      setTimeout(() => {
+        // Trigger flash animation during transition
+        triggerFlashTransition();
+        // Set animation states first, then reset screen states
+        setHeaderClass('slide-in-left');
+        setContentHeaderClass('slide-in-left');
+        setDifficultyButtonsClass('slide-in-left');
+        
+        setDifficultySelected(false);
+        setShowCustomConfig(false);
+        setShowWorkoutComplete(false);
+        setSelectedDifficulty(null);
+        setWorkoutSequence([]);
+        setCustomConfigClass(''); // Reset
+        
+        // Clear animation classes after animation completes
+        setTimeout(() => {
+          setHeaderClass('');
+          setContentHeaderClass('');
+          setDifficultyButtonsClass('');
+        }, 500);
+      }, 1);
+    } else if (difficultySelected) {
+      // Coming from difficulty confirmation
+      setDifficultyConfirmationClass('slide-out-right');
+      setTimeout(() => {
+        // Trigger flash animation during transition
+        triggerFlashTransition();
+        // Set animation states first, then reset screen states
+        setHeaderClass('slide-in-left');
+        setContentHeaderClass('slide-in-left');
+        setDifficultyButtonsClass('slide-in-left');
+        
+        setDifficultySelected(false);
+        setShowCustomConfig(false);
+        setShowWorkoutComplete(false);
+        setSelectedDifficulty(null);
+        setWorkoutSequence([]);
+        setDifficultyConfirmationClass(''); // Reset
+        
+        // Clear animation classes after animation completes
+        setTimeout(() => {
+          setHeaderClass('');
+          setContentHeaderClass('');
+          setDifficultyButtonsClass('');
+        }, 500);
+      }, 1);
+    } else if (showWorkoutComplete) {
+      // Coming from workout complete screen - trigger flash and set animations
+      setTimeout(() => {
+        triggerFlashTransition();
+        setHeaderClass('slide-in-right');
+        setContentHeaderClass('slide-in-right');
+        setDifficultyButtonsClass('slide-in-right');
+        
+        // Then reset states
+        setDifficultySelected(false);
+        setShowCustomConfig(false);
+        setShowWorkoutComplete(false);
+        setSelectedDifficulty(null);
+        setWorkoutSequence([]);
+        
+        // Clear animation classes after animation completes
+        setTimeout(() => {
+          setHeaderClass('');
+          setContentHeaderClass('');
+          setDifficultyButtonsClass('');
+          }, 500);
+      }, 1);
+    } else {
+      // Direct reset without animation
+      setDifficultySelected(false);
+      setShowCustomConfig(false);
+      setShowWorkoutComplete(false);
+      setSelectedDifficulty(null);
+      setWorkoutSequence([]);
+    }
   };
 
   // Get difficulty details for display
@@ -491,6 +614,8 @@ function App() {
             actualDuration: duration
           }));
           
+          // Trigger flash animation and show completion screen simultaneously
+          triggerFlashTransition();
           setWorkoutStarted(false);
           setShowWorkoutComplete(true);
           setCurrentExerciseIndex(0);
@@ -523,6 +648,8 @@ function App() {
       actualDuration: null
     });
     
+    // Trigger flash transition and start pre-workout countdown simultaneously
+    triggerFlashTransition();
     setIsPreWorkout(true);
     setWorkoutStarted(false); // Don't start workout yet
     setCurrentExerciseIndex(0);
@@ -559,6 +686,8 @@ function App() {
         actualDuration: duration
       }));
       
+      // Trigger flash animation and show completion screen simultaneously
+      triggerFlashTransition();
       setWorkoutStarted(false);
       setShowWorkoutComplete(true);
       setCurrentExerciseIndex(0);
@@ -659,9 +788,9 @@ function App() {
   // Normale App-Logik für PWA-Modus
   return (
     <div className={`app ${isWarningTime ? 'warning-active' : ''} ${isTransitionFlash ? 'transition-flash' : ''}`}>
-      <header className="app-header">
+      <header className={`app-header ${isTransitionFlash ? 'hidden' : ''}`}>
         {!workoutStarted && !isPreWorkout && !difficultySelected && !showCustomConfig && !showWorkoutComplete && (
-          <div className={`brand-header ${isAppStartup ? 'fade-in' : ''}`}>
+          <div className={`brand-header ${isAppStartup ? 'fade-in' : ''} ${headerClass}`}>
             <h1 className="brand-title">PulsatronHIIT</h1>
             <p className="brand-slogan">Baremetal Training.</p>
           </div>
@@ -694,7 +823,7 @@ function App() {
           />
         )}
         
-        {difficultySelected && !showWorkoutComplete && (
+        {(workoutStarted || isPreWorkout) && !showWorkoutComplete && (
           <ExerciseDisplay 
             exercise={currentExercise} 
             nextExercise={nextExercise}
@@ -706,9 +835,9 @@ function App() {
         )}
         
         {!difficultySelected && !showCustomConfig && !showWorkoutComplete && (
-          <div className={`difficulty-selection ${isAppStartup ? 'fade-in' : ''}`}>
-            <h2>Wähle deine Herausforderung</h2>
-            <div className="difficulty-buttons">
+          <div className={`difficulty-selection ${isAppStartup ? 'fade-in' : ''} ${difficultySelectionClass}`}>
+            <h2 className={contentHeaderClass}>Wähle deine Herausforderung</h2>
+            <div className={`difficulty-buttons ${difficultyButtonsClass}`}>
               <button 
                 onClick={() => selectDifficulty('leicht')} 
                 className="difficulty-btn easy"
@@ -749,7 +878,7 @@ function App() {
         )}
 
         {showCustomConfig && !showWorkoutComplete && (
-          <div className="custom-config">
+          <div className={`custom-config ${customConfigClass}`}>
             <div className="config-header">
               <h2>Individuelles Workout</h2>
               <p>Stelle dein eigenes Workout zusammen</p>
@@ -842,8 +971,8 @@ function App() {
           </div>
         )}
 
-        {difficultySelected && !showCustomConfig && !workoutStarted && !isPreWorkout && !showWorkoutComplete && (
-          <div className="difficulty-confirmation">
+        {difficultySelected && !showCustomConfig && !workoutStarted && !isPreWorkout && !showWorkoutComplete && !isTransitionFlash && (
+          <div className={`difficulty-confirmation ${difficultyConfirmationClass}`}>
             {(() => {
               const details = getDifficultyDetails(selectedDifficulty);
               return details ? (
