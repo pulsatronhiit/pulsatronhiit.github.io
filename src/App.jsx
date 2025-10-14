@@ -336,7 +336,7 @@ function App() {
       setDifficultySelected(true);
       setDifficultyConfirmationClass('slide-in-left');
       setCustomConfigClass(''); // Reset
-    }, 400); // Match slide-out duration
+    }, 1); // Match slide-out duration
   };
 
   // Convert minutes:seconds format to total seconds for calculations
