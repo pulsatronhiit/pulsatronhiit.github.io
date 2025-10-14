@@ -1,6 +1,7 @@
 // src/components/InstallPrompt.jsx
 import React, { useState, useEffect } from 'react';
 import './InstallPrompt.css';
+import appIcon from '/icon-192x192.svg';
 
 const InstallPrompt = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
@@ -16,9 +17,9 @@ const InstallPrompt = () => {
     
     // Zeige manuelle Anweisungen nach 3 Sekunden falls kein Install-Prompt verfügbar
     const timer = setTimeout(() => {
-      if (!deferredPrompt) {
+      // if (!deferredPrompt) {
         setShowManualInstructions(true);
-      }
+      // }
     }, 3000);
 
     return () => {
@@ -43,7 +44,7 @@ const InstallPrompt = () => {
     <div className="install-prompt">
       <div className="install-container">
         <div className="app-icon">
-          <img src="/icon-192x192.svg" alt="PulsatronHIIT" />
+          <img src={appIcon} alt="PulsatronHIIT" />
         </div>
         
         <h1>PulsatronHIIT</h1>

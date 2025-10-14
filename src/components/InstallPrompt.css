@@ -1,7 +1,7 @@
 /* src/components/InstallPrompt.css */
 .install-prompt {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,11 +12,11 @@
 .install-container {
   max-width: 400px;
   width: 100%;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
   padding: 40px 30px;
   text-align: center;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
 }
 
@@ -33,20 +33,24 @@
 
 .install-prompt h1 {
   margin: 0 0 8px 0;
-  font-size: 28px;
-  font-weight: 800;
-  color: #1a1a1a;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  font-size: clamp(1.75rem, 5.6vw, 2.8rem);
+  font-weight: 900;
+  background: linear-gradient(135deg, #ffffff 0%, #cccccc 50%, #888888 100%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+  letter-spacing: -0.02em;
 }
 
 .tagline {
   margin: 0 0 30px 0;
-  font-size: 16px;
-  color: #666;
-  font-weight: 500;
+  font-size: clamp(0.9rem, 3vw, 1.1rem);
+  color: #667eea;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
 }
 
 .install-content h2 {
@@ -59,7 +63,7 @@
 .install-content p {
   margin: 0 0 25px 0;
   font-size: 16px;
-  color: #555;
+  color: rgba(255, 255, 255, 0.8);
   line-height: 1.5;
 }
 
@@ -107,7 +111,7 @@
   margin: 0 0 15px 0;
   font-size: 18px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: #667eea;
   text-align: center;
 }
 
@@ -140,8 +144,13 @@
 .step p {
   margin: 0;
   font-size: 14px;
-  color: #555;
+  color: rgba(255, 255, 255, 0.8);
   line-height: 1.4;
+}
+
+.step strong {
+  color: #ffffff;
+  font-weight: 600;
 }
 
 .features-preview {
@@ -155,7 +164,7 @@
   margin: 0 0 15px 0;
   font-size: 18px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: #667eea;
   text-align: center;
 }
 
@@ -168,7 +177,7 @@
 .features-preview li {
   margin-bottom: 8px;
   font-size: 14px;
-  color: #555;
+  color: rgba(255, 255, 255, 0.8);
   line-height: 1.4;
 }
 
