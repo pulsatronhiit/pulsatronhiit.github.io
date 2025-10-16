@@ -1083,7 +1083,7 @@ function App() {
                   className="share-btn primary-share"
                   title="Mit nativer Share-Funktion oder Zwischenablage teilen"
                 >
-                  📱 Teilen
+                  Teilen
                 </button>
                 
 
