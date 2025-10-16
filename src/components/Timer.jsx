@@ -43,6 +43,84 @@ const Timer = ({ onTimeUp, autoStart, onWarningChange, onPauseToggle, isActive, 
   
   // Track previous time to detect second changes for beep countdown
   const [prevTimeInSeconds, setPrevTimeInSeconds] = useState(0);
+  const [audioContext, setAudioContext] = useState(null);
+  const [audioInitialized, setAudioInitialized] = useState(false);
+
+  // Initialize audio context on first user interaction (required for iOS)
+  const initializeAudio = () => {
+    if (!audioInitialized) {
+      try {
+        const context = new (window.AudioContext || window.webkitAudioContext)();
+        // Resume audio context if suspended (iOS requirement)
+        if (context.state === 'suspended') {
+          context.resume();
+        }
+        setAudioContext(context);
+        setAudioInitialized(true);
+      } catch (error) {
+        console.log('Audio not supported or blocked');
+      }
+    }
+  };
+
+  // Add click listener to initialize audio on first interaction
+  useEffect(() => {
+    const handleUserInteraction = () => {
+      initializeAudio();
+      // Remove listener after first interaction
+      document.removeEventListener('touchstart', handleUserInteraction);
+      document.removeEventListener('click', handleUserInteraction);
+    };
+
+    document.addEventListener('touchstart', handleUserInteraction);
+    document.addEventListener('click', handleUserInteraction);
+
+    return () => {
+      document.removeEventListener('touchstart', handleUserInteraction);
+      document.removeEventListener('click', handleUserInteraction);
+    };
+  }, []);
+
+  // Function to play beep sound with iOS compatibility
+  const playBeep = (frequency) => {
+    if (!audioContext || !audioInitialized) {
+      // Fallback: Use device vibration if available (iOS PWAs support this)
+      if (navigator.vibrate) {
+        navigator.vibrate(100); // 100ms vibration as audio fallback
+      }
+      return;
+    }
+
+    try {
+      // Check if audio context is running
+      if (audioContext.state === 'suspended') {
+        audioContext.resume().then(() => {
+          createBeep(frequency);
+        });
+      } else {
+        createBeep(frequency);
+      }
+    } catch (error) {
+      // Fallback to vibration
+      if (navigator.vibrate) {
+        navigator.vibrate(100);
+      }
+    }
+  };
+
+  const createBeep = (frequency) => {
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+    
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.15);
+  };
 
   // Notify parent component about warning state changes and play countdown beeps
   useEffect(() => {
@@ -56,30 +134,15 @@ const Timer = ({ onTimeUp, autoStart, onWarningChange, onPauseToggle, isActive, 
       
       // Play beep when we cross into a new second (5, 4, 3, 2, 1)
       if (currentSeconds <= 5 && currentSeconds !== prevTimeInSeconds && currentSeconds > 0) {
-        // Create and play countdown beep sound
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-        
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-        
-        // Set frequency - higher pitch for final second
-        const frequency = currentSeconds === 1 ? 1000 : 800; // 1000Hz for last second, 800Hz for others
-        oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
-        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime); // 30% volume
-        
-        // Play a short beep
-        oscillator.start(audioContext.currentTime);
-        oscillator.stop(audioContext.currentTime + 0.15); // 150ms beep
-        
+        const frequency = currentSeconds === 1 ? 1000 : 800; // Higher pitch for last second
+        playBeep(frequency);
         setPrevTimeInSeconds(currentSeconds);
       }
     } else {
       // Reset previous time when not in warning period
       setPrevTimeInSeconds(0);
     }
-  }, [isWarningTime, timeLeft, onWarningChange, prevTimeInSeconds]);
+  }, [isWarningTime, timeLeft, onWarningChange, prevTimeInSeconds, audioContext, audioInitialized]);
 
   useEffect(() => {
     let interval = null;
