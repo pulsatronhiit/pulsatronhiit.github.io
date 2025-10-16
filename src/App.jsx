@@ -972,31 +972,34 @@ function App() {
         )}
 
         {difficultySelected && !showCustomConfig && !workoutStarted && !isPreWorkout && !showWorkoutComplete && !isTransitionFlash && (
+          
           <div className={`difficulty-confirmation ${difficultyConfirmationClass}`}>
+            <div className="exercise-container">
+              <div className="exercise-name">Dein Workout</div> 
+            </div>
             {(() => {
               const details = getDifficultyDetails(selectedDifficulty);
               return details ? (
                 <>
-                  <div className="confirmation-header">
-                    <h3>Herausforderung</h3>
-                    <h2>{details.name}</h2>
-                  </div>
-                  <div className="confirmation-details">
-                    <div className="detail-item">
-                      <span className="detail-label">Übungen:</span>
-                      <span className="detail-value">{details.exercises} zufällige Übungen</span>
+                  <div className="confirmation-content">
+                    <div className="confirmation-header">
+                      <h3>Herausforderung</h3>
+                      <h2>{details.name}</h2>
                     </div>
-                    <div className="detail-item">
-                      <span className="detail-label">Pausen:</span>
-                      <span className="detail-value">{details.pauseText}</span>
+                    <div className="confirmation-details">
+                      <div className="detail-item">
+                        <span className="detail-label">Übungen:</span>
+                        <span className="detail-value">{details.exercises} zufällige Übungen</span>
+                      </div>
+                      <div className="detail-item">
+                        <span className="detail-label">Pausen:</span>
+                        <span className="detail-value">{details.pauseText}</span>
+                      </div>
+                      <div className="detail-item">
+                        <span className="detail-label">Gesamtdauer:</span>
+                        <span className="detail-value">{details.duration}</span>
+                      </div>
                     </div>
-                    <div className="detail-item">
-                      <span className="detail-label">Gesamtdauer:</span>
-                      <span className="detail-value">{details.duration}</span>
-                    </div>
-                  </div>
-                  <div className="random-workout-hint">
-                    Ein Workout mit zufälligen Übungen wird für dich zusammengestellt.
                   </div>
                   <div className="confirmation-buttons">
                     <button 

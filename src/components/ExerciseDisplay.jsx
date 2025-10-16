@@ -37,14 +37,6 @@ const ExerciseDisplay = ({ exercise, nextExercise, isLastExercise, isRestTime, i
     );
   }
 
-  if (!exercise) {
-    return (
-      <div className="exercise-container">
-        <div className="exercise-name">Dein Workout</div> 
-      </div>
-    );
-  } 
-
   // During rest time, show the next exercise as the main display
   if (isRestTime && nextExercise) {
     return (
