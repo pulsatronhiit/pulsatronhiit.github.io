@@ -40,13 +40,46 @@ const Timer = ({ onTimeUp, autoStart, onWarningChange, onPauseToggle, isActive, 
 
   // Check if we're in the warning period (only during exercise, last 5 seconds)
   const isWarningTime = !isRestTime && !isPreWorkout && !isLongPause && timeLeft <= 5000 && timeLeft > 0;
+  
+  // Track previous time to detect second changes for beep countdown
+  const [prevTimeInSeconds, setPrevTimeInSeconds] = useState(0);
 
-  // Notify parent component about warning state changes
+  // Notify parent component about warning state changes and play countdown beeps
   useEffect(() => {
     if (onWarningChange) {
       onWarningChange(isWarningTime);
     }
-  }, [isWarningTime, onWarningChange]);
+    
+    // Play countdown beep for each second in the last 5 seconds
+    if (isWarningTime) {
+      const currentSeconds = Math.ceil(timeLeft / 1000); // Current seconds remaining (rounded up)
+      
+      // Play beep when we cross into a new second (5, 4, 3, 2, 1)
+      if (currentSeconds <= 5 && currentSeconds !== prevTimeInSeconds && currentSeconds > 0) {
+        // Create and play countdown beep sound
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        // Set frequency - higher pitch for final second
+        const frequency = currentSeconds === 1 ? 1000 : 800; // 1000Hz for last second, 800Hz for others
+        oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime); // 30% volume
+        
+        // Play a short beep
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.15); // 150ms beep
+        
+        setPrevTimeInSeconds(currentSeconds);
+      }
+    } else {
+      // Reset previous time when not in warning period
+      setPrevTimeInSeconds(0);
+    }
+  }, [isWarningTime, timeLeft, onWarningChange, prevTimeInSeconds]);
 
   useEffect(() => {
     let interval = null;
