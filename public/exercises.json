@@ -13,7 +13,7 @@
     "one-arm-kb-swing-bottom-up": {
       "id": "one-arm-kb-swing-bottom-up",
       "name": "One-arm KB Swing to Bottom-Up Hold",
-      "description": "Schwinge die Kettlebell einarmig zwischen den Beinen hoch, fange sie am oberen Punkt mit dem Boden nach oben ab und halte sie stabil mit dem Boden nach oben."
+      "description": "Schwinge die Kettlebell einarmig zwischen den Beinen hoch, fange sie am oberen Punkt mit dem Boden nach oben ab und halte sie stabil mit dem Boden nach oben"
     },
     "one-arm-kb-swing": {
       "id": "one-arm-kb-swing",
@@ -43,7 +43,7 @@
     "gorilla-rows": {
       "id": "gorilla-rows",
       "name": "Gorilla Rows",
-      "description": "Stehe in breiter Squat-Position, halte eine Kettlebell mit einer Hand und ziehe sie zum Bauch, am höchsten Punkt wechselst du die KB fliegend in die andere Hand und ziehst weiter."
+      "description": "Stehe in breiter Squat-Position, halte eine Kettlebell mit einer Hand und ziehe sie zum Bauch, am höchsten Punkt wechselst du die KB fliegend in die andere Hand und ziehst weiter"
     },
     "alternating-kb-snatch": {
       "id": "alternating-kb-snatch",
@@ -101,12 +101,12 @@
       "left": {
         "id": "kb-cross-body-clean-left",
         "name": "Kettlebell Cross-Body Clean links",
-        "description": "Halte die Kettlebell einarmig auf der gegenüberliegenden Seite nebem dem Körper auf Hüfthöhe, ziehe sie diagonal vor dem Körper zur gegenüberliegenden Schulter und fange sie in der Rack-Position ab."      
+        "description": "Halte die Kettlebell einarmig auf der gegenüberliegenden Seite nebem dem Körper auf Hüfthöhe, ziehe sie diagonal vor dem Körper zur gegenüberliegenden Schulter und fange sie in der Rack-Position ab"      
       },
       "right": {
         "id": "kb-cross-body-clean-right",
         "name": "Kettlebell Cross-Body Clean rechts",
-        "description": "Halte die Kettlebell einarmig auf der gegenüberliegenden Seite nebem dem Körper auf Hüfthöhe, ziehe sie diagonal vor dem Körper zur gegenüberliegenden Schulter und fange sie in der Rack-Position ab."
+        "description": "Halte die Kettlebell einarmig auf der gegenüberliegenden Seite nebem dem Körper auf Hüfthöhe, ziehe sie diagonal vor dem Körper zur gegenüberliegenden Schulter und fange sie in der Rack-Position ab"
       }
     },
     "plank-breakdance-swing": {
@@ -128,6 +128,12 @@
       "id": "lateral-swings",
       "name": "Lateral Swings",
       "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen bis auf Schulterhöhe, dann zurück zur Mitte und zur anderen Seite"
+    },
+    "lunge-into-windmillpress": {
+      "id": "lunge-into-windmillpress",
+      "name": "Lunge into Windmillpress",
+      "description": "Halte die Kettlebell in Rack-Position, mach mit dem gegenüberliegenden Bein nach hinten in den Ausfallschritt, hebe dann die Kettlebell in den Windmillpress"
     }
   }
+
 }
