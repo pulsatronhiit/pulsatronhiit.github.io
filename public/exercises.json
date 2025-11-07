@@ -133,7 +133,13 @@
       "id": "lunge-into-windmillpress",
       "name": "Lunge into Windmillpress",
       "description": "Halte die Kettlebell in Rack-Position, mach mit dem gegenüberliegenden Bein nach hinten in den Ausfallschritt, hebe dann die Kettlebell in den Windmillpress"
+    },
+    "side-kicks": {
+      "id": "side-kicks",
+      "name": "Side Kicks",
+      "description": "Starte auf allen Vieren, hebe ein Bein und den gegenüberliegenden Arm an, hebe das Knie des anderen Beins leicht vom Boden ab, schiebe nun das vom Boden gelößte Bein unterm Körper durch"
     }
   }
 
 }
+
