@@ -63,6 +63,23 @@
           "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann zurück zur Mitte und direkt in einen Snatch über den Kopf, kontrolliert zurück zur Startposition"
         }
     },
+
+    "kb-lateral-swing-windmill" : {
+        "type": "group",
+        "left": {
+          "id": "kb-lateral-swing-windmill-left",
+          "name": "KB lateral Swing to Windmill-Press links",
+          "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann direkt in einen Windmill-Press, kontrolliert zurück zur Startposition"
+        },
+        "right": {
+          "id": "kb-lateral-swing-windmill-right",
+          "name": "KB lateral Swing to Windmill-Press rechts",
+          "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann direkt in einen Windmill-Press, kontrolliert zurück zur Startposition"
+        }
+    },
+
+
+    
     "kb-halo-lateral-swing": {
       "id": "kb-halo-lateral-swing",
       "name": "KB Halo to lateral Swing",
@@ -142,4 +159,5 @@
   }
 
 }
+
 
