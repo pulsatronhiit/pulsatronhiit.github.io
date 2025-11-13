@@ -63,7 +63,6 @@
           "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann zurück zur Mitte und direkt in einen Snatch über den Kopf, kontrolliert zurück zur Startposition"
         }
     },
-
     "kb-lateral-swing-windmill" : {
         "type": "group",
         "left": {
@@ -77,9 +76,6 @@
           "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann direkt in einen Windmill-Press, kontrolliert zurück zur Startposition"
         }
     },
-
-
-    
     "kb-halo-lateral-swing": {
       "id": "kb-halo-lateral-swing",
       "name": "KB Halo to lateral Swing",
@@ -128,7 +124,7 @@
     },
     "plank-breakdance-swing": {
       "id": "plank-breakdance-swing",
-      "name": "Plank to Breakdance Swing Through",
+      "name": "Plank to Swing Through",
       "description": "Starte in Plank-Position, gehe in seitliche Stützposition und schwinge ein Bein nach vorne durch, zurück in die Plank und zur anderen Seite wechseln"
     },
     "kickstand-squat-pushpress": {
@@ -139,6 +135,11 @@
     "figure8-lunge": {
       "id": "figure8-lunge",
       "name": "Figure 8 to Lunge",
+      "description": "Führe die Kettlebell in einer 8er-Bewegung zwischen den Beinen durch und wechsle dabei die Hände, dann direkt in einen Ausfallschritt nach hinten"
+    },
+    "figure8-lateral-lunge": {
+      "id": "figure8-lateral-lunge",
+      "name": "Figure 8 to Lateral-Lunge",
       "description": "Führe die Kettlebell in einer 8er-Bewegung zwischen den Beinen durch und wechsle dabei die Hände, dann direkt in einen Ausfallschritt zur Seite"
     },
     "lateral-swings": {
@@ -157,7 +158,4 @@
       "description": "Starte auf allen Vieren, hebe ein Bein und den gegenüberliegenden Arm an, hebe das Knie des anderen Beins leicht vom Boden ab, schiebe nun das vom Boden gelößte Bein unterm Körper durch"
     }
   }
-
 }
-
-
