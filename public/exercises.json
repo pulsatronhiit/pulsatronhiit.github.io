@@ -156,7 +156,7 @@
       "id": "side-kicks",
       "name": "Side Kicks",
       "description": "Starte auf allen Vieren, hebe ein Bein und den gegenüberliegenden Arm an, hebe das Knie des anderen Beins leicht vom Boden ab, schiebe nun das vom Boden gelößte Bein unterm Körper durch"
-    },,
+    },
     "kb-snatch": {
       "id": "kb-snatch",
       "name": "Kettlebell Snatch",
@@ -164,4 +164,5 @@
     }
   }
 }
+
 
