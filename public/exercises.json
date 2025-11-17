@@ -50,7 +50,7 @@
       "name": "Alternating KB Snatch",
       "description": "Schwinge die Kettlebell einarmig kraftvoll vom Boden hoch, wechsle sie auf halber Höhe fliegend in die andere Hand und führe sie über den Kopf, dann kontrolliert runter"
     },
-    "kb-lateral-swing-snatch" : {
+    "kb-lateral-swing-snatch-group" : {
         "type": "group",
         "left": {
           "id": "kb-lateral-swing-snatch-left",
@@ -160,9 +160,15 @@
     "kb-snatch": {
       "id": "kb-snatch",
       "name": "Kettlebell Snatch",
-      "description": "Schwinge die Kettlebell kraftvoll vom Boden über den Kopf, der Arm ist am Ende gestreckt. Führe die Bewegung kontrolliert zurück zur Ausgangsposition."
+      "description": "Schwinge die Kettlebell kraftvoll vom Boden über den Kopf, der Arm ist am Ende gestreckt. Führe die Bewegung kontrolliert zurück zur Ausgangsposition"
+    },
+    "kb-lateral-swing-snatch": {
+      "id": "kb-lateral-swing-snatch",
+      "name": "KB lateral Swing to Snatch",
+      "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann zurück zur Mitte und direkt in einen Snatch über den Kopf, dann wechsle dynamisch zur anderen Seite"
     }
   }
 }
+
 
 
