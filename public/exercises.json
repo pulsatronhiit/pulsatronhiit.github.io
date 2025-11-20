@@ -166,9 +166,15 @@
       "id": "kb-lateral-swing-snatch",
       "name": "KB lateral Swing to Snatch",
       "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann zurück zur Mitte und direkt in einen Snatch über den Kopf, dann wechsle dynamisch zur anderen Seite"
+    },
+    "kb-around-the-world-clean": {
+      "id": "kb-around-the-world-clean",
+      "name": "KB around the world to clean",
+      "description": "Kreise die Kettlebell einmal um den Körper (around the world), dann direkt in einen Clean zur Schulter führen."
     }
   }
 }
+
 
 
 
