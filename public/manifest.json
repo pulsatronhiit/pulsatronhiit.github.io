@@ -76,5 +76,7 @@
       "protocol": "web+hiit",
       "url": "/app/?workout=%s"
     }
-  ]
+  ],
+  "prefer_related_applications": false,
+  "offline_enabled": true
 }

@@ -11,5 +11,7 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist/app' // Build app into dist/app folder
-  }
+  },
+  // Ensure service worker is available during development
+  publicDir: 'public'
 })
