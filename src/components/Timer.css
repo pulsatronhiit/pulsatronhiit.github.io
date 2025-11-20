@@ -20,8 +20,8 @@
 }
 
 .timer-display.rest-mode {
-  color: #00bfff;
-  text-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+  color: #00ff88;
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
 }
 
 .timer-display.pre-workout-mode {
