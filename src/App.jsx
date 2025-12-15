@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Timer from './components/Timer';
 import ExerciseDisplay from './components/ExerciseDisplay';
 import InstallPrompt from './components/InstallPrompt';
+import { generateWorkout as generateWorkoutUtil } from './utils/workoutGenerator';
 import './App.css';
 
 function App() {
@@ -146,136 +147,7 @@ function App() {
 
   // Generate random workout based on difficulty or custom config
   const generateWorkout = (difficulty) => {
-    const config = difficulty === 'individuell' ? customConfig : workoutConfigs[difficulty];
-    const exerciseIds = Object.keys(exercises);
-    const sequence = [];
-
-    // Calculate pause positions - distribute evenly
-    const pausePositions = [];
-    if (config.pauseCount > 0) {
-      const interval = Math.floor(config.totalExercises / (config.pauseCount + 1));
-      for (let i = 1; i <= config.pauseCount; i++) {
-        const position = interval * i;
-        if (position < config.totalExercises) {
-          pausePositions.push(position);
-        }
-      }
-    }
-
-    // Track used exercises to avoid duplicates
-    const usedExercises = new Set();
-    const availableExercises = [...exerciseIds];
-    
-    // Shuffle function to randomize exercises
-    const shuffleArray = (array) => {
-      const shuffled = [...array];
-      for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-      }
-      return shuffled;
-    };
-
-    // Get next available exercise (prefer unused ones)
-    const getNextExercise = () => {
-      // First, try to get an unused exercise
-      const unusedExercises = availableExercises.filter(id => !usedExercises.has(id));
-      
-      if (unusedExercises.length > 0) {
-        // Shuffle unused exercises and pick the first one
-        const shuffledUnused = shuffleArray(unusedExercises);
-        const selectedId = shuffledUnused[0];
-        usedExercises.add(selectedId);
-        return selectedId;
-      } else {
-        // All exercises have been used, reset and pick randomly
-        usedExercises.clear();
-        const shuffledAll = shuffleArray(availableExercises);
-        const selectedId = shuffledAll[0];
-        usedExercises.add(selectedId);
-        return selectedId;
-      }
-    };
-
-    // Generate random exercise sequence
-    let exerciseCount = 0;
-    while (exerciseCount < config.totalExercises) {
-      // Pick next available exercise
-      const randomExerciseId = getNextExercise();
-      const exerciseData = exercises[randomExerciseId];
-      
-      if (exerciseData.type === 'group') {
-        // This is a group - check if we have room for both exercises
-        if (exerciseCount + 1 < config.totalExercises) {
-          // Add left exercise
-          sequence.push({
-            type: 'exercise',
-            exerciseId: exerciseData.left.id,
-            exercise: exerciseData.left
-          });
-          exerciseCount++;
-          
-          // Add pause if this is a pause position
-          if (pausePositions.includes(exerciseCount) && exerciseCount < config.totalExercises) {
-            sequence.push({
-              type: 'pause',
-              duration: config.pauseDuration
-            });
-          }
-          
-          // Add right exercise
-          sequence.push({
-            type: 'exercise',
-            exerciseId: exerciseData.right.id,
-            exercise: exerciseData.right
-          });
-          exerciseCount++;
-        } else {
-          // Only room for one more exercise - pick a different individual exercise instead
-          const individualExercises = exerciseIds.filter(id => exercises[id].type !== 'group');
-          const unusedIndividualExercises = individualExercises.filter(id => !usedExercises.has(id));
-          
-          let selectedIndividualId;
-          if (unusedIndividualExercises.length > 0) {
-            // Pick from unused individual exercises
-            const shuffledUnused = shuffleArray(unusedIndividualExercises);
-            selectedIndividualId = shuffledUnused[0];
-          } else if (individualExercises.length > 0) {
-            // All individual exercises used, pick randomly
-            const shuffledAll = shuffleArray(individualExercises);
-            selectedIndividualId = shuffledAll[0];
-          } else {
-            // Fallback: if no individual exercises exist, add the left exercise
-            selectedIndividualId = exerciseData.left.id;
-          }
-          
-          usedExercises.add(selectedIndividualId);
-          sequence.push({
-            type: 'exercise',
-            exerciseId: selectedIndividualId,
-            exercise: exercises[selectedIndividualId]?.left || undefined
-          });
-          exerciseCount++;
-        }
-      } else {
-        // This is a regular individual exercise
-        sequence.push({
-          type: 'exercise',
-          exerciseId: randomExerciseId
-        });
-        exerciseCount++;
-      }
-
-      // Add pause if this is a pause position (for individual exercises)
-      if (exerciseData.type !== 'group' && pausePositions.includes(exerciseCount) && exerciseCount < config.totalExercises) {
-        sequence.push({
-          type: 'pause',
-          duration: config.pauseDuration
-        });
-      }
-    }
-
-    return sequence;
+    return generateWorkoutUtil(difficulty, exercises, workoutConfigs, customConfig);
   };
 
   // Handle difficulty selection

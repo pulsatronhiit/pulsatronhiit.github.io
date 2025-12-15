@@ -63,3 +63,8 @@ ehthumbs.db
 
 # Scripts
 *.ps1
+
+# Test coverage reports
+/coverage/
+*.lcov
+.nyc_output
