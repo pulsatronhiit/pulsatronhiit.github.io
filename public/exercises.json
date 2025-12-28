@@ -20,11 +20,6 @@
       "name": "One-arm KB Swing",
       "description": "Schwinge die Kettlebell einarmig kraftvoll zwischen den Beinen hoch bis auf Schulterhöhe, nutze die Hüftbewegung für den Schwung"
     },
-    "breakdance-swing-through": {
-      "id": "breakdance-swing-through",
-      "name": "Breakdance Swing Through",
-      "description": "Springe zur Seite auf ein Bein, beuge dich runter und stütze dich mit der gegenüberliegenden Hand ab, schwinge das freie Bein nach vorne durch und zurück, dann Seitenwechsel"
-    },
     "mountain-climbers": {
       "id": "mountain-climbers",
       "name": "Mountain Climbers",
@@ -147,6 +142,11 @@
       "name": "Lateral Swings",
       "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen bis auf Schulterhöhe, dann zurück zur Mitte und zur anderen Seite"
     },
+    "lateral-swing-underpress": {
+      "id": "lateral-swing-underpress",
+      "name": "Lateral Swing to Underpress",
+      "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann direkt aus der Rack-Position in eine Underpress-Bewegung über den Kopf, kontrolliert zurück zur Startposition"
+    },
     "lunge-into-windmillpress": {
       "id": "lunge-into-windmillpress",
       "name": "Lunge into Windmillpress",
@@ -162,6 +162,11 @@
       "name": "Kettlebell Snatch",
       "description": "Schwinge die Kettlebell kraftvoll vom Boden über den Kopf, der Arm ist am Ende gestreckt. Führe die Bewegung kontrolliert zurück zur Ausgangsposition"
     },
+    "kb-snatch-bottom-up": {
+      "id": "kb-snatch-bottom-up",
+      "name": "Kettlebell Snatch Bottom Up",
+      "description": "Schwinge die Kettlebell kraftvoll vom Boden hoch, fange sie am oberen Punkt mit dem Boden nach oben ab und halte sie stabil über dem Kopf mit dem Boden nach oben, dann kontrolliert zurück zur Startposition"
+    },
     "kb-lateral-swing-snatch": {
       "id": "kb-lateral-swing-snatch",
       "name": "KB lateral Swing to Snatch",
@@ -171,6 +176,19 @@
       "id": "kb-around-the-world-clean",
       "name": "KB around the world to clean",
       "description": "Kreise die Kettlebell einmal um den Körper (around the world), dann direkt in einen Clean zur Schulter führen."
+    },
+    "around-the-world-squat": {
+      "id": "around-the-world-squat",
+      "name": "Around the world into squat",
+      "description": "Kreise die Kettlebell einmal um den Körper herum, dann direkt in eine tiefe Squat-Position, halte die KB dabei in der Clean-Position und komme kontrolliert wieder hoch"
+    }
+  },
+
+  "unusedExercises": {
+    "breakdance-swing-through": {
+      "id": "breakdance-swing-through",
+      "name": "Breakdance Swing Through",
+      "description": "Springe zur Seite auf ein Bein, beuge dich runter und stütze dich mit der gegenüberliegenden Hand ab, schwinge das freie Bein nach vorne durch und zurück, dann Seitenwechsel"
     }
   }
 }
