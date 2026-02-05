@@ -45,31 +45,10 @@
       "name": "Alternating KB Snatch",
       "description": "Schwinge die Kettlebell einarmig kraftvoll vom Boden hoch, wechsle sie auf halber Höhe fliegend in die andere Hand und führe sie über den Kopf, dann kontrolliert runter"
     },
-    "kb-lateral-swing-snatch-group" : {
-        "type": "group",
-        "left": {
-          "id": "kb-lateral-swing-snatch-left",
-          "name": "KB lateral Swing to Snatch links",
-          "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann zurück zur Mitte und direkt in einen Snatch über den Kopf, kontrolliert zurück zur Startposition"
-        },
-        "right": {
-          "id": "kb-lateral-swing-snatch-right",
-          "name": "KB lateral Swing to Snatch rechts",
-          "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann zurück zur Mitte und direkt in einen Snatch über den Kopf, kontrolliert zurück zur Startposition"
-        }
-    },
-    "kb-lateral-swing-windmill" : {
-        "type": "group",
-        "left": {
-          "id": "kb-lateral-swing-windmill-left",
-          "name": "KB lateral Swing to Windmill-Press links",
-          "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann direkt in einen Windmill-Press, kontrolliert zurück zur Startposition"
-        },
-        "right": {
-          "id": "kb-lateral-swing-windmill-right",
-          "name": "KB lateral Swing to Windmill-Press rechts",
-          "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann direkt in einen Windmill-Press, kontrolliert zurück zur Startposition"
-        }
+    "kb-lateral-swing-windmill": {
+          "id": "kb-lateral-swing-windmill",
+          "name": "KB lateral Swing to Windmill-Press",
+          "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann direkt in einen Windmill-Press, kontrolliert zurück zur Startposition, dann Seitenwechsel."
     },
     "kb-halo-lateral-swing": {
       "id": "kb-halo-lateral-swing",
@@ -192,6 +171,7 @@
     }
   }
 }
+
 
 
 
