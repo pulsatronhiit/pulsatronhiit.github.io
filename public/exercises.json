@@ -160,6 +160,19 @@
       "id": "kb-wood-chopper",
       "name": "Kettlebell Wood Chopper",
       "description": "Halte die Kettlebell mit gestreckten Armen auf einer Körperseite auf Hüfthöhe, drehe den Oberkörper und führe die KB diagonale nach oben über die Kopf zur anderen Seite, dann zurück zur Startposition und Seitenwechsel"
+    },
+    "resistance-band-core-rotation": {
+      "type": "group",
+      "left": {
+        "id": "resistance-band-core-rotation-left",
+        "name": "Resistance Band Core Rotation links",
+        "description": "Stehe mit schulterbreitem Stand, halte das Resistance Band mit gestreckten Armen auf Brusthöhe, rotiere den Oberkörper nach links, halte die Hüfte stabil und kehre kontrolliert zurück"
+      },
+      "right": {
+        "id": "resistance-band-core-rotation-right",
+        "name": "Resistance Band Core Rotation rechts",
+        "description": "Stehe mit schulterbreitem Stand, halte das Resistance Band mit gestreckten Armen auf Brusthöhe, rotiere den Oberkörper nach rechts, halte die Hüfte stabil und kehre kontrolliert zurück"
+      }
     }
   },
 
