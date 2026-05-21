@@ -83,12 +83,12 @@
       "left": {
         "id": "kb-cross-body-clean-left",
         "name": "Kettlebell Cross-Body Clean links",
-        "description": "Halte die Kettlebell einarmig auf der gegenüberliegenden Seite nebem dem Körper auf Hüfthöhe, ziehe sie diagonal vor dem Körper zur gegenüberliegenden Schulter und fange sie in der Rack-Position ab"      
+        "description": "Halte die Kettlebell einarmig auf der gegenüberliegenden Seite nebem dem Körper auf Hüfthöhe, ziehe sie diagonal vor dem Körper zur gegenüberliegenden Schulter und fange sie ab"
       },
       "right": {
         "id": "kb-cross-body-clean-right",
         "name": "Kettlebell Cross-Body Clean rechts",
-        "description": "Halte die Kettlebell einarmig auf der gegenüberliegenden Seite nebem dem Körper auf Hüfthöhe, ziehe sie diagonal vor dem Körper zur gegenüberliegenden Schulter und fange sie in der Rack-Position ab"
+        "description": "Halte die Kettlebell einarmig auf der gegenüberliegenden Seite nebem dem Körper auf Hüfthöhe, ziehe sie diagonal vor dem Körper zur gegenüberliegenden Schulter und fange sie ab"
       }
     },
     "plank-breakdance-swing": {
@@ -129,7 +129,7 @@
     "side-kicks": {
       "id": "side-kicks",
       "name": "Side Kicks",
-      "description": "Starte auf allen Vieren, hebe ein Bein und den gegenüberliegenden Arm an, hebe das Knie des anderen Beins leicht vom Boden ab, schiebe nun das vom Boden gelößte Bein unterm Körper durch"
+      "description": "Starte auf allen Vieren, hebe ein Bein und den gegenüberliegenden Arm an, hebe das Knie des anderen Beins leicht vom Boden ab, schiebe nun das vom Boden gelöste Bein unterm Körper durch"
     },
     "kb-snatch": {
       "id": "kb-snatch",
@@ -139,7 +139,7 @@
     "kb-snatch-bottom-up": {
       "id": "kb-snatch-bottom-up",
       "name": "Kettlebell Snatch Bottom Up",
-      "description": "Schwinge die Kettlebell kraftvoll vom Boden hoch, fange sie am oberen Punkt mit dem Boden nach oben ab und halte sie stabil über dem Kopf mit dem Boden nach oben, dann kontrolliert zurück zur Startposition"
+      "description": "Schwinge die Kettlebell kraftvoll vom Boden hoch, fange sie am oberen Punkt mit dem Boden nach oben ab und halte sie stabil über dem Kopf mit dem Boden nach oben, dann kontrolliert runter"
     },
     "kb-lateral-swing-snatch": {
       "id": "kb-lateral-swing-snatch",
@@ -155,6 +155,11 @@
       "id": "around-the-world-squat",
       "name": "Around the world into squat",
       "description": "Kreise die Kettlebell einmal um den Körper herum, dann direkt in eine tiefe Squat-Position, halte die KB dabei in der Clean-Position und komme kontrolliert wieder hoch"
+    },
+    "kb-wood-chopper": {
+      "id": "kb-wood-chopper",
+      "name": "Kettlebell Wood Chopper",
+      "description": "Halte die Kettlebell mit gestreckten Armen auf einer Körperseite auf Hüfthöhe, drehe den Oberkörper und führe die KB diagonale nach oben über die Kopf zur anderen Seite, dann zurück zur Startposition und Seitenwechsel"
     }
   },
 
@@ -166,8 +171,3 @@
     }
   }
 }
-
-
-
-
-
