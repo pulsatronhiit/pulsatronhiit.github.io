@@ -83,12 +83,12 @@
       "left": {
         "id": "kb-cross-body-clean-left",
         "name": "Kettlebell Cross-Body Clean links",
-        "description": "Halte die Kettlebell einarmig auf der gegenüberliegenden Seite nebem dem Körper auf Hüfthöhe, ziehe sie diagonal vor dem Körper zur gegenüberliegenden Schulter und fange sie ab"
+        "description": "Halte die Kettlebell einarmig auf der gegenüberliegenden Seite nebem dem Körper auf Hüfthöhe, ziehe sie diagonal vor dem Körper zur gegenüberliegenden Schulter und fange sie auf"
       },
       "right": {
         "id": "kb-cross-body-clean-right",
         "name": "Kettlebell Cross-Body Clean rechts",
-        "description": "Halte die Kettlebell einarmig auf der gegenüberliegenden Seite nebem dem Körper auf Hüfthöhe, ziehe sie diagonal vor dem Körper zur gegenüberliegenden Schulter und fange sie ab"
+        "description": "Halte die Kettlebell einarmig auf der gegenüberliegenden Seite nebem dem Körper auf Hüfthöhe, ziehe sie diagonal vor dem Körper zur gegenüberliegenden Schulter und fange sie auf"
       }
     },
     "plank-breakdance-swing": {
@@ -159,7 +159,7 @@
     "kb-wood-chopper": {
       "id": "kb-wood-chopper",
       "name": "Kettlebell Wood Chopper",
-      "description": "Halte die Kettlebell mit gestreckten Armen auf einer Körperseite auf Hüfthöhe, drehe den Oberkörper und führe die KB diagonale nach oben über die Kopf zur anderen Seite, dann zurück zur Startposition und Seitenwechsel"
+      "description": "Halte die Kettlebell mit gestreckten Armen auf einer Körperseite auf Hüfthöhe, drehe den Oberkörper und führe die KB diagonale nach oben über die Kopf zur anderen Seite, dann zurück"
     },
     "resistance-band-core-rotation": {
       "type": "group",
@@ -173,6 +173,16 @@
         "name": "Resistance Band Core Rotation rechts",
         "description": "Stehe mit schulterbreitem Stand, halte das Resistance Band mit gestreckten Armen auf Brusthöhe, rotiere den Oberkörper nach rechts, halte die Hüfte stabil und kehre kontrolliert zurück"
       }
+    },
+    "snatch-grip-squat-to-lunge": {
+      "id": "snatch-grip-squat-to-lunge",
+      "name": "Snatch-Grip Squat to Lunge",
+      "description": "Halte die Kettlebell mit breitem Griff (Snatch-Grip) über dem Kopf in gestreckten Armen, gehe in eine tiefe Squat-Position, komme hoch und führe direkt einen Ausfallschritt durch"
+    },
+    "snatch-grip-standing-walk": {
+      "id": "snatch-grip-standing-walk",
+      "name": "Snatch-Grip Standing Walk",
+      "description": "Halte die Kettlebell mit breitem Griff (Snatch-Grip) über dem Kopf in gestreckten Armen stabil und laufe mehrere Schritte vorwärts und rückwärts, halte dabei deine Kernspannung"
     }
   },
 
