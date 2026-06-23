@@ -38,7 +38,7 @@
     "gorilla-rows": {
       "id": "gorilla-rows",
       "name": "Gorilla Rows",
-      "description": "Stehe in breiter Squat-Position, halte eine Kettlebell mit einer Hand und ziehe sie zum Bauch, am höchsten Punkt wechselst du die KB fliegend in die andere Hand und ziehst weiter"
+      "description": "Stehe in breiter Squat-Position, halte eine Kettlebell mit einer Hand und ziehe sie zum Bauch, am höchsten Punkt wechselst du die KB fliegend in die andere Hand und ziehst w[...]"
     },
     "alternating-kb-snatch": {
       "id": "alternating-kb-snatch",
@@ -46,9 +46,9 @@
       "description": "Schwinge die Kettlebell einarmig kraftvoll vom Boden hoch, wechsle sie auf halber Höhe fliegend in die andere Hand und führe sie über den Kopf, dann kontrolliert runter"
     },
     "kb-lateral-swing-windmill": {
-          "id": "kb-lateral-swing-windmill",
-          "name": "KB lateral Swing to Windmill-Press",
-          "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann direkt in einen Windmill-Press, kontrolliert zurück zur Startposition, dann Seitenwechsel."
+      "id": "kb-lateral-swing-windmill",
+      "name": "KB lateral Swing to Windmill-Press",
+      "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann direkt in einen Windmill-Press, kontrolliert zurück zur Startposition, dann Seitenwechsel."
     },
     "kb-halo-lateral-swing": {
       "id": "kb-halo-lateral-swing",
@@ -60,7 +60,7 @@
       "name": "KB Figure 8 into clean",
       "description": "Führe die Kettlebell in einer 8er-Bewegung zwischen den Beinen durch und wechsle dabei die Hände, dann direkt in einen Clean zur Schulter"
     },
-    "split-stance-rotation" : {
+    "split-stance-rotation": {
       "type": "group",
       "left": {
         "id": "split-stance-rotation-left",
@@ -78,17 +78,17 @@
       "name": "KB Swings",
       "description": "Schwinge die Kettlebell beidhändig kraftvoll zwischen den Beinen hoch bis auf Brusthöhe, nutze die Hüftbewegung für den Schwung und halte den Rücken gerade"
     },
-    "kb-cross-body-clean" : {
+    "kb-cross-body-clean": {
       "type": "group",
       "left": {
         "id": "kb-cross-body-clean-left",
         "name": "Kettlebell Cross-Body Clean links",
-        "description": "Halte die Kettlebell einarmig auf der gegenüberliegenden Seite nebem dem Körper auf Hüfthöhe, ziehe sie diagonal vor dem Körper zur gegenüberliegenden Schulter und fange sie auf"
+        "description": "Halte die Kettlebell einarmig auf der gegenüberliegenden Seite nebem dem Körper auf Hüfthöhe, ziehe sie diagonal vor dem Körper zur gegenüberliegenden Schulter und fa[...]"
       },
       "right": {
         "id": "kb-cross-body-clean-right",
         "name": "Kettlebell Cross-Body Clean rechts",
-        "description": "Halte die Kettlebell einarmig auf der gegenüberliegenden Seite nebem dem Körper auf Hüfthöhe, ziehe sie diagonal vor dem Körper zur gegenüberliegenden Schulter und fange sie auf"
+        "description": "Halte die Kettlebell einarmig auf der gegenüberliegenden Seite nebem dem Körper auf Hüfthöhe, ziehe sie diagonal vor dem Körper zur gegenüberliegenden Schulter und fa[...]"
       }
     },
     "plank-breakdance-swing": {
@@ -119,7 +119,7 @@
     "lateral-swing-underpress": {
       "id": "lateral-swing-underpress",
       "name": "Lateral Swing to Underpress",
-      "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann direkt aus der Rack-Position in eine Underpress-Bewegung über den Kopf, kontrolliert zurück zur Startposition"
+      "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, dann direkt aus der Rack-Position in eine Underpress-Bewegung über den Kopf, kontrolliert zurück zur Startpos[...]"
     },
     "lunge-into-windmillpress": {
       "id": "lunge-into-windmillpress",
@@ -129,7 +129,7 @@
     "side-kicks": {
       "id": "side-kicks",
       "name": "Side Kicks",
-      "description": "Starte auf allen Vieren, hebe ein Bein und den gegenüberliegenden Arm an, hebe das Knie des anderen Beins leicht vom Boden ab, schiebe nun das vom Boden gelöste Bein unterm Körper durch"
+      "description": "Starte auf allen Vieren, hebe ein Bein und den gegenüberliegenden Arm an, hebe das Knie des anderen Beins leicht vom Boden ab, schiebe nun das vom Boden gelöste Bein unter[...]"
     },
     "kb-snatch": {
       "id": "kb-snatch",
@@ -139,7 +139,7 @@
     "kb-snatch-bottom-up": {
       "id": "kb-snatch-bottom-up",
       "name": "Kettlebell Snatch Bottom Up",
-      "description": "Schwinge die Kettlebell kraftvoll vom Boden hoch, fange sie am oberen Punkt mit dem Boden nach oben ab und halte sie stabil über dem Kopf mit dem Boden nach oben, dann kontrolliert runter"
+      "description": "Schwinge die Kettlebell kraftvoll vom Boden hoch, fange sie am oberen Punkt mit dem Boden nach oben ab und halte sie stabil über dem Kopf mit dem Boden nach oben, dann kont[...]"
     },
     "kb-lateral-swing-snatch": {
       "id": "kb-lateral-swing-snatch",
@@ -159,19 +159,19 @@
     "kb-wood-chopper": {
       "id": "kb-wood-chopper",
       "name": "Kettlebell Wood Chopper",
-      "description": "Halte die Kettlebell mit gestreckten Armen auf einer Körperseite auf Hüfthöhe, drehe den Oberkörper und führe die KB diagonale nach oben über die Kopf zur anderen Seite, dann zurück"
+      "description": "Halte die Kettlebell mit gestreckten Armen auf einer Körperseite auf Hüfthöhe, drehe den Oberkörper und führe die KB diagonale nach oben über die Kopf zur anderen Seit[...]"
     },
     "resistance-band-core-rotation": {
       "type": "group",
       "left": {
         "id": "resistance-band-core-rotation-left",
         "name": "Resistance Band Core Rotation links",
-        "description": "Stehe mit schulterbreitem Stand, halte das Resistance Band mit gestreckten Armen auf Brusthöhe, rotiere den Oberkörper nach links, halte die Hüfte stabil und kehre kontrolliert zurück"
+        "description": "Stehe mit schulterbreitem Stand, halte das Resistance Band mit gestreckten Armen auf Brusthöhe, rotiere den Oberkörper nach links, halte die Hüfte stabil und kehre kont[...]"
       },
       "right": {
         "id": "resistance-band-core-rotation-right",
         "name": "Resistance Band Core Rotation rechts",
-        "description": "Stehe mit schulterbreitem Stand, halte das Resistance Band mit gestreckten Armen auf Brusthöhe, rotiere den Oberkörper nach rechts, halte die Hüfte stabil und kehre kontrolliert zurück"
+        "description": "Stehe mit schulterbreitem Stand, halte das Resistance Band mit gestreckten Armen auf Brusthöhe, rotiere den Oberkörper nach rechts, halte die Hüfte stabil und kehre kon[...]"
       }
     },
     "snatch-grip-squat-to-lunge": {
@@ -183,6 +183,16 @@
       "id": "snatch-grip-standing-walk",
       "name": "Snatch-Grip Standing Walk",
       "description": "Halte die Kettlebell mit breitem Griff (Snatch-Grip) über dem Kopf in gestreckten Armen stabil und laufe dabei auf der Stelle, halte dabei deine Kernspannung"
+    },
+    "rotational-high-pull": {
+      "id": "rotational-high-pull",
+      "name": "Rotational High Pull",
+      "description": "Schwinge die Kettlebell einarmig vom Boden hoch, drehe den Oberkörper dabei zur gleichen Seite und ziehe die KB bis auf Höhe der Schulter, halte die Rotation oben kurz an und bringe die KB kontrolliert zurück, dann Seitenwechsel"
+    },
+    "lateral-swing-into-rotational-clean": {
+      "id": "lateral-swing-into-rotational-clean",
+      "name": "Lateral Swing into Rotational Clean",
+      "description": "Schwinge die Kettlebell seitlich vom Körper weg nach außen, bringe sie zurück zur Mitte und drehe dabei den Oberkörper, führe die KB mit einer rotierenden Bewegung zur Schulter in den Clean, dann Seitenwechsel"
     }
   },
 
@@ -190,7 +200,7 @@
     "breakdance-swing-through": {
       "id": "breakdance-swing-through",
       "name": "Breakdance Swing Through",
-      "description": "Springe zur Seite auf ein Bein, beuge dich runter und stütze dich mit der gegenüberliegenden Hand ab, schwinge das freie Bein nach vorne durch und zurück, dann Seitenwechsel"
+      "description": "Springe zur Seite auf ein Bein, beuge dich runter und stütze dich mit der gegenüberliegenden Hand ab, schwinge das freie Bein nach vorne durch und zurück, dann Seitenwech[...]"
     }
   }
 }
