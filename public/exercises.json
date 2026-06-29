@@ -91,11 +91,6 @@
         "description": "Halte die Kettlebell einarmig auf der gegenüberliegenden Seite nebem dem Körper auf Hüfthöhe, ziehe sie diagonal vor dem Körper zur gegenüberliegenden Schulter und fa[...]"
       }
     },
-    "plank-breakdance-swing": {
-      "id": "plank-breakdance-swing",
-      "name": "Plank to Swing Through",
-      "description": "Starte in Plank-Position, gehe in seitliche Stützposition und schwinge ein Bein nach vorne durch, zurück in die Plank und zur anderen Seite wechseln"
-    },
     "kickstand-squat-pushpress": {
       "id": "kickstand-squat-pushpress",
       "name": "Kickstand Squat to Pushpress",
